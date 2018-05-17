@@ -9,20 +9,20 @@ public class Configuration {
 
     /* Attributes */
     private String tableName,
-    dbName,
-    ipAddr,
-    password,
-    port,
-    username;
+            dbName,
+            ipAddr,
+            password,
+            port,
+            username;
 
     private boolean debug,
-    with_password;
+            with_password;
 
     private int bandwidth,
-    schedule_type,
-    time_start,
-    time_end,
-    timeout;
+            duration,
+            schedule_type,
+            start_time,
+            timeout;
 
     /* Getters */
 
@@ -62,11 +62,11 @@ public class Configuration {
     }
 
     int getStartTime() {
-        return time_start;
+        return start_time;
     }
 
-    int getEndTime() {
-        return time_end;
+    int getDuration() {
+        return duration;
     }
 
     int getBandwidth() {
@@ -87,10 +87,10 @@ public class Configuration {
     // ...for connection.
     boolean setIpAddress(String ipAddr) {
         boolean match = Pattern.matches("([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$",
-            ipAddr);
+                                        "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                                        "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                                        "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$",
+                                        ipAddr);
         if (match) {
             this.ipAddr = ipAddr;
             return true;
@@ -128,12 +128,12 @@ public class Configuration {
         this.schedule_type = schedule_type;
     }
 
-    void setStartTime(int time_start) {
-        this.time_start = time_start;
+    void setStartTime(int start_time) {
+        this.start_time = start_time;
     }
 
-    void setEndTime(int time_end) {
-        this.time_end = time_end;
+    void setDuration(int duration) {
+        this.duration = duration;
     }
 
     void setBandwidth(int bandwidth) {
@@ -165,9 +165,9 @@ public class Configuration {
         // queue configuration
         bandwidth = 1000000000; // 1Gb
         schedule_type = 0; // FIFO
-        timeout = 60; // 60 ticks
-        time_start = -1;
-        time_end = -1;
+        timeout = 60; // 60 seconds
+        start_time = 0; // init
+        duration = 28800; // 8 hours
 
         // program mode
         debug = false;
@@ -189,11 +189,11 @@ public class Configuration {
         }
 
         match = Pattern.matches("^--ip-address=" +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$",
-            input);
+                                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                                "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$",
+                                input);
         if (match) {
             String[] parts = input.split("=");
             setIpAddress(parts[1]);
@@ -252,6 +252,20 @@ public class Configuration {
         if (match) {
             String[] parts = input.split("=");
             setTimeout(Integer.parseInt(parts[1]));
+            return 1;
+        }
+
+        match = Pattern.matches("^--starttime=[0-9]+?", input);
+        if (match) {
+            String[] parts = input.split("=");
+            setStartTime(Integer.parseInt(parts[1]));
+            return 1;
+        }
+
+         match = Pattern.matches("^--duration=[0-9]+?", input);
+        if (match) {
+            String[] parts = input.split("=");
+            setDuration(Integer.parseInt(parts[1]));
             return 1;
         }
 
@@ -315,6 +329,8 @@ public class Configuration {
         System.out.println("\tbandwidth = " + bandwidth + " bps");
         System.out.println("\tschedule = " + sched);
         System.out.println("\ttimeout = " + timeout + " s");
+        System.out.println("\tstart time = " + start_time + " s");
+        System.out.println("\tduration = " + duration + " s");
 
         // program mode
         System.out.println("\n\t[ program mode ]");
