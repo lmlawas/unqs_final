@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.LinkedList;
 
 public class PriorityQueue implements Schedule {
@@ -42,14 +43,29 @@ public class PriorityQueue implements Schedule {
 		packets_dropped_cnt++;
 	}
 
-	public void info(int current_time) {
-		System.out.println("\n\n--------\nResults:\n--------");
+	public void info(int bandwidth, int current_time, String dateAsText) {
+		System.out.println("\n\n- - - [ " + dateAsText + " ] - - -\n");
 		System.out.println("packets_dropped_size = " + packets_dropped_size + " B");
+		System.out.println("packets_dropped_cnt = " + packets_dropped_cnt + " packets\n");
 		System.out.println("packets_switched_size = " + packets_switched_size + " B");
-		System.out.println("packets_dropped_cnt = " + packets_dropped_cnt + " packets");
-		System.out.println("packets_switched_cnt = " + packets_switched_cnt + " packets");
-		System.out.println("total_wait_time = " + total_wait_time + " seconds");
-		System.out.println("throughput = " + throughput(current_time) + " seconds");
+		System.out.println("packets_switched_cnt = " + packets_switched_cnt + " packets\n");
+		System.out.println("total_wait_time = " + total_wait_time + " seconds\n");
+		System.out.println("bandwidth = " + bandwidth + " bps");
+		System.out.println("throughput = " + throughput(current_time) + " bps");
+	}
+
+	public void saveResults(int bandwidth, int current_time, String dateAsText) throws IOException{
+		FileWriter fw = new FileWriter("results_pq.txt", true);		
+		fw.write("\n\n- - - [ " + dateAsText + " ] - - -\n");
+		fw.write("\npackets_dropped_size = " + packets_dropped_size + " B");
+		fw.write("\npackets_dropped_cnt = " + packets_dropped_cnt + " packets\n");
+		fw.write("\npackets_switched_size = " + packets_switched_size + " B");
+		fw.write("\npackets_switched_cnt = " + packets_switched_cnt + " packets\n");
+		fw.write("\ntotal_wait_time = " + total_wait_time + " seconds\n");
+		fw.write("\nbandwidth = " + bandwidth + " bps");
+		fw.write("\nthroughput = " + throughput(current_time) + " bps");
+		fw.close();
+		fw.close();
 	}
 
 	public void switchPacket(Packet p) {
