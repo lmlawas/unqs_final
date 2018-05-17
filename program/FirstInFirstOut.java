@@ -3,8 +3,8 @@ import java.util.LinkedList;
 public class FirstInFirstOut implements Schedule {
 
 	/* Attributes */
-	public double packets_dropped_size;
-	public double packets_switched_size;
+	public int packets_dropped_size;
+	public int packets_switched_size;
 	public int packets_dropped_cnt;
 	public int packets_switched_cnt;
 	public int total_wait_time;
@@ -56,7 +56,7 @@ public class FirstInFirstOut implements Schedule {
 	public void process(int bandwidth, int current_time, int timeout, LinkedList<Packet> packets) {
 		int temp_buffer_size = 0;
 		for (Packet p : packets) {
-			p.info();
+			// p.info();
 			addPacket(p);			
 		}
 		while (!buffer.isEmpty()) {

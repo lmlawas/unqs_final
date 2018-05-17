@@ -93,10 +93,12 @@ public class UNQS {
             else{
                 System.out.println("Invalid schedule type.\n");
                 return;
-            }
+            }            
 
             while (current_time <= config.getStartTime() + config.getDuration()) {
                 flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES+OUT_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
+
+                System.out.println("current_time = " + current_time+"\n");
 
                 // while there are flows at time t
                 while ( flows.next() ) {
@@ -119,7 +121,7 @@ public class UNQS {
                     new_packets.clear();
 
                 }
-                current_time++;
+                current_time+=1;
             }
 
             sched.info();
