@@ -29,4 +29,11 @@ public class Packet {
 	public int waitTime(int current_time) {
 		return (current_time - first_switched);
 	}
+
+	public void info(){
+		System.out.println("------------\npacket info:\n------------");
+		System.out.println("\tfirst_switched = " + first_switched);
+		System.out.println("\tpriority = " + priority);
+		System.out.println("\tsize = " + size + "\n------------\n");
+	}
 }
