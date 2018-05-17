@@ -122,7 +122,8 @@ public class UNQS {
                 current_time += 1;
             }
 
-            sched.info(current_time);
+            sched.info(config.getBandwidth(), current_time, readableDate(config.getStartTime()));
+            sched.saveResults(config.getBandwidth(), current_time, readableDate(config.getStartTime()));
 
             con.close();
         } catch (Exception e) {
