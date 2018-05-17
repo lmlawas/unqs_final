@@ -3,8 +3,8 @@ import java.util.LinkedList;
 public class PriorityQueue implements Schedule {
 
 	/* Attributes */
-	public double packets_dropped_size;
-	public double packets_switched_size;
+	public int packets_dropped_size;
+	public int packets_switched_size;
 	public int packets_dropped_cnt;
 	public int packets_switched_cnt;
 	public int total_wait_time;
@@ -28,6 +28,10 @@ public class PriorityQueue implements Schedule {
 	}
 
 	/* Methods */
+	public double throughput(int current_time) {
+		return (packets_switched_size * 8 / current_time);
+	}
+
 	public void addPacket(Packet p) {
 		buffer[p.priority].add(p);
 	}
@@ -38,13 +42,14 @@ public class PriorityQueue implements Schedule {
 		packets_dropped_cnt++;
 	}
 
-	public void info() {
+	public void info(int current_time) {
 		System.out.println("\n\n--------\nResults:\n--------");
 		System.out.println("packets_dropped_size = " + packets_dropped_size + " B");
 		System.out.println("packets_switched_size = " + packets_switched_size + " B");
 		System.out.println("packets_dropped_cnt = " + packets_dropped_cnt + " packets");
 		System.out.println("packets_switched_cnt = " + packets_switched_cnt + " packets");
 		System.out.println("total_wait_time = " + total_wait_time + " seconds");
+		System.out.println("throughput = " + throughput(current_time) + " seconds");
 	}
 
 	public void switchPacket(Packet p) {

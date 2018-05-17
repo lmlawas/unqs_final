@@ -81,32 +81,28 @@ public class UNQS {
             LinkedList<Packet> new_packets = new LinkedList<Packet>();
             Schedule sched;
 
-            if(config.getSchedule() ==  Schedule.FIFO){
+            if (config.getSchedule() ==  Schedule.FIFO) {
                 sched = new FirstInFirstOut();
-            }
-            else if(config.getSchedule() == Schedule.PQ){
+            } else if (config.getSchedule() == Schedule.PQ) {
                 sched = new PriorityQueue();
-            }
-            else if(config.getSchedule() == Schedule.FQ){
+            } else if (config.getSchedule() == Schedule.FQ) {
                 sched = new FairQueue();
-            }
-            else{
+            } else {
                 System.out.println("Invalid schedule type.\n");
                 return;
-            }            
+            }
 
             while (current_time <= config.getStartTime() + config.getDuration()) {
                 flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES+OUT_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
 
-                System.out.println("current_time = " + current_time+"\n");
+                if(config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
 
                 // while there are flows at time t
                 while ( flows.next() ) {
-                    if(config.getSchedule() == Schedule.FIFO){
-                        single_flow = new Flow(flows.getInt(1),flows.getInt(2), flows.getInt(4));
-                    }
-                    else{
-                        single_flow = new Flow(flows.getInt(1),flows.getInt(2), flows.getInt(3), flows.getInt(4));
+                    if (config.getSchedule() == Schedule.FIFO) {
+                        single_flow = new Flow(flows.getInt(1), flows.getInt(2), flows.getInt(4));
+                    } else {
+                        single_flow = new Flow(flows.getInt(1), flows.getInt(2), flows.getInt(3), flows.getInt(4));
                     }
                     // single_flow.first_switched = flows.getInt(1);
                     // single_flow.no_of_packets = flows.getInt(2);
@@ -117,14 +113,16 @@ public class UNQS {
 
                     sched.process(config.getBandwidth(), current_time, config.getTimeout(), new_packets);
 
+                    if(config.getDebug()) System.out.println("\tProcessed " + new_packets.size() + " packets.");
                     // empty list before the next iteration
                     new_packets.clear();
 
-                }
-                current_time+=1;
+                }                
+                if(config.getDebug()) System.out.println("\n");
+                current_time += 1;
             }
 
-            sched.info();
+            sched.info(current_time);
 
             con.close();
         } catch (Exception e) {
