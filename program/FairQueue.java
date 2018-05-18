@@ -3,12 +3,12 @@ import java.util.LinkedList;
 
 public class FairQueue implements Schedule {
 
-	/* Attributes */
-	public int packets_dropped_size;
-	public int packets_switched_size;
+	/* Attributes */	
 	public int packets_dropped_cnt;
 	public int packets_switched_cnt;
 	public int total_wait_time;
+	public long packets_dropped_size;
+	public long packets_switched_size;
 	public NetworkBuffer[] buffer;
 
 	/* Constructor */

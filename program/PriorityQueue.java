@@ -4,11 +4,11 @@ import java.util.LinkedList;
 public class PriorityQueue implements Schedule {
 
 	/* Attributes */
-	public int packets_dropped_size;
-	public int packets_switched_size;
 	public int packets_dropped_cnt;
 	public int packets_switched_cnt;
 	public int total_wait_time;
+	public long packets_dropped_size;
+	public long packets_switched_size;
 	public NetworkBuffer[] buffer;
 
 	/* Constructor */
@@ -64,7 +64,6 @@ public class PriorityQueue implements Schedule {
 		fw.write("\ntotal_wait_time = " + total_wait_time + " seconds\n");
 		fw.write("\nbandwidth = " + bandwidth + " bps");
 		fw.write("\nthroughput = " + throughput(current_time) + " bps");
-		fw.close();
 		fw.close();
 	}
 
