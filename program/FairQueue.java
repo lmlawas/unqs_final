@@ -9,7 +9,7 @@ public class FairQueue implements Schedule {
 	public int total_wait_time;
 	public long packets_dropped_size;
 	public long packets_switched_size;
-	public NetworkBuffer[] buffer;
+	public LinkedList<NetworkBuffer> buffer;
 
 	/* Constructor */
 	public FairQueue() {
@@ -25,50 +25,55 @@ public class FairQueue implements Schedule {
 		total_wait_time = 0;
 
 		// for buffers
-		buffer = new NetworkBuffer[3];
+		buffer = new LinkedList<NetworkBuffer>();
+		for(int i=0;i<3;i++){
+			buffer.add(new NetworkBuffer());
+		}
 	}
 
 	/* Methods */
-	public double throughput(int current_time) {
-		return (packets_switched_size * 8 / current_time);
+	public double throughput(int duration) {
+		return (packets_switched_size / duration);
 	}
 
 	public void addPacket(Packet p) {
-		buffer[p.priority].add(p);
+		buffer.get(p.priority).add(p);
 	}
 
 	public void dropPacket(Packet p) {
-		buffer[p.priority].remove();
+		buffer.get(p.priority).remove();
 		packets_dropped_size += p.size;
 		packets_dropped_cnt++;
 	}
 
-	public void info(int bandwidth, int current_time, String dateAsText) {
-		System.out.println("\n\n------[ " + dateAsText + " ]------\n");
-		System.out.println("packets_dropped_size = " + packets_dropped_size + " B");
+	public void info(int bandwidth, int duration, String dateAsText) {
+		System.out.println("\n\n------[ RESULT ]------\n");
+		System.out.println("TIMESTAMP = " + dateAsText);
+		System.out.println("BANDWIDTH = " + bandwidth + " bps\n");
+		System.out.println("packets_dropped_size = " + packets_dropped_size + " b");
 		System.out.println("packets_dropped_cnt = " + packets_dropped_cnt + " packets\n");
-		System.out.println("packets_switched_size = " + packets_switched_size + " B");
+		System.out.println("packets_switched_size = " + packets_switched_size + " b");
 		System.out.println("packets_switched_cnt = " + packets_switched_cnt + " packets\n");
-		System.out.println("total_wait_time = " + total_wait_time + " seconds\n");
-		System.out.println("bandwidth = " + bandwidth + " bps");
-		System.out.println("throughput = " + throughput(current_time) + " bps");
+		System.out.println("total_wait_time = " + total_wait_time + " seconds");
+		System.out.println("throughput = " + throughput(duration) + " bps");
 	}
 
-	public void saveResults(int bandwidth, int current_time, String dateAsText) throws IOException {
+	public void saveResults(int bandwidth, int duration, String dateAsText) throws IOException {
 		FileWriter fw = new FileWriter("results_fq.txt", true);		
-		fw.write("\n\n------[ " + dateAsText + " ]------\n");
-		fw.write("\npackets_dropped_size = " + packets_dropped_size + " B");
-		fw.write("\npackets_dropped_cnt = " + packets_dropped_cnt + " packets\n");
-		fw.write("\npackets_switched_size = " + packets_switched_size + " B");
-		fw.write("\npackets_switched_cnt = " + packets_switched_cnt + " packets\n");
-		fw.write("\ntotal_wait_time = " + total_wait_time + " seconds\n");
-		fw.write("\nbandwidth = " + bandwidth + " bps");
-		fw.write("\nthroughput = " + throughput(current_time) + " bps");
+		fw.write("\n\n------[ RESULT ]------");
+		fw.write("\nTIMESTAMP = " + dateAsText);
+		fw.write("\nBANDWIDTH = " + bandwidth + " bps\n");
+		fw.write("\n\tpackets_dropped_size = " + packets_dropped_size + " b");
+		fw.write("\n\tpackets_dropped_cnt = " + packets_dropped_cnt + " packets\n");
+		fw.write("\n\tpackets_switched_size = " + packets_switched_size + " b");
+		fw.write("\n\tpackets_switched_cnt = " + packets_switched_cnt + " packets\n");
+		fw.write("\n\ttotal_wait_time = " + total_wait_time + " seconds");		
+		fw.write("\n\tthroughput = " + throughput(duration) + " bps");
 		fw.close();
 	}
 
 	public void switchPacket(Packet p) {
-		buffer[p.priority].remove();
+		buffer.get(p.priority).remove();
 		packets_switched_size += p.size;
 		packets_switched_cnt++;
 	}
@@ -84,7 +89,7 @@ public class FairQueue implements Schedule {
 
 		while (!emptyBuffers()) {
 			temp_priority = getPriorityWithMinVFT(current_time);
-			Packet p = buffer[temp_priority].peekFirst();
+			Packet p = buffer.get(temp_priority).peekFirst();
 			if (p.waitTime(current_time) == timeout) {
 				dropPacket(p);
 				total_wait_time += p.waitTime(current_time);
@@ -96,8 +101,9 @@ public class FairQueue implements Schedule {
 	}
 
 	int getPriorityWithMinVFT(int current_time) {
-		int min_vft = Integer.MAX_VALUE,
-		    temp_priority = 0;
+		int temp_priority = 0;
+		long min_vft = Integer.MAX_VALUE;
+		     
 		for (NetworkBuffer temp_buffer : buffer) {
 			if (!temp_buffer.isEmpty()) {
 				Packet p = temp_buffer.peekFirst();
