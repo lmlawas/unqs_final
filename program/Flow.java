@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class Flow {
 
+	public static int BITS_PER_BYTE = 8;
+
 	/* Attributes */
 	public int first_switched,
 	       no_of_packets,
@@ -19,14 +21,14 @@ public class Flow {
 		this.first_switched = first_switched;
 		this.no_of_packets = no_of_packets;
 		this.priority = 0;
-		this.size = size;
+		this.size = size*BITS_PER_BYTE;
 	}
 
 	public Flow(int first_switched, int no_of_packets, int protocol, int size) {
 		this.first_switched = first_switched;
 		this.no_of_packets = no_of_packets;
 		this.priority = getPriority(protocol);
-		this.size = size;
+		this.size = size*BITS_PER_BYTE;
 	}
 
 	/* Methods */
