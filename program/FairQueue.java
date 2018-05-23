@@ -83,7 +83,7 @@ public class FairQueue implements Schedule {
 		    temp_priority = 0;
 
 		for (Packet p : packets) {
-			p.info();
+			// p.info();
 			addPacket(p);
 		}
 
