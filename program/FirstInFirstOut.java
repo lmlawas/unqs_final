@@ -82,7 +82,6 @@ public class FirstInFirstOut implements Schedule {
 		int temp_buffer_size = 0;
 		if (packets != null) {
 			for (Packet p : packets) {
-				// p.info();
 				addPacket(p);
 			}
 		}

@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.LinkedList;
 
-public class PriorityQueue implements Schedule {
+public class WaitFairQueue implements Schedule {
 
-	/* Attributes */
+	/* Attributes */	
 	public int packets_dropped_cnt;
 	public int packets_switched_cnt;
 	public int total_wait_time;
@@ -13,7 +13,7 @@ public class PriorityQueue implements Schedule {
 	public NetworkBuffer wait_buffer;
 
 	/* Constructor */
-	public PriorityQueue() {
+	public WaitFairQueue() {
 		// for throughput
 		packets_dropped_size = 0;
 		packets_switched_size = 0;
@@ -59,8 +59,8 @@ public class PriorityQueue implements Schedule {
 		System.out.println("throughput = " + throughput(duration) + " bps");
 	}
 
-	public void saveResults(int bandwidth, int duration, String dateAsText) throws IOException{
-		FileWriter fw = new FileWriter("results_pq.txt", true);		
+	public void saveResults(int bandwidth, int duration, String dateAsText) throws IOException {
+		FileWriter fw = new FileWriter("results_fq.txt", true);		
 		fw.write("\n\n------[ RESULT ]------");
 		fw.write("\nTIMESTAMP = " + dateAsText);
 		fw.write("\nBANDWIDTH = " + bandwidth + " bps\n");
@@ -81,11 +81,22 @@ public class PriorityQueue implements Schedule {
 	}
 
 	public void process(int bandwidth, int current_time, int timeout, LinkedList<Packet> packets) {
-		int temp_buffer_size = 0;
+		int temp_buffer_size = 0,
+		    temp_priority = 0;
+
 		if (packets != null) {
 			for (Packet p : packets) {
 				addPacket(p);
 			}
+		}
+
+		// wait factor
+		while(!wait_buffer.isEmpty()){
+			Packet p = wait_buffer.peekFirst();
+			if(p.waitTime(current_time) != timeout && p.waitTime(current_time) >= 55){
+				switchPacket(p);
+				total_wait_time += p.waitTime(current_time);
+			} else break;
 		}
 
 		while (!priority_buffer.isEmpty()) {
@@ -109,6 +120,7 @@ public class PriorityQueue implements Schedule {
 				total_wait_time += p.waitTime(current_time);
 			} else break;
 		}
+
 	}
 
 	public boolean queueEmpty(){		
