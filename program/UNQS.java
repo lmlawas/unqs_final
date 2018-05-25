@@ -109,11 +109,11 @@ public class UNQS {
 
                     new_packets = single_flow.convertToPackets(config.getSchedule());
 
-                    // if (config.getDebug()) {
-                    //     for (Packet p : new_packets) {
-                    //         p.info();
-                    //     }
-                    // }
+                    if (config.getDebug()) {
+                        for (Packet p : new_packets) {
+                            p.info();
+                        }
+                    }
 
                     sched.process(config.getBandwidth(), current_time, config.getTimeout(), new_packets);
 
@@ -126,14 +126,14 @@ public class UNQS {
                 current_time += 1;
             }
 
-            while(sched.queueEmpty()){
+            while(!sched.queueEmpty()){
                 sched.process(config.getBandwidth(), current_time, config.getTimeout(), null);
                 current_time += 1;
             }
 
             System.out.print("done.\n\n");
-            //sched.info(config.getBandwidth(), config.getDuration(), readableDate(config.getStartTime()));
-            //sched.saveResults(config.getBandwidth(), config.getDuration(), readableDate(config.getStartTime()));
+            sched.info(config.getBandwidth(), current_time-1-config.getStartTime(), readableDate(config.getStartTime()));
+            sched.saveResults(config.getBandwidth(), current_time-1-config.getStartTime(), readableDate(config.getStartTime()));
 
             con.close();
         } catch (Exception e) {
