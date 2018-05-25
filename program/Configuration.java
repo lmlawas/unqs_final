@@ -19,7 +19,7 @@ public class Configuration {
             with_password;
 
     private int bandwidth,
-            duration,
+            end_time,
             schedule_type,
             start_time,
             timeout;
@@ -65,8 +65,8 @@ public class Configuration {
         return start_time;
     }
 
-    int getDuration() {
-        return duration;
+    int getEndTime() {
+        return end_time;
     }
 
     int getBandwidth() {
@@ -132,8 +132,8 @@ public class Configuration {
         this.start_time = start_time;
     }
 
-    void setDuration(int duration) {
-        this.duration = duration;
+    void setEndTime(int end_time) {
+        this.end_time = end_time;
     }
 
     void setBandwidth(int bandwidth) {
@@ -167,7 +167,7 @@ public class Configuration {
         schedule_type = 0; // FIFO
         timeout = 60; // 60 seconds
         start_time = 0; // init
-        duration = 28800; // 8 hours
+        end_time = 86400; // 24 hours
 
         // program mode
         debug = false;
@@ -262,10 +262,10 @@ public class Configuration {
             return 1;
         }
 
-         match = Pattern.matches("^--duration=[0-9]+?", input);
+         match = Pattern.matches("^--endtime=[0-9]+?", input);
         if (match) {
             String[] parts = input.split("=");
-            setDuration(Integer.parseInt(parts[1]));
+            setEndTime(Integer.parseInt(parts[1]));
             return 1;
         }
 
@@ -330,7 +330,7 @@ public class Configuration {
         System.out.println("\tschedule = " + sched);
         System.out.println("\ttimeout = " + timeout + " s");
         System.out.println("\tstart time = " + start_time + " s");
-        System.out.println("\tduration = " + duration + " s");
+        System.out.println("\tend time = " + end_time + " s");
 
         // program mode
         System.out.println("\n\t[ program mode ]");
