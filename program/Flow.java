@@ -21,14 +21,14 @@ public class Flow {
 		this.first_switched = first_switched;
 		this.no_of_packets = no_of_packets;
 		this.priority = 0;
-		this.size = size*BITS_PER_BYTE;
+		this.size = size * BITS_PER_BYTE;
 	}
 
 	public Flow(int first_switched, int no_of_packets, int protocol, int size) {
 		this.first_switched = first_switched;
 		this.no_of_packets = no_of_packets;
 		this.priority = getPriority(protocol);
-		this.size = size*BITS_PER_BYTE;
+		this.size = size * BITS_PER_BYTE;
 	}
 
 	/* Methods */
@@ -57,26 +57,24 @@ public class Flow {
 
 	public int getPriority(int protocol) {
 		try {
-			int i;
-			for (i = 1; i < 3; i++) {
-				String file_location = "../priority/" + Integer.toString(i) + ".txt";
-				FileReader fp = new FileReader(file_location);
-				BufferedReader br = new BufferedReader(fp);
-				String line = null;
 
-				while ((line = br.readLine()) != null) {
-					if (matchCommas(line)) {
-						String[] tokens = line.split(",");
-						int port = Integer.parseInt(tokens[1]);
-						if (protocol == port) {
-							return i-1;
-						}
+			String file_location = "../priority/1.txt";
+			FileReader fp = new FileReader(file_location);
+			BufferedReader br = new BufferedReader(fp);
+			String line = null;
+
+			while ((line = br.readLine()) != null) {
+				if (matchCommas(line)) {
+					String[] tokens = line.split(",");
+					int port = Integer.parseInt(tokens[1]);
+					if (protocol == port) {
+						return 0;
 					}
 				}
-				br.close();
-				fp.close();
 			}
-			return i-1;
+			br.close();
+			fp.close();
+			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;

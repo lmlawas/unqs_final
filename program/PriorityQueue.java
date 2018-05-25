@@ -9,7 +9,8 @@ public class PriorityQueue implements Schedule {
 	public int total_wait_time;
 	public long packets_dropped_size;
 	public long packets_switched_size;
-	public LinkedList<NetworkBuffer> buffer;
+	public NetworkBuffer priority_buffer;
+	public NetworkBuffer wait_buffer;
 
 	/* Constructor */
 	public PriorityQueue() {
@@ -25,10 +26,8 @@ public class PriorityQueue implements Schedule {
 		total_wait_time = 0;
 
 		// for buffers
-		buffer = new LinkedList<NetworkBuffer>();
-		for(int i=0;i<3;i++){
-			buffer.add(new NetworkBuffer());
-		}
+		priority_buffer = new NetworkBuffer();
+		wait_buffer = new NetworkBuffer();
 	}
 
 	/* Methods */
@@ -37,11 +36,13 @@ public class PriorityQueue implements Schedule {
 	}
 
 	public void addPacket(Packet p) {
-		buffer.get(p.priority).add(p);
+		if(p.priority == 0) priority_buffer.add(p);
+		else wait_buffer.add(p);
 	}
 
 	public void dropPacket(Packet p) {
-		buffer.get(p.priority).remove();
+		if(p.priority == 0) priority_buffer.remove();
+		else wait_buffer.remove();
 		packets_dropped_size += p.size;
 		packets_dropped_cnt++;
 	}
@@ -73,29 +74,37 @@ public class PriorityQueue implements Schedule {
 	}
 
 	public void switchPacket(Packet p) {
-		buffer.get(p.priority).remove();
+		if(p.priority == 0) priority_buffer.remove();
+		else wait_buffer.remove();
 		packets_switched_size += p.size;
 		packets_switched_cnt++;
 	}
 
 	public void process(int bandwidth, int current_time, int timeout, LinkedList<Packet> packets) {
 		int temp_buffer_size = 0;
-		for (Packet p : packets) {
-			// p.info();
-			addPacket(p);
-		}
-		for (NetworkBuffer temp_buffer : buffer) {
-			while (!temp_buffer.isEmpty()) {
-				Packet p = temp_buffer.peekFirst();
-				if (p.waitTime(current_time) == timeout) {
-					dropPacket(p);
-					total_wait_time += p.waitTime(current_time);
-				} else if (p.size + temp_buffer_size <= bandwidth) {
-					switchPacket(p);
-					total_wait_time += p.waitTime(current_time);
-				} else break;
+		if (packets != null) {
+			for (Packet p : packets) {
+				// p.info();
+				addPacket(p);
 			}
 		}
 
+		// for (NetworkBuffer temp_buffer : buffer) {
+		// 	while (!temp_buffer.isEmpty()) {
+		// 		Packet p = temp_buffer.peekFirst();
+		// 		if (p.waitTime(current_time) == timeout) {
+		// 			dropPacket(p);
+		// 			total_wait_time += p.waitTime(current_time);
+		// 		} else if (p.size + temp_buffer_size <= bandwidth) {
+		// 			switchPacket(p);
+		// 			total_wait_time += p.waitTime(current_time);
+		// 		} else break;
+		// 	}
+		// }
+
+	}
+
+	public boolean queueEmpty(){		
+		return (priority_buffer.isEmpty() && wait_buffer.isEmpty());
 	}
 }

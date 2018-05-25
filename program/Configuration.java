@@ -308,8 +308,8 @@ public class Configuration {
             sched = "FIFO";
         } else if (schedule_type == Schedule.PQ) {
             sched = "PQ";
-        } else if (schedule_type == Schedule.FQ) {
-            sched = "FQ";
+        } else if (schedule_type == Schedule.WFQ) {
+            sched = "WFQ";
         }
 
         System.out.println("-------------------------------");

@@ -80,10 +80,13 @@ public class FirstInFirstOut implements Schedule {
 
 	public void process(int bandwidth, int current_time, int timeout, LinkedList<Packet> packets) {
 		int temp_buffer_size = 0;
-		for (Packet p : packets) {
-			// p.info();
-			addPacket(p);
+		if (packets != null) {
+			for (Packet p : packets) {
+				// p.info();
+				addPacket(p);
+			}
 		}
+
 		while (!buffer.isEmpty()) {
 			Packet p = buffer.peekFirst();
 			if (p.waitTime(current_time) == timeout) {
@@ -94,5 +97,10 @@ public class FirstInFirstOut implements Schedule {
 				total_wait_time += p.waitTime(current_time);
 			} else break;
 		}
+	}
+
+	public boolean queueEmpty(){
+		if(buffer.isEmpty()) return true;
+		return false;
 	}
 }

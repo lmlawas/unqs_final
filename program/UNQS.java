@@ -85,8 +85,8 @@ public class UNQS {
                 sched = new FirstInFirstOut();
             } else if (config.getSchedule() == Schedule.PQ) {
                 sched = new PriorityQueue();
-            } else if (config.getSchedule() == Schedule.FQ) {
-                sched = new FairQueue();
+            } else if (config.getSchedule() == Schedule.WFQ) {
+                sched = new WaitFairQueue();
             } else {
                 System.out.println("Invalid schedule type.\n");
                 return;
@@ -94,7 +94,7 @@ public class UNQS {
 
             System.out.print("Processing packets...");
 
-            while (current_time <= config.getStartTime() + config.getDuration()) {
+            while (current_time <= config.getEndTime()) {
                 flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES+OUT_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
 
                 if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
@@ -106,10 +106,6 @@ public class UNQS {
                     } else {
                         single_flow = new Flow(flows.getInt(1), flows.getInt(2), flows.getInt(3), flows.getInt(4));
                     }
-                    // single_flow.first_switched = flows.getInt(1);
-                    // single_flow.no_of_packets = flows.getInt(2);
-                    // single_flow.priority = flows.getInt(3);
-                    // single_flow.size = flows.getInt(4);
 
                     new_packets = single_flow.convertToPackets(config.getSchedule());
 
@@ -130,9 +126,14 @@ public class UNQS {
                 current_time += 1;
             }
 
+            while(sched.queueEmpty()){
+                sched.process(config.getBandwidth(), current_time, config.getTimeout(), null);
+                current_time += 1;
+            }
+
             System.out.print("done.\n\n");
-            sched.info(config.getBandwidth(), config.getDuration(), readableDate(config.getStartTime()));
-            sched.saveResults(config.getBandwidth(), config.getDuration(), readableDate(config.getStartTime()));
+            //sched.info(config.getBandwidth(), config.getDuration(), readableDate(config.getStartTime()));
+            //sched.saveResults(config.getBandwidth(), config.getDuration(), readableDate(config.getStartTime()));
 
             con.close();
         } catch (Exception e) {
