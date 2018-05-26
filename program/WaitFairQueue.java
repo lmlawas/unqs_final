@@ -60,7 +60,7 @@ public class WaitFairQueue implements Schedule {
 	}
 
 	public void saveResults(int bandwidth, int duration, String dateAsText) throws IOException {
-		FileWriter fw = new FileWriter("results_wfq_"+dateAsText+"_"+bandwidth+".txt", true);
+		FileWriter fw = new FileWriter("results/wfq_"+dateAsText+"_"+bandwidth+".txt", true);
 		fw.write("\n\n------[ WFQ SIMULATION SUMMARY ]------");
 		fw.write("\nTIMESTAMP = " + dateAsText);
 		fw.write("\nBANDWIDTH = " + bandwidth + " bps\n");

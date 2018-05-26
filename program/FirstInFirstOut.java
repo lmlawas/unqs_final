@@ -58,7 +58,7 @@ public class FirstInFirstOut implements Schedule {
 	}
 
 	public void saveResults(int bandwidth, int duration, String dateAsText) throws IOException {
-		FileWriter fw = new FileWriter("results_fifo_"+dateAsText+"_"+bandwidth+".txt", true);
+		FileWriter fw = new FileWriter("results/fifo_"+dateAsText+"_"+bandwidth+".txt", true);
 		fw.write("\n\n------[ FIFO SIMULATION SUMMARY ]------");
 		fw.write("\nTIMESTAMP = " + dateAsText);
 		fw.write("\nBANDWIDTH = " + bandwidth + " bps\n");
