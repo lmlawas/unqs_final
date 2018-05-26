@@ -144,7 +144,7 @@ public class UNQS {
     }
 
     public static String readableDate(int timestamp) {
-        String dateAsText = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        String dateAsText = new SimpleDateFormat("yyyy-MM-dd")
         .format(new Date(timestamp * 1000L));
         return dateAsText;
     }

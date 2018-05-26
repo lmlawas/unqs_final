@@ -604,7 +604,7 @@
 			"file": "program/simulation.conf",
 			"settings":
 			{
-				"buffer_size": 299,
+				"buffer_size": 300,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -1128,15 +1128,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 299,
+						"buffer_size": 300,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								178,
-								178
+								204,
+								204
 							]
 						],
 						"settings":

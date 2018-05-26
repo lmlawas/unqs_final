@@ -3,20 +3,20 @@ public class Packet {
 	/* Attributes */
 	public int first_switched;
 	public int priority;
-	public long size;
+	public double size;
 
 	/* Constructors */
 	public Packet() {
 	}
 
-	public Packet(int first_switched, int priority, long size) {
+	public Packet(int first_switched, int priority, double size) {
 		this.first_switched = first_switched;
 		this.priority = priority;
 		this.size = size;
 	}
 
 	/* Methods */
-	public long virtualFinishTime(int current_time) {
+	public double virtualFinishTime(int current_time) {
 		int max_time = current_time;
 
 		if (this.first_switched > max_time) {

@@ -7,8 +7,8 @@ public class WaitFairQueue implements Schedule {
 	public int packets_dropped_cnt;
 	public int packets_switched_cnt;
 	public int total_wait_time;
-	public long packets_dropped_size;
-	public long packets_switched_size;
+	public double packets_dropped_size;
+	public double packets_switched_size;
 	public NetworkBuffer priority_buffer;
 	public NetworkBuffer wait_buffer;
 
@@ -32,7 +32,7 @@ public class WaitFairQueue implements Schedule {
 
 	/* Methods */
 	public double throughput(int duration) {
-		return (packets_switched_size / duration);
+		return (packets_switched_size / (double)duration);
 	}
 
 	public void addPacket(Packet p) {
@@ -48,7 +48,7 @@ public class WaitFairQueue implements Schedule {
 	}
 
 	public void info(int bandwidth, int duration, String dateAsText) {
-		System.out.println("\n\n------[ RESULT ]------\n");
+		System.out.println("\n\n------[ WFQ SIMULATION SUMMARY ]------");
 		System.out.println("TIMESTAMP = " + dateAsText);
 		System.out.println("BANDWIDTH = " + bandwidth + " bps\n");
 		System.out.println("packets_dropped_size = " + packets_dropped_size + " b");
@@ -60,15 +60,15 @@ public class WaitFairQueue implements Schedule {
 	}
 
 	public void saveResults(int bandwidth, int duration, String dateAsText) throws IOException {
-		FileWriter fw = new FileWriter("results_fq.txt", true);		
-		fw.write("\n\n------[ RESULT ]------");
+		FileWriter fw = new FileWriter("results_wfq_"+dateAsText+"_"+bandwidth+".txt", true);
+		fw.write("\n\n------[ WFQ SIMULATION SUMMARY ]------");
 		fw.write("\nTIMESTAMP = " + dateAsText);
 		fw.write("\nBANDWIDTH = " + bandwidth + " bps\n");
 		fw.write("\n\tpackets_dropped_size = " + packets_dropped_size + " b");
 		fw.write("\n\tpackets_dropped_cnt = " + packets_dropped_cnt + " packets\n");
 		fw.write("\n\tpackets_switched_size = " + packets_switched_size + " b");
 		fw.write("\n\tpackets_switched_cnt = " + packets_switched_cnt + " packets\n");
-		fw.write("\n\ttotal_wait_time = " + total_wait_time + " seconds");		
+		fw.write("\n\ttotal_wait_time = " + total_wait_time + " seconds");
 		fw.write("\n\tthroughput = " + throughput(duration) + " bps");
 		fw.close();
 	}
@@ -81,8 +81,7 @@ public class WaitFairQueue implements Schedule {
 	}
 
 	public void process(int bandwidth, int current_time, int timeout, LinkedList<Packet> packets) {
-		int temp_buffer_size = 0,
-		    temp_priority = 0;
+		double temp_buffer_size = 0;
 
 		if (packets != null) {
 			for (Packet p : packets) {
