@@ -1,0 +1,14 @@
+
+
+------[ WFQ SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-13
+BANDWIDTH = 12200 bps
+
+	packets_dropped_size = 0.0 b
+	packets_dropped_cnt = 0 packets
+
+	packets_switched_size = 5.4446560764816516E11 b
+	packets_switched_cnt = 132896282 packets
+
+	total_wait_time = 0 seconds
+	throughput = 6319898.871146767 bps
