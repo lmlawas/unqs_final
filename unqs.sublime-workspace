@@ -536,7 +536,6 @@
 			"settings":
 			{
 				"buffer_size": 5734,
-				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -611,7 +610,6 @@
 			"settings":
 			{
 				"buffer_size": 300,
-				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -685,11 +683,13 @@
 	},
 	"expanded_folders":
 	[
-		"/home/lmlawas1/Documents/unqs_final/program",
-		"/home/lmlawas1/Documents/unqs_final/program/conf"
+		"/home/lmlawas1/Documents/unqs_final/program"
 	],
 	"file_history":
 	[
+		"/home/lmlawas1/Documents/unqs_final/program/results/wfq_2017-11-19_12200.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/results/fifo_2017-11-19_12200.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/results/pq_2017-11-19_12200.txt",
 		"/home/lmlawas1/Documents/unqs_final/program/conf/nov13.conf",
 		"/home/lmlawas1/Documents/unqs_final/program/Schedule.java",
 		"/home/lmlawas1/Documents/unqs_final/program/Configuration.java",
@@ -814,10 +814,7 @@
 		"/home/lmlawas1/Desktop/characters/Charlie Parker/rps/declan bishop.txt",
 		"/home/lmlawas1/Desktop/Dog.java",
 		"/home/lmlawas1/Desktop/port/service-names-port-numbers.csv",
-		"/home/lmlawas1/Desktop/new-unqs/protocol_match_to_ports/1.txt",
-		"/home/lmlawas1/Desktop/new-unqs/protocol_match_to_ports/Finder.java",
-		"/home/lmlawas1/Desktop/new-unqs/protocol_match_to_ports/2.txt",
-		"/home/lmlawas1/Desktop/characters/Mathieu Donovan/rps/janice daniels.txt"
+		"/home/lmlawas1/Desktop/new-unqs/protocol_match_to_ports/1.txt"
 	],
 	"find":
 	{
@@ -865,7 +862,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 12,
 			"sheets":
 			[
 				{
@@ -893,7 +890,7 @@
 						"translation.y": 1728.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -909,8 +906,8 @@
 						"selection":
 						[
 							[
-								476,
-								524
+								356,
+								356
 							]
 						],
 						"settings":
@@ -923,7 +920,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1227,8 +1224,8 @@
 						"selection":
 						[
 							[
-								109,
-								109
+								512,
+								512
 							]
 						],
 						"settings":
@@ -1240,7 +1237,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1326,7 +1323,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 345.0,
 	"status_bar_visible": true,
 	"template_settings":
