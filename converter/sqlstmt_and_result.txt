@@ -61,6 +61,103 @@ order by TOTAL_BYTES asc;
 81%
 
 
+
+167772160-184549375	    
+2886729728-2887778303
+3232235520-3232301055
+
+select IP_SRC_ADDR src,
+IP_DST_ADDR dst,
+SUM(IN_BYTES+OUT_BYTES) total_bytes,
+ROUND(SUM(IN_BYTES+OUT_BYTES)/102982614457*100, 1) percent_bytes
+from flowsv4
+where IP_DST_ADDR NOT IN (select IP_DST_ADDR from local_ip_addr)
+group by src, dst order by SUM(IN_BYTES+OUT_BYTES) asc;
+
+total out flow rows
+58831
+
+out flow bytes
+102982614457
+
+|  167774332 | 3627731726 |  1039431952 |           1.0 |		216.58.203.14 = AS15169 Google LLC
+|  167782193 |  301815244 |  1054547100 |           1.0 |		17.253.85.204 = AS6185 Apple Inc.
+|  167783254 | 3627731727 |  1242563600 |           1.2 |		216.58.203.15 = AS15169 Google LLC
+| 3232235777 | 4026531834 |  1562493373 |           1.5 |		239.255.255.250 = 
+| 3232235521 | 4026531834 |  1575146908 |           1.5 |		239.255.255.250 = 
+|  167781195 | 2649753392 |  2771346197 |           2.7 |		157.240.7.48 = AS32934 Facebook, Inc.
+|  167783740 | 3627736462 |  2920460978 |           2.8 |		216.58.221.142 = AS15169 Google LLC
+|  167798008 | 4010412554 |  9173263420 |           8.9 |		239.10.10.10 = 
+|  167782102 | 1788788301 | 62409079786 |          60.6 |		106.158.190.77 = AS2516 KDDI CORPORATION
+
+81.2%
+
+
+
+KDDI Corporation is a telecommunications business based in Japan. It provides content hosting over optimized networks, and ICT and business services and solutions.
+http://www.kddi.com/english/corporate/kddi/our-business/ may 28 2018
+
+Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. 
+
+WorldStream B.V. is a popular Internet Service Provider in the Netherlands used by customers from all over the world. It provides cost-effective services to secure hosting environment, and hardware and Operating System technologies.
+https://www.worldstream.nl/en/about/company
+
+M247 Ltd. is a UK-based technology company that offers  services and tools to secure network and data while providing connectivity and internet infastructure that expands to a global scale.
+https://m247.com/about-us/
+
+Converge ICT is a Philippine technology company with the fastest growing fiber internet and offers services to ensure pure end-to-end fiber internet connection, thus reducing data loss, faster speed and bandwidth.
+http://www.convergeict.com/about-us/
+
+Facebook is an American online social media and social networking service company.
+
+Apple Inc. is an American multinational technology company that designs, develops, and sells consumer electronics, computer software, and online services.
+
+total in flow rows
+22058
+
+in flow bytes
+184191603946
+
+| 3627736449 |  167772855 |  1750693948 |           1.0 |		216.58.221.129 = AS15169 Google LLC
+| 3393565714 |  167776468 |  1812641471 |           1.0 |		202.69.180.18 = AS17639 Converge ICT Solutions Inc.
+| 3111686621 |  167777984 |  2098695101 |           1.1 |		185.120.145.221 = AS9009 M247 Ltd
+| 3393566991 |  167824779 |  2154908552 |           1.2 |		202.69.185.15 = AS17639 Converge ICT Solutions Inc.
+| 3114495383 |  167782547 |  2187777140 |           1.2 |		185.163.109.151 = AS9009 M247 Ltd
+| 3627736449 |  167783472 |  2815063488 |           1.5 |		216.58.221.129 = AS15169 Google LLC
+| 1844203949 |  167778372 |  3426880570 |           1.9 |		109.236.81.173 = AS49981 WorldStream B.V.
+| 3627736449 |  167781426 | 23393060326 |          12.7 |		216.58.221.129 = AS15169 Google LLC
+| 1788788301 |  167782102 | 79135454093 |          43.0 |		106.158.190.77 = AS2516 KDDI CORPORATION
+
+
+select IP_SRC_ADDR src,
+IP_DST_ADDR dst,
+SUM(IN_BYTES+OUT_BYTES) total_bytes,
+ROUND(SUM(IN_BYTES+OUT_BYTES)/184191603946*100, 1) percent_bytes
+from flowsv4
+where IP_DST_ADDR IN (select IP_DST_ADDR from local_ip_addr)
+group by src, dst order by SUM(IN_BYTES+OUT_BYTES) asc;
+
+69.4%
+
+total flow bytes
+287174218403
+
+
+
+
+
+
+
+
+
+
+
+select IP_DST_ADDR dst, 
+ROUND(SUM(IN_BYTES+OUT_BYTES)/102982614457*100, 1) pct_out
+from flowsv4 where IP_DST_ADDR not in (select distinct IP_DST_ADDR from flowsv4 where IP_DST_ADDR between 167772160 and 184549375 UNION select distinct IP_DST_ADDR from flowsv4 where IP_DST_ADDR between 2886729728 and 2887778303 UNION select distinct IP_DST_ADDR from flowsv4 where IP_DST_ADDR between 3232235520 and 3232301055) group by IP_DST_ADDR order by SUM(IN_BYTES+OUT_BYTES) asc
+
+
+
 total flows 554392
 
 select DISTINCT L4_DST_PORT,
