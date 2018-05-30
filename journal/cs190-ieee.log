@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.26)  30 MAY 2018 16:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.26)  30 MAY 2018 19:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -731,84 +731,116 @@ File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
+(/usr/share/texlive/texmf-dist/tex/latex/blindtext/blindtext.sty
+Package: blindtext 2012/01/06 V2.0 blindtext-Package
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+\c@blindtext=\count143
+\c@Blindtext=\count144
+\c@blind@countparstart=\count145
+\blind@countxx=\count146
+\blindtext@numBlindtext=\count147
+\blind@countyy=\count148
+\c@blindlist=\count149
+\c@blindlistlevel=\count150
+\c@blindlist@level=\count151
+\blind@listitem=\count152
+\c@blind@listcount=\count153
+\c@blind@levelcount=\count154
+\blind@mathformula=\count155
+\blind@Mathformula=\count156
+\c@blind@randomcount=\count157
+\c@blind@randommax=\count158
+\c@blind@pangramcount=\count159
+\c@blind@pangrammax=\count160
+)
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-(./cs190-ieee.aux)
+(./cs190-ieee.aux
+
+LaTeX Warning: Label `top-out-flows' multiply defined.
+
+
+LaTeX Warning: Label `top-out-flows' multiply defined.
+
+)
 \openout1 = `cs190-ieee.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 53.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 54.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    ... okay on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <5> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <7> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <8> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <11> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <11> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <17> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <20> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <24> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 54.
 
 ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count143
+\scratchcounter=\count161
 \scratchdimen=\dimen188
 \scratchbox=\box43
-\nofMPsegments=\count144
-\nofMParguments=\count145
+\nofMPsegments=\count162
+\nofMParguments=\count163
 \everyMPshowfont=\toks38
-\MPscratchCnt=\count146
+\MPscratchCnt=\count164
 \MPscratchDim=\dimen189
-\MPnumerator=\count147
-\makeMPintoPDFobject=\count148
+\MPnumerator=\count165
+\makeMPintoPDFobject=\count166
 \everyMPtoPDFconversion=\toks39
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -866,107 +898,102 @@ tim
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.13} into 
 your preamble.
- on input line 53.
+ on input line 54.
 
-\c@lstlisting=\count149
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 92.
+\c@lstlisting=\count167
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 93.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Try loading font information for T1+zi4 on input line 122.
+LaTeX Font Info:    Try loading font information for T1+zi4 on input line 123.
 
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 ) [2
 
 ]
-Overfull \hbox (8.00244pt too wide) in paragraph at lines 189--190
-[][][][][][][][][][][]  
- []
+LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <8> not available
+(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 158.
 
-
-LaTeX Warning: Float too large for page by 28.1319pt on input line 205.
-
-
-Underfull \hbox (badness 3849) in paragraph at lines 224--225
+Underfull \hbox (badness 3849) in paragraph at lines 227--228
 \T1/ptm/m/n/10 10.0.53.53 (5444 flows), 10.0.3.110 (1825 flows), and
  []
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 248--250
+
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
 []\T1/ptm/m/n/10 Three source nodes most no-tably ac-tive were
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--250
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
 \T1/ptm/m/n/10 of IP ad-dresses 10.0.53.9 (7967), 10.0.3.110 (932),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--250
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
 \T1/ptm/m/n/10 and 10.0.3.148 (369). On the re-ceiv-ing end, the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--250
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
 \T1/ptm/m/n/10 fol-low-ing are the top 3 IP ad-dresses: 10.0.3.53
  []
 
 
-Underfull \hbox (badness 2726) in paragraph at lines 248--250
+Underfull \hbox (badness 2726) in paragraph at lines 251--253
 \T1/ptm/m/n/10 (7970), 239.255.255.250 (2525), and 224.0.0.251 (861).
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 248--250
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
 
  []
 
-<images/duration.png, id=23, 455.45157pt x 255.95625pt>
+<images/duration.png, id=17, 455.45157pt x 255.95625pt>
 File: images/duration.png Graphic file (type png)
 
 <use images/duration.png>
-Package pdftex.def Info: images/duration.png used on input line 260.
+Package pdftex.def Info: images/duration.png used on input line 263.
 (pdftex.def)             Requested size: 258.0pt x 144.99438pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 260--261
+Overfull \hbox (6.0pt too wide) in paragraph at lines 263--264
 [][]
  []
 
-<images/throughput.png, id=24, 455.45157pt x 255.95625pt>
+[3] <images/throughput.png, id=24, 455.45157pt x 255.95625pt>
 File: images/throughput.png Graphic file (type png)
 
 <use images/throughput.png>
-Package pdftex.def Info: images/throughput.png used on input line 272.
+Package pdftex.def Info: images/throughput.png used on input line 275.
 (pdftex.def)             Requested size: 258.0pt x 144.99438pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 272--273
-[][]
- []
-
-<images/packetloss.png, id=25, 455.45157pt x 255.95625pt>
-File: images/packetloss.png Graphic file (type png)
-
-<use images/packetloss.png>
-Package pdftex.def Info: images/packetloss.png used on input line 285.
-(pdftex.def)             Requested size: 258.0pt x 144.99438pt.
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 285--286
+Overfull \hbox (6.0pt too wide) in paragraph at lines 275--276
 [][]
  []
 
 [4 <./images/duration.png (PNG copy)> <./images/throughput.png (PNG copy)>]
+<images/packetloss.png, id=30, 455.45157pt x 255.95625pt>
+File: images/packetloss.png Graphic file (type png)
+
+<use images/packetloss.png>
+Package pdftex.def Info: images/packetloss.png used on input line 288.
+(pdftex.def)             Requested size: 258.0pt x 144.99438pt.
+
+Overfull \hbox (6.0pt too wide) in paragraph at lines 288--289
+[][]
+ []
+
 <images/duration_with_bc.png, id=31, 455.45157pt x 255.95625pt>
 File: images/duration_with_bc.png Graphic file (type png)
 
 <use images/duration_with_bc.png>
-Package pdftex.def Info: images/duration_with_bc.png used on input line 303.
+Package pdftex.def Info: images/duration_with_bc.png used on input line 306.
 (pdftex.def)             Requested size: 258.0pt x 144.99438pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 303--304
+Overfull \hbox (6.0pt too wide) in paragraph at lines 306--307
 [][]
  []
 
@@ -988,13 +1015,13 @@ Overfull \hbox (60.10063pt too wide) in paragraph at lines 92--97
 ANoptSolutionGd.pdf 
  []
 
-
+[5 <./images/packetloss.png (PNG copy)> <./images/duration_with_bc.png (PNG cop
+y)>]
 Underfull \hbox (badness 1867) in paragraph at lines 117--120
 []\T1/ptm/m/n/8 webopedia, ``Clock tick,'' 2017. [On-line]. Avail-able:
  []
 
-) [5 <./images/packetloss.png (PNG copy)> <./images/duration_with_bc.png (PNG c
-opy)>]
+)
 Package epstopdf Info: Source file: <./yourPicture.eps>
 (epstopdf)                    date: 2006-08-25 06:40:04
 (epstopdf)                    size: 21238 bytes
@@ -1003,17 +1030,17 @@ Package epstopdf Info: Source file: <./yourPicture.eps>
 (epstopdf)                    size: 6374 bytes
 (epstopdf)             Command: <repstopdf --outfile=./yourPicture-eps-converte
 d-to.pdf ./yourPicture.eps>
-(epstopdf)             \includegraphics on input line 320.
+(epstopdf)             \includegraphics on input line 323.
 Package epstopdf Info: Output file is already uptodate.
  <./yourPicture-eps-converted-to.pdf, id=35, 73.27374pt x 91.34125pt>
 File: ./yourPicture-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./yourPicture-eps-converted-to.pdf>
 Package pdftex.def Info: ./yourPicture-eps-converted-to.pdf used on input line 
-320.
+323.
 (pdftex.def)             Requested size: 73.27354pt x 91.34102pt.
 
-Overfull \hbox (1.00356pt too wide) in paragraph at lines 320--320
+Overfull \hbox (1.00356pt too wide) in paragraph at lines 323--323
  [][] 
  []
 
@@ -1025,42 +1052,45 @@ Package epstopdf Info: Source file: <./yourPicture.eps>
 (epstopdf)                    size: 6374 bytes
 (epstopdf)             Command: <repstopdf --outfile=./yourPicture-eps-converte
 d-to.pdf ./yourPicture.eps>
-(epstopdf)             \includegraphics on input line 320.
+(epstopdf)             \includegraphics on input line 323.
 Package epstopdf Info: Output file is already uptodate.
 File: ./yourPicture-eps-converted-to.pdf Graphic file (type pdf)
 <use ./yourPicture-eps-converted-to.pdf>
 Package pdftex.def Info: ./yourPicture-eps-converted-to.pdf used on input line 
-320.
+323.
 (pdftex.def)             Requested size: 73.27354pt x 91.34102pt.
 
-Overfull \hbox (1.00356pt too wide) in paragraph at lines 320--320
+Overfull \hbox (1.00356pt too wide) in paragraph at lines 323--323
  [][] 
  []
 
 [6
 
- <./yourPicture-eps-converted-to.pdf>] (./cs190-ieee.aux) ) 
+ <./yourPicture-eps-converted-to.pdf>] (./cs190-ieee.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 24273 strings out of 493029
- 596368 string characters out of 6136234
- 791407 words of memory out of 5000000
- 27366 multiletter control sequences out of 15000+600000
- 115682 words of font info for 122 fonts, out of 8000000 for 9000
+ 24372 strings out of 493029
+ 598463 string characters out of 6136234
+ 758407 words of memory out of 5000000
+ 27455 multiletter control sequences out of 15000+600000
+ 124809 words of font info for 124 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,10n,77p,1022b,1071s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/
-texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texlive/texmf-di
-st/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/publi
-c/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-urw/times/utmri8a.pfb>
-Output written on cs190-ieee.pdf (6 pages, 221595 bytes).
+ 62i,10n,77p,1022b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/
+share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-
+dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utm
+b8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on cs190-ieee.pdf (6 pages, 219866 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  51 compressed objects within 1 object stream

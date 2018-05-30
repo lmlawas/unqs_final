@@ -14,6 +14,7 @@
 \definecolor{pgrey}{rgb}{0.46,0.45,0.48}
 \usepackage{cite,graphicx,pgfplots,amsmath}
 \usepackage{listings}
+\usepackage{blindtext}
 \lstset{language=Java,
   showspaces=false,
   showtabs=false,
@@ -102,26 +103,26 @@ In determining the most optimal bandwidth, the throughput, latency, and flow los
 \section{Review of Related Literature}
 Several studies have been conducted which attempted to manage internet bandwidth as efficiently as possible. With a goal to provide speedy transaction of certain services such as e-mailing, video streaming, downloading, and many more, internet bandwidth management plays an important role not just for business and commerce applications, but as well as personal usage, for customer satisfaction and improved network performance. Because of the many details enumerated, the demand for internet bandwidth management has never been greater.
 
-Internet users from 2015 to 2016 had increased with an estimated 43.4\% of the world population to 46.1\% \cite{internet_live_stats_2016}. It has been a dramatic increase since 1995, with users all over the world amounting less than 1\%. The implications of this statistics to the UPLB academe can also be applicable, as more students and workers enter the university to make use of the campus network. The increase entails a growth in demand for larger internet bandwidth. With a number of users sending multiple requests for different services with varying sizes, data traffic becomes congested. No end-user wants delays, slow downs, or timeouts, in accomplishing the services they requested. Instead, end-users want fast execution of their requests so they can proceed to doing other tasks.
+From 2015 to 2016, Filipino Internet users had increased from an estimated 42.3\% to 43.5\% \cite{internet_live_stats_2016}. The implications of this statistics to the UPLB academe can also be applicable, as more students and workers enter the university to make use of the campus network. The increase entails a growth in demand for larger internet bandwidth. With a number of users sending multiple requests for different services with varying sizes, data traffic becomes congested. No end-user wants delays, slow downs, or timeouts, in accomplishing the services they requested. Instead, end-users want fast execution of their requests so they can proceed to doing other tasks.
 
 To fix the problem, bandwidth management takes place. Instead of paying for an increase in bandwidth for a temporary fix \cite{communication_news_2001}, bandwidth management aims to properly allocate the already existing bandwidth size as effectively and as efficiently as possible.
 
 Before packets are received by the destination address, they first arrive in packet switches. These packet switches are in charge of queueing the packets and forwarding them eventually to the destination \cite{comer_1999}. Thus enters the scheduling algorithms used to identify which packets must be distrbuted first to the computers in the network.
 
-Traffic classification is an initial stage that plays a key role to the scheduling algorithms, particularly for the PQ and WFQ algorithms. Because of bandwidth contraints, traffic classification helps in managing the fixed, limited, and available bandwidth. Classification can be payload-based, meaning a field of the payload is examined and used for classification \cite[Chapter~5]{cisco_2008}. An early traffic classification technique \cite{schneider_1996} made use of port numbers, which worked best for well-known or reserved ports. The other method for classifcation uses statistical analysis of traffica behavior \cite[Chapter~5]{cisco_2008}.
+Traffic classification is an initial stage that plays a key role in some scheduling algorithms, such as Priority Queueing (PQ). Because of bandwidth contraints, traffic classification helps in managing the fixed, limited, and available bandwidth. Classification can be payload-based, meaning a field of the payload is examined and used for classification \cite[Chapter~5]{cisco_2008}. An early traffic classification technique \cite{schneider_1996} made use of port numbers, which worked best for well-known or reserved ports. The other method for classifcation uses statistical analysis of traffic behavior \cite[Chapter~5]{cisco_2008}.
 
-A proposed priority packet scheduling algorithm \cite{karim_2012} made use of three priority queues that gave importance to real-time traffic (priority 1) over non-real time traffic (priorities 2 and 3). Its result suggested of a better performance opposed to FCFS and multi-level queue scheduler algorithms.
+A proposed priority packet scheduling algorithm \cite{karim_2012} made use of three priority queues that gave importance to real-time traffic (priority 1) over non-real time traffic (priorities 2 and 3). Its result suggested of a better performance opposed to FIFO and multi-level queue scheduler algorithms.
 
-From a different study, packet scheduling algorithms using fair queueing and two additional variants were simulated to compare the delay. It showed that WFQ and Self Clock Fair Queueing (SCFQ) experienced a linear delay, whereas the Worst Case Weighted Fair Queueing (WF2Q) share the output link \cite{muhilan_2013}.
+From a different study, packet scheduling algorithms using fair queueing and two additional variants were simulated to compare the delay. It showed that Weighted Fair Queueing (WFQ) and Self Clock Fair Queueing (SCFQ) experienced a linear delay, whereas the Worst Case Weighted Fair Queueing (WF2Q) share the output link \cite{muhilan_2013}.
 
-The aforementioned studies inspired and influenced this study, which shall use traffic data classified by protocol as input for the simulations of FIFO, PQ, and WFQ scheduling algorithms.
+The aforementioned studies inspired and influenced this study, which used traffic data as input for simulating the FIFO scheduling algorithm using various bandwidth settings.% classified by port number as input for the simulations of FIFO, PQ, and WFQ scheduling algorithms.
 
 % MATERIALS AND METHODS
 \section{Methodology}
 \subsection{Traffic Collection}
-With assistance from ITC, a mirror port was setup and connected to a 64-bit Ubuntu server named as \texttt{babage}. The traffic monitoring application, \texttt{ntopng}, was installed to the server. \texttt{MySQL} database management system was also installed, which shall contain the database where traffic flow data from \texttt{ntong} will be dumped. To run \texttt{ntopng}, a configuration file needs to be set to identify the network interface(s) and network(s) to be monitored, the database and table to be dumped at, and the HTTP port where the web portal can be accessed. Data was collected on April 17-18, 25, 28-29, and using the \texttt{mysqldump} tool, the .sql file was generated, which was used for the researcher to have a copy of the database outside of the UPLB network. 
+With assistance from ITC, a mirror port was setup and connected to a 64-bit Ubuntu server named as \texttt{babage}. The traffic monitoring application, \texttt{ntopng}, was installed to the server. \texttt{MySQL} database management system was also installed, which shall contain the database where traffic flow data from \texttt{ntong} will be dumped. To run \texttt{ntopng}, a configuration file needs to be set to identify the network interface(s) and network(s) to be monitored, the database and table to be dumped at, and the HTTP port where the web portal can be accessed. Data was collected from November 13 to 20. Using the \texttt{mysqldump} tool, the .sql file was generated for the researcher to have a copy of the database outside of the UPLB network. 
 
-\texttt{ntopng} uses ticks to measure the arrival of packets into the switch and their exit from switch to their destination. There are 66 million ticks per second \cite{webopedia_2017}, which means 1 tick is equal to 0.000000015 seconds. This value in seconds was multiplied to the tick value that \texttt{ntopng} collected.
+\texttt{ntopng} uses the Unix timestamp to label the arrival time of packets into the switch (known as \texttt{FIRST\_SWITCHED}) and their exit time from switch to their destination hosts (\texttt{LAST\_SWITCHED}). This timestamp counts the seconds that have passed since January 1, 1970 (Coordinated Universal Time/UTC).
 
 \subsection{Simulation}
 \subsubsection{Classes and their attributes}
@@ -148,66 +149,68 @@ where \textit{d} is the fixed distribution rate for each priority (0.5, 0.3, and
 \item \textbf{Schedule.java} - Schedule has static-defined variables \textit{FIFO} (0), \textit{PQ} (1), and \textit{WFQ} (2). Its attributes are the schedule number and the total number of bytes transmitted.
 \end{enumerate}
 
-\subsubsection{Code snippet of the queue processing}
-The code snippet in Figure \ref{fig:snippet} shows how the queues are being processed depending on the configured queue type. This method is called on per every iteration of time \textit{t}. The loop will stop once all the packets in the queues have been serviced.
-\begin{figure}
-\begin{lstlisting}
-
-public boolean process(LinkedList<Queue> queues){
-boolean success = false;
-
-// process in order of arrival
-if(schedule==Schedule.FIFO){
-	Queue q = queues.remove();
-	if(q.isEmpty()) return true;
-	success = q.process(schedule);
-	queues.add(0, q);
-	return success;
-}
-
-// process from highest to lowest priority
-else if(schedule == Schedule.PQ){
-	for(int i=2; i>=0; i--){
-	if(!queues.get(i).isEmpty()){
-		Queue q = queues.remove(i);
-		success = q.process(schedule);
-		queues.add(i, q);
-		return success;
- 	}}
-}
-
-// process the smallest virtual time
-else if(schedule == Schedule.WFQ){
-	int pri = 0,
-		smallest_virtual_time = 2147483647;
-	Queue q;
-
-	for(int i=2; i>=0; i--){
-		q = queues.remove(i);
-		if(!q.isEmpty()){					
-		if( q.isEmpty() ) continue;
-		else if(q.peek().virtual_time 
-		< smallest_virtual_time){
-		smallest_virtual_time = q.peek().virtual_time;
-		pri = i;
-		}}
-		queues.add(i, q);
-	}
-	q = queues.remove(pri);
-	success = q.process(schedule);
-	queues.add(pri, q);
-}
-
-return success;	// true = nothing was processed or queue is empty. false = queue is not empty
-}
-\end{lstlisting}
-\label{fig:snippet}\caption{Code Snippet of \textit{process} method in \texttt{Schedule.java}}
-\end{figure}
-
-
 \section{Results and Discussion}
 
 \subsection{Description of Data per day}
+
+\begin{table*}[ht]
+\centering
+\caption{\textbf{Top 9 Out-Flows}}
+\label{top-out-flows}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{IP SOURCE ADDRESS} & \textbf{IP DESTINATION ADDRESS} 	& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
+    10.0.38.214		       & 106.158.190.77 (KDDI CORPORATION)  &  62409079786			& 60.6        \\ \hline
+    10.0.100.248           & 239.10.10.10 (MULTICAST)			&  9173263420           & 8.9         \\ \hline
+    10.0.45.60      	   & 216.58.221.142 (Google LLC)		&  2920460978           & 2.8         \\ \hline
+    10.0.35.75             & 157.240.7.48 (Facebook, Inc.)		&  2771346197           & 2.7         \\ \hline
+    192.168.0.1            & 239.255.255.250 (MULTICAST)		&  1575146908           & 1.5         \\ \hline
+    192.168.1.1            & 239.255.255.250 (MULTICAST)		&  1562493373           & 1.5         \\ \hline
+    10.0.43.86             & 216.58.203.15 (Google LLC)			&  1242563600           & 1.2         \\ \hline
+    10.0.39.49		   	   & 17.253.85.204 (Apple Inc.)			&  1054547100           & 1.0         \\ \hline
+    10.0.8.124	           & 216.58.203.14 (Google LLC)			&  1039431952           & 1.0         \\ \hline
+\end{tabular}
+\end{table*}
+
+\begin{table*}[ht]
+\centering
+\caption{\textbf{Top 9 In-Flows}}
+\label{top-out-flows}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{IP SOURCE ADDRESS} 						& \textbf{IP DESTINATION ADDRESS}	& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
+    106.158.190.77 (KDDI CORPORATION)			& 10.0.38.214						&  79135454093			& 43.0        \\ \hline
+    216.58.221.129 (Google LLC)					& 10.0.36.50						&  23393060326          & 12.7        \\ \hline
+    109.236.81.173 (WorldStream B.V.)			& 10.0.24.68						&  3426880570           & 1.9         \\ \hline
+    216.58.221.129 (Google LLC)					& 10.0.44.48						&  2815063488           & 1.5         \\ \hline
+    185.163.109.151 (M247 Ltd)					& 10.0.40.147						&  2187777140           & 1.2         \\ \hline
+    202.69.185.15 (Converge ICT Solutions Inc.)	& 10.0.205.139						&  2154908552			& 1.2         \\ \hline
+    185.120.145.221 (M247 Ltd)					& 10.0.22.192						&  2098695101           & 1.1         \\ \hline
+    202.69.180.18 (Converge ICT Solutions Inc.)	& 10.0.16.212						&  1812641471           & 1.0         \\ \hline
+    216.58.221.129 (Google LLC)					& 10.0.2.183						&  1750693948           & 1.0         \\ \hline
+\end{tabular}
+\end{table*}
+
+\begin{table*}[ht]
+\centering
+\caption{\textbf{Top 10 Destination Ports}}
+\label{top-out-flows}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{PORT NUMBER}			& \textbf{PROTOCOL}			& \textbf{TOTAL FLOWS}		& \textbf{\%} 	 \\ \hline
+    443							& HTTPS						&  65088					& 11.7  	     \\ \hline
+    53							& DNS						&  60765        			& 11.0			 \\ \hline
+    1900						& SSDP						&  52579					& 9.5			 \\ \hline
+    5060						& SIP						&  43101          			& 7.8   	     \\ \hline
+    445							& Microsoft-DS				&  28746           			& 5.2        	 \\ \hline
+    80							& HTTP						&  18485					& 3.3         	 \\ \hline
+    5355						& LLMNR						&  17090    		        & 3.1    	     \\ \hline
+    0							& Reserved					&  15732		            & 2.8       	 \\ \hline
+    7437						& Faximum					&  13734        		    & 2.5         	 \\ \hline
+    161							& SNMP						&  9142        			    & 1.6         	 \\ \hline
+    67							& Bootstrap Protocol Server	&  8602        			    & 1.6         	 \\ \hline
+\end{tabular}
+\end{table*}
 
 \subsubsection{\textbf{April 17, 2017}}
 The data collected on the first day spanned 28,823 ticks, garnering a total of 31,259 flows.
