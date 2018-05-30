@@ -30,7 +30,7 @@
 
 
 
-\newcommand{\SPTITLE}{UPLB Network Queue Simulator (UNQS): Surveying Network Performance Under Different Queueing Techniques For Internet Bandwidth Management}
+\newcommand{\SPTITLE}{UPLB Network Queue Simulator (UNQS): Surveying Network Performance For Internet Bandwidth Management}
 \newcommand{\ADVISEE}{Leensey M. Lawas}
 \newcommand{\ADVISER}{Danilo J. Mercado}
 
@@ -57,7 +57,7 @@
 
 % ABSTRACT
 \begin{abstract}
-Given the increasing demand for bandwidth, UNQS was developed to survey and to identify which among three queueing disciplines, namely, First In-First Out (FIFO), Priority Queue (PQ), and Weighted Fair Queueing (WFQ), produced the best performance as measured by duration (seconds), throughput (bits per second), and packet loss (percentage). The results show that while the simplest, FIFO showed the  best performance with minimal duration, maximal throughput, and minimal packet loss.
+Given the increasing demand for bandwidth, UNQS was developed to survey and to identify the optimal bandwidth setting as measured by duration (seconds), throughput (bits per second), and flow loss (percentage). The results show that while the simplest, FIFO showed the  best performance with minimal duration, maximal throughput, and minimal packet loss.
 \end{abstract}
 
 % INDEX TERMS
@@ -77,29 +77,27 @@ Tong and Yang (2007)\cite{tong_yang_2007} cited that there have been many studie
 In an article named \textit{Bandwidth management pays off} (2002)\cite{communication_news_2001}, two key devices were identified to help in bandwidth management: traffic shaping or congestion avoidance mechanisms and queueing techniques. \textit{Congestion avoidance mechanisms} or \textit{congestion control} locates where in the router the packets do not enter the system, and finds an alternative route so the packets do not block the way and cause timeout \cite{jacobson_1988}. \textit{Queueing techniques}, on the other hand, help predict and direct the traffic flow by implementing a constraint or constraints to provide the services as demanded \cite{gross_harris_1974}). In addition, queueing network models are known for accuracy and efficiency \cite{lazowska_zahorjan_graham_sevcik_1984}.
 
 \subsection{Significance of the study}
-Inefficient internet bandwidth management can lead to dissatisfied customers and reduced productivity. There have been many studies conducted to improve bandwidth management, but this study made use of queueing techniques to provide a simple yet novel and effective solution for managing internet bandwidth, particularly for the University of the Philippines Los Banos (UPLB) Network. While there is no imminent need to make use of a scheduling algorithm beside the traditional First Come-First Serve (FCFS) or First In-First Out (FIFO), it is undeniable that an increase of traffic coming in and out of the network will be expected. The results of this study can be helpful to determine if applying a different queueing scheduling algorithm will improve traffic flow at a given buffer size.
-
-As long there will be a need for “high quality of corporate customer satisfaction”, bandwidth management will continue to grow as a body of knowledge \cite{duzbeck_2006}. That being said, this study aims to add to that body of knowledge by surveying three queueing scheduling algorithms and their effectivity as buffers for the traffic which will be passed from client to server and vice versa. Specifically, this study will monitor the UPLB Network traffic and simulate the traffic \clearpage using three queueing scheduling algorithms. By having this simulation, the advisable settings for the network will be identified, which in turn would provide effective bandwidth management.
+Inefficient internet bandwidth management can lead to dissatisfied customers and reduced productivity. As long there is a need for “high quality of corporate customer satisfaction”, bandwidth management will continue to grow as a body of knowledge \cite{duzbeck_2006}. This study simulated actual traffic data within the University of the Philippines Los Banos (UPLB) Network in order to determine whether the existing bandwidth is optimal or not. Additionally, the results can also be used for future planning that can entail significant cost reductions, thus optimizing both bandwidth and budget to provide quality service.
 
 \subsection{Objectives of the study}
-The general objective of the study is to efficiently simulate the UPLB network traffic by identifying the most effective queueing technique. Specifically, the study should be able to:
+The general objective of the study is to efficiently simulate the UPLB network traffic by identifying the most optimal bandwidth setting. Specifically, the study was able to:
 
 \begin{enumerate}
 \item Collect traffic data from the UPLB network;
-\item Simulate the traffic data using the three queueing techniques;
-\item Take note of the duration, throughput, and packet loss for each simulation; and
-\item Determine the most effective queueing technique using graphs and simple statistics.
+\item Simulate the traffic data using various bandwidth sizes;
+\item Take note of the duration, throughput, and flow loss for each simulation; and
+\item Determine the most optimal network setting using graphs and simple statistics.
 \end{enumerate}
 
+\clearpage
+
 \subsection{Time and Place of the study}
-The study was conducted from January 2017 until May 2017, at the Institute of Computer Science, UPLB.
+The study was conducted from January 2017 until November 2017, at the Institute of Computer Science, UPLB.
 
 \subsection{Scope and Limitation of the study}
-The study is limited to monitoring and simulating UPLB network. Also, it only made use of three queueing techniques, namely, First In-First Out Queueing (FIFO), Priority Queueing (PQ), and Weighted Fair Queueing (WFQ) or Priority Queuieng with aging.
+The study is limited to monitoring and simulating a portion of the UPLB network. Also, it focused on the traditional queueing technique known as First In-First Out Queueing (FIFO).
 
-In determining the most effective queueing technique, the throughput, latency, and packet loss values will be measured, noted, and compared. \textit{Throughput} is the number of tasks accomplished over a period of timem \textit{latency} is the time it takes for a fixed task to be finished \cite{martin_roth_nd}, and \textit{packet loss} is the percentage of dropped packets over the total number of packets.
-
-The study shall be limited to monitoring and modeling the UPLB network.
+In determining the most optimal bandwidth, the throughput, latency, and flow loss values will be measured, noted, and compared. \textit{Throughput} is the number of tasks accomplished over a period of time, \textit{latency} is the time it takes for a fixed task to be finished \cite{martin_roth_nd}, and \textit{flow loss} is the percentage of dropped flows over the total number of flows.
 
 \section{Review of Related Literature}
 Several studies have been conducted which attempted to manage internet bandwidth as efficiently as possible. With a goal to provide speedy transaction of certain services such as e-mailing, video streaming, downloading, and many more, internet bandwidth management plays an important role not just for business and commerce applications, but as well as personal usage, for customer satisfaction and improved network performance. Because of the many details enumerated, the demand for internet bandwidth management has never been greater.
