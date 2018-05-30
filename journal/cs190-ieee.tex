@@ -151,7 +151,7 @@ where \textit{d} is the fixed distribution rate for each priority (0.5, 0.3, and
 
 \section{Results and Discussion}
 
-\subsection{Description of Data per day}
+\subsection{Traffic Description}
 
 \begin{table*}[ht]
 \centering
@@ -212,45 +212,47 @@ where \textit{d} is the fixed distribution rate for each priority (0.5, 0.3, and
 \end{tabular}
 \end{table*}
 
-\subsubsection{\textbf{April 17, 2017}}
-The data collected on the first day spanned 28,823 ticks, garnering a total of 31,259 flows.
+%\subsubsection{\textbf{Public IP addresses description}}
 
-The top 3 source ports are as follows: port 0 with 4448 flows, port 5353 with 2247 flows, and port 137 with 1097 flows. Meanwhile, the top 3 destination ports are port 1900 (8528 flows), port 8000 (6153 flows), and port 0 (4448 flows).
+The top destination IP addresses for out-flow traffic and the top source IP addresses for in-flow traffic belong to the following companies.
 
-The top 3 source IP addresses were 10.0.53.67 (4399 flows), 10.0.3.110 (3769 flows), and a tie for 10.0.53.53 and 10.0.3.148 (1764 flows). As for the destination IP addresses, 239.255.255.250 (9523), 10.0.3.53 (6174), and 224.0.0.252 (4088) ranked highest among other IP addresses.
+\textit{KDDI Corporation} is a telecommunications business based in Japan. It provides content hosting over optimized networks, and ICT and business services and solutions. \textit{Google LLC} is an American multinational technology company that specializes in Internet-related services and products such as online advertising technologies, search engine, cloud computing, software, and hardware. \textit{WorldStream B.V.} is a popular Internet Service Provider based in the Netherlands and is used by customers from all over the world. It provides cost-effective services to secure hosting environment, and offers hardware and Operating System technologies.
+\textit{M247 Ltd} is a UK-based technology company that offers  services and tools to secure network and data while providing connectivity and internet infastructure that expands to a global scale. \textit{Converge ICT} is a Philippine technology company with the fastest growing fiber internet and offers services to ensure pure end-to-end fiber internet connection, thus reducing data loss, faster speed and bandwidth. \textit{Facebook} is an American online social media and social networking service company. \textit{Apple Inc.} is an American multinational technology company that designs, develops, and sells consumer electronics, computer software, and online services. Multicast IPs allow group communication to be sent simultaneously to multiple computers.
 
-\subsubsection{\textbf{April 18, 2017}}
-For the second day, the data collection process took a total of 14,392 ticks, and recorded 20,574 flows.
+% Ports
 
-The 3 most used source ports are ports 0, 5353, and 137, which were found in 2372, 1237, and 655 flows respectively. On the other hand, the top 3 frequented destination ports are noted to be port 8000 with 5439 flows, port 1900 with 5048 flows, and port 5355 with 2523 flows.
+Hypertext Transfer Protocol Secure - secure communication  via encryption over a computer network.
 
-The 3 highest talkers for the day were IP addresses 10.0.53.53 (5444 flows), 10.0.3.110 (1825 flows), and 10.0.3.160 (1052 flows). Looking over to the receiving end, the top three destination IP addresses were 239.255.255.250 (5748 flows), 10.0.3.53 (5451), and 224.0.0.252 (3068).
+Domain Name System - match names to IP addresses and vice versa
 
-\subsubsection{\textbf{April 25, 2017}}
-The third day when the data was collected had a duration of 2498 ticks and a total of 3,892 flows, both of which are the shortest time span and smallest count of flows for the entire data set.
+Simple Service Discovery Protocol - advertisement and discovery of network services and presence information
 
-The top 3 source ports were port 0 (433), port 5353 (281), and port 138 (134). Destination ports most actively used were ports 8000 (1344 flows), 1900 (890), and 0 (433).
+Session Inititation Protocol - signal and control multimedia communication sessions in applications using Internet telephony for voice and video calls, private IP telephone systems, and even instant messaging over IP networks. It is part of the Voice over IP (VoIP) group of technologies.
 
-Hosts that sent most packets through the network came from IP addresses 10.0.53.177 (1359), 10.0.3.110 (319), and 10.0.3.89 (168). Three IP addresses that received the most requests that day were 10.0.3.53 (1359), 239.255.255.250 (991), and 224.0.0.252 (365).
+Microsoft-Directory Services - follows the Server Message Block protocol for shared access to files, printers, and serial ports and ohter communications between nodes on a network.
 
-\subsubsection{\textbf{April 28, 2017}}
+Hypertext Transfer Protocol - used to facilitate data communication for the World Wide Web
 
-Data gathered for the fourth day lasted for a length of 11,812 ticks and observed a total of 11,483 flows in the network.
+Link Local Multicast Name Resolution - based on DNS and allows both IPv4 and IPv6 hosts to perform name resolution for hosts on the same local link.s
 
-Ports that were used to send out the most interaction are ports 0 (2220), 5353 (897), and 138 (532). Ports that received the most interaction are ports 1900 (3789), 0 (2220), and 5355 (1473).
+0 (Reserved) and 7437 (Faximum) are likely ports used to send computer attacks and harmful content like viruses.
 
-The most active source IP address is 10.0.3.110 (1529), followed by 10.0.3.148 (817), and 10.0.3.89 (689). On the other hand, the most active destination IP addresses are 239.255.255.250 (4312), 224.0.0.252 (1959), and 224.0.0.251 (1423).
+Simple Network Management Protocol - collect and organize information about managed devices on IP networks and for modifying information to change device behavior
+
+Bootstrap Protocol Server - exclusive for IPv4, Dynamic Host Configuration Protocol (DHCP) server to receive requests
 
 
-\subsubsection{\textbf{April 29, 2017}}
 
-The fifth and final data collection counted 14,027 flows within a time frame of 7183 ticks.
+%Multicast
 
-Topping as a source port is port 0 with 1197 flows, followed by port 5353 at 600 flows, and lastly, port 138 with 281 flows. The three highest ranking destination ports are as follows: port 8000 counted 7924 flows; port 1900 had 2253; and port 0 registered 1197 flows.
+%http://www.kddi.com/english/corporate/kddi/our-business/ may 28 2018
+%https://www.worldstream.nl/en/about/company
+%https://m247.com/about-us/
+%http://www.convergeict.com/about-us/
+%https://tools.ietf.org/html/rfc1112
 
-Three source nodes most notably active were of IP addresses 10.0.53.9 (7967), 10.0.3.110 (932), and 10.0.3.148 (369). On the receiving end, the following are the top 3 IP addresses: 10.0.3.53 (7970), 239.255.255.250 (2525), and 224.0.0.251 (861).
-\linebreak
-\hrule
+%\linebreak
+%\hrule
 
 In summary, the observed frequented applications being used can be seen by the ports used most. Port 8000 is used by the Hyper Text Transfer Protocol, port 1900 is used by the Simple Service Discovery Protocol, port 0 is the initial 'binding' port before the operating system returns a new value, which is an available port, and port 5355 is used for Link-Local Multicast Name Resolution.
 
