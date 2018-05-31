@@ -44,8 +44,8 @@ public class FirstInFirstOut implements Schedule {
 		return (flows_switched_size / (double)duration);
 	}
 
-	public double process(int bandwidth, int current_time, int timeout, boolean debug) {
-		double temp_duration = 0;
+	public int process(int bandwidth, int current_time, int timeout, boolean debug) {
+		int temp_duration = 0;
 
 		// check if there are timed out flows waiting in queue
 		while (!buffer.isEmpty()) {
@@ -63,8 +63,8 @@ public class FirstInFirstOut implements Schedule {
 		// switch flows that fit the bandwidth and
 		while (!buffer.isEmpty()) {
 			Flow f = buffer.peekFirst();
-			temp_duration = (double)((f.size + f.no_of_packets) / bandwidth);
-			if (temp_duration < (double)timeout) {
+			temp_duration = temp_duration + ( (f.size + f.no_of_packets) / bandwidth );
+			if (temp_duration < timeout) {
 				if(debug){
 					System.out.println("Switching flow--");
 					f.info();
@@ -74,7 +74,7 @@ public class FirstInFirstOut implements Schedule {
 			} else break;
 		}
 
-		return ((double)current_time + temp_duration);
+		return (current_time + temp_duration);
 	}
 
 	public void addFlow(Flow f) {

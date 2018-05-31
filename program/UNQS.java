@@ -98,7 +98,7 @@ public class UNQS {
             while (current_time <= config.getEndTime()) {
                 flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
 
-                if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
+                if (config.getDebug()) System.out.println("[ current_time = " + current_time + "/"+temp_wait_time+" ]");
 
                 // while there are flows at time t
                 while ( flows.next() ) {
@@ -118,8 +118,8 @@ public class UNQS {
                 }
 
                 // wait for current processed elapsed time to finish before processing again
-                if (current_time == temp_wait_time) {
-                    temp_wait_time = Math.round((int)sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug()));
+                if (current_time >= temp_wait_time) {
+                    temp_wait_time = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
                 }
                 if (config.getDebug()) {
                     System.out.println("buffer size" + sched.bufferSize());
@@ -128,10 +128,10 @@ public class UNQS {
             }
 
             while (!sched.queueEmpty()) {
-                if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
+                if (config.getDebug()) System.out.println("[ current_time = " + current_time + "/"+temp_wait_time+" ]");
 
-                if (current_time == temp_wait_time) {
-                    temp_wait_time = Math.round((int)sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug()));
+                if (current_time >= temp_wait_time) {
+                    temp_wait_time = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
                 }
 
                 if (config.getDebug()) {
