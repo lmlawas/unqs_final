@@ -11,7 +11,8 @@ interface Schedule {
 	/* Methods */
 	abstract boolean queueEmpty();
 	abstract double throughput(int current_time);
-	abstract double process(int bandwidth, int current_time, int timeout, LinkedList<Flow> flows);
+	abstract double process(int bandwidth, int current_time, int timeout, boolean debug);
+	abstract int bufferSize();
 	abstract void addFlow(Flow f);
 	abstract void dropFlow(Flow f);
 	abstract void info(int bandwidth, int duration, String dateAsText);	

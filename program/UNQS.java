@@ -77,8 +77,8 @@ public class UNQS {
             Statement stmt = con.createStatement();
             ResultSet flows;
             int current_time = config.getStartTime();
+            int temp_wait_time = current_time;
             Flow single_flow;
-            LinkedList<Flow> new_flows = new LinkedList<Flow>();
             Schedule sched;
 
             if (config.getSchedule() ==  Schedule.FIFO) {
@@ -93,11 +93,10 @@ public class UNQS {
             //     sched = new WaitFairQueue();
             // }
 
-
             System.out.print("Processing flows...");
 
             while (current_time <= config.getEndTime()) {
-                flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES+OUT_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
+                flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
 
                 if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
 
@@ -109,22 +108,35 @@ public class UNQS {
                         single_flow = new Flow(flows.getInt(1), flows.getInt(2), flows.getInt(3), flows.getInt(4));
                     }
 
-                    new_flows.add(single_flow);
+                    // add to schedule's buffer
+                    sched.addFlow(single_flow);
 
-                    current_time = (int)sched.process(config.getBandwidth(), current_time, config.getTimeout(), new_flows);
-
-                    if (config.getDebug()) System.out.println("\tProcessed " + new_flows.size() + " flows.");
-
-                    // empty list before the next iteration
-                    new_flows.clear();
-
+                    if (config.getDebug()) {
+                        System.out.println("Add flow--");
+                        single_flow.info();
+                    }
                 }
-                if (config.getDebug()) System.out.println("\n");
+
+                // wait for current processed elapsed time to finish before processing again
+                if (current_time == temp_wait_time) {
+                    temp_wait_time = Math.round((int)sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug()));
+                }
+                if (config.getDebug()) {
+                    System.out.println("buffer size" + sched.bufferSize());
+                }
                 current_time += 1;
             }
 
             while (!sched.queueEmpty()) {
-                current_time = (int)sched.process(config.getBandwidth(), current_time, config.getTimeout(), null);
+                if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
+
+                if (current_time == temp_wait_time) {
+                    temp_wait_time = Math.round((int)sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug()));
+                }
+
+                if (config.getDebug()) {
+                    System.out.println("buffer size" + sched.bufferSize());
+                }
                 current_time += 1;
             }
 

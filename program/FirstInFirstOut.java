@@ -34,43 +34,47 @@ public class FirstInFirstOut implements Schedule {
 		return false;
 	}
 
+	public int bufferSize(){
+		return buffer.size();
+	}
+
 	public double throughput(int duration) {
 		// System.out.println(flows_switched_size);
 		// System.out.println(duration);
 		return (flows_switched_size / (double)duration);
 	}
 
-	public double process(int bandwidth, int current_time, int timeout, LinkedList<Flow> flows) {
+	public double process(int bandwidth, int current_time, int timeout, boolean debug) {
 		double temp_duration = 0;
-		if (flows != null) {
-			for (Flow f : flows) {
-				addFlow(f);
-			}
-		}
 
 		// check if there are timed out flows waiting in queue
 		while (!buffer.isEmpty()) {
 			Flow f = buffer.peekFirst();
 			if (f.waitTime(current_time) == timeout) {
+				if(debug){
+					System.out.println("Dropping flow--");
+					f.info();
+				}
 				dropFlow(f);
 				total_wait_time += f.waitTime(current_time);
 			} else break;
 		}
 
-		// switch flows that fit the bandwidth
+		// switch flows that fit the bandwidth and
 		while (!buffer.isEmpty()) {
 			Flow f = buffer.peekFirst();
-			temp_duration = (double)((f.size + f.no_of_packets)/bandwidth);
+			temp_duration = (double)((f.size + f.no_of_packets) / bandwidth);
 			if (temp_duration < (double)timeout) {
+				if(debug){
+					System.out.println("Switching flow--");
+					f.info();
+				}
 				switchFlow(f);
-				total_wait_time += f.waitTime(current_time);				
-			} else{
-				dropFlow(f);
 				total_wait_time += f.waitTime(current_time);
-			}
+			} else break;
 		}
 
-		return temp_duration;
+		return ((double)current_time + temp_duration);
 	}
 
 	public void addFlow(Flow f) {

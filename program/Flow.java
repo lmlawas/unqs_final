@@ -81,9 +81,10 @@ public class Flow {
 	}
 
 	public void info(){
-		System.out.println("------------\npacket info:\n------------");
+		System.out.println("------------\nflow info:\n------------");
 		System.out.println("\tfirst_switched = " + first_switched);
 		System.out.println("\tpriority = " + priority);
+		System.out.println("\tno_of_packets = " + no_of_packets);
 		System.out.println("\tsize = " + size + "\n------------\n");
 	}
 }
