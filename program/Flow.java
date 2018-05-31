@@ -32,16 +32,16 @@ public class Flow {
 	}
 
 	/* Methods */
-	public LinkedList<Packet> convertToPackets(int schedule_type) {
-		LinkedList<Packet> packets = new LinkedList<Packet>();
-		int i;
+	// public LinkedList<Packet> convertToPackets(int schedule_type) {
+	// 	LinkedList<Packet> packets = new LinkedList<Packet>();
+	// 	int i;
 
-		for (i = 0; i < no_of_packets; i++) {
-			packets.add(new Packet(first_switched, priority, (double)size/no_of_packets));
-		}
+	// 	for (i = 0; i < no_of_packets; i++) {
+	// 		packets.add(new Packet(first_switched, priority, (double)size/no_of_packets));
+	// 	}
 
-		return packets;
-	}
+	// 	return packets;
+	// }
 
 	public boolean matchCommas(String line) {
 		boolean match = false;
@@ -74,6 +74,10 @@ public class Flow {
 			e.printStackTrace();
 			return -1;
 		}
+	}
+
+	public int waitTime(int current_time){
+		return (current_time-first_switched);
 	}
 
 	public void info(){

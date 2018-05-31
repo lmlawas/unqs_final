@@ -4,22 +4,22 @@ import java.util.LinkedList;
 public class FirstInFirstOut implements Schedule {
 
 	/* Attributes */
-	public int packets_dropped_cnt;
-	public int packets_switched_cnt;
+	public int flows_dropped_cnt;
+	public int flows_switched_cnt;
 	public int total_wait_time;
-	public double packets_dropped_size;
-	public double packets_switched_size;
+	public double flows_dropped_size;
+	public double flows_switched_size;
 	public NetworkBuffer buffer;
 
 	/* Constructor */
 	public FirstInFirstOut() {
 		// for throughput
-		packets_dropped_size = 0;
-		packets_switched_size = 0;
+		flows_dropped_size = 0;
+		flows_switched_size = 0;
 
-		// for total packets
-		packets_dropped_cnt = 0;
-		packets_switched_cnt = 0;
+		// for total flows
+		flows_dropped_cnt = 0;
+		flows_switched_cnt = 0;
 
 		// for average wait time
 		total_wait_time = 0;
@@ -29,82 +29,89 @@ public class FirstInFirstOut implements Schedule {
 	}
 
 	/* Methods */
+	public boolean queueEmpty() {
+		if (buffer.isEmpty()) return true;
+		return false;
+	}
+
 	public double throughput(int duration) {
-		// System.out.println(packets_switched_size);
+		// System.out.println(flows_switched_size);
 		// System.out.println(duration);
-		return (packets_switched_size / (double)duration);
+		return (flows_switched_size / (double)duration);
 	}
 
-	public void addPacket(Packet p) {
-		buffer.add(p);
+	public double process(int bandwidth, int current_time, int timeout, LinkedList<Flow> flows) {
+		double temp_duration = 0;
+		if (flows != null) {
+			for (Flow f : flows) {
+				addFlow(f);
+			}
+		}
+
+		// check if there are timed out flows waiting in queue
+		while (!buffer.isEmpty()) {
+			Flow f = buffer.peekFirst();
+			if (f.waitTime(current_time) == timeout) {
+				dropFlow(f);
+				total_wait_time += f.waitTime(current_time);
+			} else break;
+		}
+
+		// switch flows that fit the bandwidth
+		while (!buffer.isEmpty()) {
+			Flow f = buffer.peekFirst();
+			temp_duration = (double)((f.size + f.no_of_packets)/bandwidth);
+			if (temp_duration < (double)timeout) {
+				switchFlow(f);
+				total_wait_time += f.waitTime(current_time);				
+			} else{
+				dropFlow(f);
+				total_wait_time += f.waitTime(current_time);
+			}
+		}
+
+		return temp_duration;
 	}
 
-	public void dropPacket(Packet p) {
+	public void addFlow(Flow f) {
+		buffer.add(f);
+	}
+
+	public void dropFlow(Flow f) {
 		buffer.remove();
-		packets_dropped_size += p.size;
-		packets_dropped_cnt++;
+		flows_dropped_size += f.size;
+		flows_dropped_cnt++;
 	}
 
 	public void info(int bandwidth, int duration, String dateAsText) {
 		System.out.println("\n\n------[ FIFO SIMULATION SUMMARY ]------");
 		System.out.println("TIMESTAMP = " + dateAsText);
 		System.out.println("BANDWIDTH = " + bandwidth + " bps\n");
-		System.out.println("packets_dropped_size = " + packets_dropped_size + " b");
-		System.out.println("packets_dropped_cnt = " + packets_dropped_cnt + " packets\n");
-		System.out.println("packets_switched_size = " + packets_switched_size + " b");
-		System.out.println("packets_switched_cnt = " + packets_switched_cnt + " packets\n");
+		System.out.println("flows_dropped_size = " + flows_dropped_size + " b");
+		System.out.println("flows_dropped_cnt = " + flows_dropped_cnt + " flows\n");
+		System.out.println("flows_switched_size = " + flows_switched_size + " b");
+		System.out.println("flows_switched_cnt = " + flows_switched_cnt + " flows\n");
 		System.out.println("total_wait_time = " + total_wait_time + " seconds");
 		System.out.println("throughput = " + throughput(duration) + " bps");
 	}
 
 	public void saveResults(int bandwidth, int duration, String dateAsText) throws IOException {
-		FileWriter fw = new FileWriter("results/"+dateAsText+"_"+bandwidth+".txt", true);
+		FileWriter fw = new FileWriter("results/" + dateAsText + "_" + bandwidth + ".txt", true);
 		fw.write("\n\n------[ FIFO SIMULATION SUMMARY ]------");
 		fw.write("\nTIMESTAMP = " + dateAsText);
 		fw.write("\nBANDWIDTH = " + bandwidth + " bps\n");
-		fw.write("\n\tpackets_dropped_size = " + packets_dropped_size + " b");
-		fw.write("\n\tpackets_dropped_cnt = " + packets_dropped_cnt + " packets\n");
-		fw.write("\n\tpackets_switched_size = " + packets_switched_size + " b");
-		fw.write("\n\tpackets_switched_cnt = " + packets_switched_cnt + " packets\n");
+		fw.write("\n\tflows_dropped_size = " + flows_dropped_size + " b");
+		fw.write("\n\tflows_dropped_cnt = " + flows_dropped_cnt + " flows\n");
+		fw.write("\n\tflows_switched_size = " + flows_switched_size + " b");
+		fw.write("\n\tflows_switched_cnt = " + flows_switched_cnt + " flows\n");
 		fw.write("\n\ttotal_wait_time = " + total_wait_time + " seconds");
 		fw.write("\n\tthroughput = " + throughput(duration) + " bps");
 		fw.close();
 	}
 
-	public void switchPacket(Packet p) {
+	public void switchFlow(Flow f) {
 		buffer.remove();
-		packets_switched_size += p.size;
-		packets_switched_cnt++;
-	}
-
-	public void process(int bandwidth, int current_time, int timeout, LinkedList<Packet> packets) {
-		double temp_buffer_size = 0;
-		if (packets != null) {
-			for (Packet p : packets) {
-				addPacket(p);
-			}
-		}
-
-		while (!buffer.isEmpty()) {
-			Packet p = buffer.peekFirst();
-			if (p.waitTime(current_time) == timeout) {
-				dropPacket(p);
-				total_wait_time += p.waitTime(current_time);
-			} else if (p.size + temp_buffer_size <= bandwidth) {
-				switchPacket(p);
-				total_wait_time += p.waitTime(current_time);
-			} else break;
-		}
-
-		// if(!buffer.isEmpty()) {
-		// 	for(Packet p: buffer){
-		// 		total_wait_time += p.waitTime(current_time);
-		// 	}
-		// }
-	}
-
-	public boolean queueEmpty(){
-		if(buffer.isEmpty()) return true;
-		return false;
+		flows_switched_size += f.size;
+		flows_switched_cnt++;
 	}
 }

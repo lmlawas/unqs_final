@@ -2,7 +2,7 @@
     To compile:
         javac -cp ".;mysql-connector-java.jar;" *.java
     To run:
-        java -cp .:mysql-connector-java.jar UNQS conf/<file>
+        java -cp .:mysql-connector-java.jar UNQS conf/simulation.conf
 */
 
 import java.io.Console;
@@ -24,7 +24,7 @@ public class UNQS {
         config.setDefault();
 
         if (args.length == 0) {
-            do { 
+            do {
                 System.out.print("Continue with the default configuration? (Y/N) ");
                 choice = input.nextLine();
 
@@ -78,21 +78,23 @@ public class UNQS {
             ResultSet flows;
             int current_time = config.getStartTime();
             Flow single_flow;
-            LinkedList<Packet> new_packets = new LinkedList<Packet>();
+            LinkedList<Flow> new_flows = new LinkedList<Flow>();
             Schedule sched;
 
             if (config.getSchedule() ==  Schedule.FIFO) {
                 sched = new FirstInFirstOut();
-            } else if (config.getSchedule() == Schedule.PQ) {
-                sched = new PriorityQueue();
-            } else if (config.getSchedule() == Schedule.WFQ) {
-                sched = new WaitFairQueue();
             } else {
                 System.out.println("Invalid schedule type.\n");
                 return;
             }
+            // else if (config.getSchedule() == Schedule.PQ) {
+            //     sched = new PriorityQueue();
+            // } else if (config.getSchedule() == Schedule.WFQ) {
+            //     sched = new WaitFairQueue();
+            // }
 
-            System.out.print("Processing packets...");
+
+            System.out.print("Processing flows...");
 
             while (current_time <= config.getEndTime()) {
                 flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES+OUT_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
@@ -100,40 +102,35 @@ public class UNQS {
                 if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
 
                 // while there are flows at time t
-                while ( flows.next() ) {                    
+                while ( flows.next() ) {
                     if (config.getSchedule() == Schedule.FIFO) {
                         single_flow = new Flow(flows.getInt(1), flows.getInt(2), flows.getInt(4));
                     } else {
                         single_flow = new Flow(flows.getInt(1), flows.getInt(2), flows.getInt(3), flows.getInt(4));
                     }
 
-                    new_packets = single_flow.convertToPackets(config.getSchedule());
+                    new_flows.add(single_flow);
 
-                    if (config.getDebug()) {
-                        for (Packet p : new_packets) {
-                            p.info();
-                        }
-                    }
+                    current_time = (int)sched.process(config.getBandwidth(), current_time, config.getTimeout(), new_flows);
 
-                    sched.process(config.getBandwidth(), current_time, config.getTimeout(), new_packets);
+                    if (config.getDebug()) System.out.println("\tProcessed " + new_flows.size() + " flows.");
 
-                    if (config.getDebug()) System.out.println("\tProcessed " + new_packets.size() + " packets.");
                     // empty list before the next iteration
-                    new_packets.clear();
+                    new_flows.clear();
 
                 }
                 if (config.getDebug()) System.out.println("\n");
                 current_time += 1;
             }
 
-            while(!sched.queueEmpty()){
-                sched.process(config.getBandwidth(), current_time, config.getTimeout(), null);
+            while (!sched.queueEmpty()) {
+                current_time = (int)sched.process(config.getBandwidth(), current_time, config.getTimeout(), null);
                 current_time += 1;
             }
 
             System.out.print("done.\n\n");
-            sched.info(config.getBandwidth(), current_time-1-config.getStartTime(), readableDate(config.getStartTime()));
-            sched.saveResults(config.getBandwidth(), current_time-1-config.getStartTime(), readableDate(config.getStartTime()));
+            sched.info(config.getBandwidth(), current_time - 1 - config.getStartTime(), readableDate(config.getStartTime()));
+            sched.saveResults(config.getBandwidth(), current_time - 1 - config.getStartTime(), readableDate(config.getStartTime()));
 
             con.close();
         } catch (Exception e) {
