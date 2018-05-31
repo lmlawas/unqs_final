@@ -58,7 +58,7 @@ public class FirstInFirstOut implements Schedule {
 	}
 
 	public void saveResults(int bandwidth, int duration, String dateAsText) throws IOException {
-		FileWriter fw = new FileWriter("results/fifo_"+dateAsText+"_"+bandwidth+".txt", true);
+		FileWriter fw = new FileWriter("results/"+dateAsText+"_"+bandwidth+".txt", true);
 		fw.write("\n\n------[ FIFO SIMULATION SUMMARY ]------");
 		fw.write("\nTIMESTAMP = " + dateAsText);
 		fw.write("\nBANDWIDTH = " + bandwidth + " bps\n");
@@ -95,6 +95,12 @@ public class FirstInFirstOut implements Schedule {
 				total_wait_time += p.waitTime(current_time);
 			} else break;
 		}
+
+		// if(!buffer.isEmpty()) {
+		// 	for(Packet p: buffer){
+		// 		total_wait_time += p.waitTime(current_time);
+		// 	}
+		// }
 	}
 
 	public boolean queueEmpty(){

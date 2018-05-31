@@ -80,18 +80,49 @@ total out flow rows
 out flow bytes
 102982614457
 
+
+
+\begin{table}[]
+\centering
+\caption{\textbf{Top 9 Out-Flows}}
+\label{top-out-flows}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{IP SOURCE ADDRESS} & \textbf{IP DESTINATION ADDRESS} 	& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
+    10.0.38.214		       & 106.158.190.77 (KDDI CORPORATION)  &  62409079786			& 60.6        \\ \hline
+    10.0.100.248           & 239.10.10.10 (MULTICAST)			&  9173263420           & 8.9         \\ \hline
+    10.0.45.60      	   & 216.58.221.142 (Google LLC)		&  2920460978           & 2.8         \\ \hline
+    10.0.35.75             & 157.240.7.48 (Facebook, Inc.)		&  2771346197           & 2.7         \\ \hline
+    192.168.0.1            & 239.255.255.250 (MULTICAST)		&  1575146908           & 1.5         \\ \hline
+    192.168.1.1            & 239.255.255.250 (MULTICAST)		&  1562493373           & 1.5         \\ \hline
+    10.0.43.86             & 216.58.203.15 (Google LLC)			&  1242563600           & 1.2         \\ \hline
+    10.0.39.49		   	   & 17.253.85.204 (Apple Inc.)			&  1054547100           & 1.0         \\ \hline
+    10.0.8.124	           & 216.58.203.14 (Google LLC)			&  1039431952           & 1.0         \\ \hline
+\end{tabular}
+\end{table}
+
+10.0.2.183
+10.0.16.212
+10.0.22.192
+10.0.205.139
+10.0.40.147
+10.0.44.48
+10.0.24.68
+10.0.36.50
+10.0.38.214
+OUT
+
 |  167774332 | 3627731726 |  1039431952 |           1.0 |		216.58.203.14 = AS15169 Google LLC
 |  167782193 |  301815244 |  1054547100 |           1.0 |		17.253.85.204 = AS6185 Apple Inc.
 |  167783254 | 3627731727 |  1242563600 |           1.2 |		216.58.203.15 = AS15169 Google LLC
-| 3232235777 | 4026531834 |  1562493373 |           1.5 |		239.255.255.250 = 
-| 3232235521 | 4026531834 |  1575146908 |           1.5 |		239.255.255.250 = 
+| 3232235777 | 4026531834 |  1562493373 |           1.5 |		239.255.255.250 = MULTICAST
+| 3232235521 | 4026531834 |  1575146908 |           1.5 |		239.255.255.250 = MULTICAST
 |  167781195 | 2649753392 |  2771346197 |           2.7 |		157.240.7.48 = AS32934 Facebook, Inc.
 |  167783740 | 3627736462 |  2920460978 |           2.8 |		216.58.221.142 = AS15169 Google LLC
-|  167798008 | 4010412554 |  9173263420 |           8.9 |		239.10.10.10 = 
+|  167798008 | 4010412554 |  9173263420 |           8.9 |		239.10.10.10 = MULTICAST
 |  167782102 | 1788788301 | 62409079786 |          60.6 |		106.158.190.77 = AS2516 KDDI CORPORATION
 
 81.2%
-
 
 
 KDDI Corporation is a telecommunications business based in Japan. It provides content hosting over optimized networks, and ICT and business services and solutions.
@@ -112,6 +143,9 @@ Facebook is an American online social media and social networking service compan
 
 Apple Inc. is an American multinational technology company that designs, develops, and sells consumer electronics, computer software, and online services.
 
+Multicast
+https://tools.ietf.org/html/rfc1112
+
 total in flow rows
 22058
 
@@ -129,6 +163,26 @@ in flow bytes
 | 1788788301 |  167782102 | 79135454093 |          43.0 |		106.158.190.77 = AS2516 KDDI CORPORATION
 
 
+\begin{table}[]
+\centering
+\caption{\textbf{Top 9 In-Flows}}
+\label{top-out-flows}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{IP SOURCE ADDRESS} 						& \textbf{IP DESTINATION ADDRESS}	& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
+    106.158.190.77 (KDDI CORPORATION)			& 10.0.38.214						&  79135454093			& 43.0        \\ \hline
+    216.58.221.129 (Google LLC)					& 10.0.36.50						&  23393060326          & 12.7        \\ \hline
+    109.236.81.173 (WorldStream B.V.)			& 10.0.24.68						&  3426880570           & 1.9         \\ \hline
+    216.58.221.129 (Google LLC)					& 10.0.44.48						&  2815063488           & 1.5         \\ \hline
+    185.163.109.151 (M247 Ltd)					& 10.0.40.147						&  2187777140           & 1.2         \\ \hline
+    202.69.185.15 (Converge ICT Solutions Inc.)	& 10.0.205.139						&  2154908552			& 1.2         \\ \hline
+    185.120.145.221 (M247 Ltd)					& 10.0.22.192						&  2098695101           & 1.1         \\ \hline
+    202.69.180.18 (Converge ICT Solutions Inc.)	& 10.0.16.212						&  1812641471           & 1.0         \\ \hline
+    216.58.221.129 (Google LLC)					& 10.0.2.183						&  1750693948           & 1.0         \\ \hline
+\end{tabular}
+\end{table}
+
+
 select IP_SRC_ADDR src,
 IP_DST_ADDR dst,
 SUM(IN_BYTES+OUT_BYTES) total_bytes,
@@ -137,7 +191,7 @@ from flowsv4
 where IP_DST_ADDR IN (select IP_DST_ADDR from local_ip_addr)
 group by src, dst order by SUM(IN_BYTES+OUT_BYTES) asc;
 
-69.4%
+64.6%
 
 total flow bytes
 287174218403
@@ -216,21 +270,61 @@ order by count(idx) asc;
 |        3544 |       4580 |                               0.8 |3
 |        5228 |       5836 |                               1.1 |1
 |         123 |       8430 |                               1.5 |1
-|          67 |       8602 |                               1.6 |
-|         161 |       9142 |                               1.6 |2
-|        7437 |      13734 |                               2.5 |1
-|           0 |      15732 |                               2.8 |1
-|        5355 |      17090 |                               3.1 |1
-|          80 |      18485 |                               3.3 |1
-|         445 |      28746 |                               5.2 |1
-|        5060 |      43101 |                               7.8 |1
-|        1900 |      52579 |                               9.5 |1
-|          53 |      60765 |                              11.0 |1
-|         443 |      65088 |                              11.7 |1
+
+|          67 |       8602 |   1.6 |  	| 	Bootstrap Protocol Server
+|         161 |       9142 |   1.6 |2 	| 	SNMP
+|        7437 |      13734 |   2.5 |1	| 	Faximum
+|           0 |      15732 |   2.8 |1	| 	Reserved
+|        5355 |      17090 |   3.1 |1	| 	LLMNR
+|          80 |      18485 |   3.3 |1	| 	HTTP
+|         445 |      28746 |   5.2 |1	|	Microsoft-DS
+|        5060 |      43101 |   7.8 |1	| 	SIP
+|        1900 |      52579 |   9.5 |1	| 	SSDP
+|          53 |      60765 |  11.0 |1	| 	DNS
+|         443 |      65088 |  11.7 |1	| 	HTTPS
 
 73.26%
 
+\begin{table*}[ht]
+\centering
+\caption{\textbf{Top 9 In-Flows}}
+\label{top-out-flows}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{L4 DESTINATION PORT}			& \textbf{PROTOCOL}			& \textbf{TOTAL FLOWS}		& \textbf{\%} 	 \\ \hline
+    443									& HTTPS						&  65088					& 11.7  	     \\ \hline
+    53									& DNS						&  60765        			& 11.0			 \\ \hline
+    1900								& SSDP						&  52579					& 9.5			 \\ \hline
+    5060								& SIP						&  43101          			& 7.8   	     \\ \hline
+    445									& Microsoft-DS				&  28746           			& 5.2        	 \\ \hline
+    80									& HTTP						&  18485					& 3.3         	 \\ \hline
+    5355								& LLMNR						&  17090    		        & 3.1    	     \\ \hline
+    0									& Reserved					&  15732		            & 2.8       	 \\ \hline
+    7437								& Faximum					&  13734        		    & 2.5         	 \\ \hline
+    161									& SNMP						&  9142        			    & 1.6         	 \\ \hline
+    67									& Bootstrap Protocol Server	&  8602        			    & 1.6         	 \\ \hline
+\end{tabular}
+\end{table*}
 
+Hypertext Transfer Protocol Secure - secure communication  via encryption over a computer network.
+
+Domain Name System - match names to IP addresses and vice versa
+
+Simple Service Discovery Protocol - advertisement and discovery of network services and presence information
+
+Session Inititation Protocol - signal and control multimedia communication sessions in applications using Internet telephony for voice and video calls, private IP telephone systems, and even instant messaging over IP networks. It is part of the Voice over IP (VoIP) group of technologies.
+
+Microsoft-Directory Services - follows the Server Message Block protocol for shared access to files, printers, and serial ports and ohter communications between nodes on a network.
+
+Hypertext Transfer Protocol - used to facilitate data communication for the World Wide Web
+
+Link Local Multicast Name Resolution - based on DNS and allows both IPv4 and IPv6 hosts to perform name resolution for hosts on the same local link.s
+
+0 (Reserved) and 7437 (Faximum) are likely ports used to send computer attacks and harmful content like viruses.
+
+Simple Network Management Protocol - collect and organize information about managed devices on IP networks and for modifying information to change device behavior
+
+Bootstrap Protocol Server - exclusive for IPv4, Dynamic Host Configuration Protocol (DHCP) server to receive requests
 
 select DISTINCT L4_SRC_PORT,
 count(idx),

@@ -31,7 +31,7 @@
 
 
 
-\newcommand{\SPTITLE}{UPLB Network Queue Simulator (UNQS): Surveying Network Performance For Internet Bandwidth Management}
+\newcommand{\SPTITLE}{UPLB Network Queue Simulator (UNQS): Analyzing Network Performance For Internet Bandwidth Management}
 \newcommand{\ADVISEE}{Leensey M. Lawas}
 \newcommand{\ADVISER}{Danilo J. Mercado}
 
@@ -151,22 +151,28 @@ A class diagram (section \ref{fig:uml}, pg. \pageref{fig:uml}) was constructed t
 
 \subsection{Traffic Description}
 
+Network traffic was collected from November 13-20. Specifically, the earliest interaction was sent at 1510502646 and the last flow arrived at 1511168758.
+
+The total number of flows was 554,392, the largest flow having 1,362,515,708 bytes of data, the average size being 517,998.49 bytes and the smallest containing 60 bytes.
+
+The most active source IP address, 2886731784, sent  the most data, accounting for 5.4324\% of the total flows while the IP address 4026531834 received the most interactions, thus describing the 9.9321\%.
+
 \begin{table*}[ht]
 \centering
 \caption{\textbf{Top 9 Out-Flows}}
 \label{top-out-flows}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|c|c|c|}
 \hline
-\textbf{IP SOURCE ADDRESS} & \textbf{IP DESTINATION ADDRESS} 	& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
-    10.0.38.214		       & 106.158.190.77 (KDDI CORPORATION)  &  62409079786			& 60.6        \\ \hline
-    10.0.100.248           & 239.10.10.10 (MULTICAST)			&  9173263420           & 8.9         \\ \hline
-    10.0.45.60      	   & 216.58.221.142 (Google LLC)		&  2920460978           & 2.8         \\ \hline
-    10.0.35.75             & 157.240.7.48 (Facebook, Inc.)		&  2771346197           & 2.7         \\ \hline
-    192.168.0.1            & 239.255.255.250 (MULTICAST)		&  1575146908           & 1.5         \\ \hline
-    192.168.1.1            & 239.255.255.250 (MULTICAST)		&  1562493373           & 1.5         \\ \hline
-    10.0.43.86             & 216.58.203.15 (Google LLC)			&  1242563600           & 1.2         \\ \hline
-    10.0.39.49		   	   & 17.253.85.204 (Apple Inc.)			&  1054547100           & 1.0         \\ \hline
-    10.0.8.124	           & 216.58.203.14 (Google LLC)			&  1039431952           & 1.0         \\ \hline
+\textbf{DESTINATION (\# of flows)} 		& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
+	KDDI CORPORATION (1)				&  62409079786			& 60.6        \\ \hline
+	MULTICAST (3)						&  12310903701          & 11.9        \\ \hline
+	Google LLC(3)						&  5202456530           & 5.0         \\ \hline
+	Facebook, Inc. (1)					&  2771346197           & 2.7         \\ \hline
+	% MULTICAST							&  1575146908           & 1.5         \\ \hline
+	% MULTICAST							&  1562493373           & 1.5         \\ \hline
+	% Google LLC							&  1242563600           & 1.2         \\ \hline
+	Apple Inc.(1)						&  1054547100           & 1.0         \\ \hline
+	% Google LLC							&  1039431952           & 1.0         \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -174,18 +180,18 @@ A class diagram (section \ref{fig:uml}, pg. \pageref{fig:uml}) was constructed t
 \centering
 \caption{\textbf{Top 9 In-Flows}}
 \label{top-in-flows}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|c|c|c|}
 \hline
-\textbf{IP SOURCE ADDRESS} 						& \textbf{IP DESTINATION ADDRESS}	& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
-    106.158.190.77 (KDDI CORPORATION)			& 10.0.38.214						&  79135454093			& 43.0        \\ \hline
-    216.58.221.129 (Google LLC)					& 10.0.36.50						&  23393060326          & 12.7        \\ \hline
-    109.236.81.173 (WorldStream B.V.)			& 10.0.24.68						&  3426880570           & 1.9         \\ \hline
-    216.58.221.129 (Google LLC)					& 10.0.44.48						&  2815063488           & 1.5         \\ \hline
-    185.163.109.151 (M247 Ltd)					& 10.0.40.147						&  2187777140           & 1.2         \\ \hline
-    202.69.185.15 (Converge ICT Solutions Inc.)	& 10.0.205.139						&  2154908552			& 1.2         \\ \hline
-    185.120.145.221 (M247 Ltd)					& 10.0.22.192						&  2098695101           & 1.1         \\ \hline
-    202.69.180.18 (Converge ICT Solutions Inc.)	& 10.0.16.212						&  1812641471           & 1.0         \\ \hline
-    216.58.221.129 (Google LLC)					& 10.0.2.183						&  1750693948           & 1.0         \\ \hline
+\textbf{SOURCE (\# of flows)} 		& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
+    KDDI CORPORATION(1)				&  79135454093			& 43.0        \\ \hline
+    Google LLC(3)					&  27958817762          & 15.2        \\ \hline
+    WorldStream B.V.(1)				&  3426880570           & 1.9         \\ \hline
+    % Google LLC						&  2815063488           & 1.5         \\ \hline
+    M247 Ltd(2)						&  4286472241           & 2.3         \\ \hline
+    Converge ICT Solutions Inc.(2)	&  3967550023			& 2.2         \\ \hline
+    % M247 Ltd						&  2098695101           & 1.1         \\ \hline
+    % Converge ICT Solutions Inc.		&  1812641471           & 1.0         \\ \hline
+    % Google LLC						&  1750693948           & 1.0         \\ \hline
 \end{tabular}
 \end{table*}
 

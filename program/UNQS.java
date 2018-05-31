@@ -2,7 +2,7 @@
     To compile:
         javac -cp ".;mysql-connector-java.jar;" *.java
     To run:
-        java -cp .:mysql-connector-java.jar UNQS simulation.conf
+        java -cp .:mysql-connector-java.jar UNQS conf/<file>
 */
 
 import java.io.Console;
@@ -24,7 +24,7 @@ public class UNQS {
         config.setDefault();
 
         if (args.length == 0) {
-            do {
+            do { 
                 System.out.print("Continue with the default configuration? (Y/N) ");
                 choice = input.nextLine();
 

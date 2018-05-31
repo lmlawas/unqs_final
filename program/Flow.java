@@ -37,7 +37,7 @@ public class Flow {
 		int i;
 
 		for (i = 0; i < no_of_packets; i++) {
-			packets.add(new Packet(first_switched, priority, (double)size/no_of_packets));			
+			packets.add(new Packet(first_switched, priority, (double)size/no_of_packets));
 		}
 
 		return packets;
@@ -74,5 +74,12 @@ public class Flow {
 			e.printStackTrace();
 			return -1;
 		}
+	}
+
+	public void info(){
+		System.out.println("------------\npacket info:\n------------");
+		System.out.println("\tfirst_switched = " + first_switched);
+		System.out.println("\tpriority = " + priority);
+		System.out.println("\tsize = " + size + "\n------------\n");
 	}
 }
