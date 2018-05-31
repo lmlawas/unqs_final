@@ -58,7 +58,7 @@
 
 % ABSTRACT
 \begin{abstract}
-Given the increasing demand for bandwidth, UNQS was developed to survey and to identify the optimal bandwidth setting as measured by duration (seconds), throughput (bits per second), and flow loss (percentage). The results show that while the simplest, FIFO showed the  best performance with minimal duration, maximal throughput, and minimal packet loss.
+Given the increasing demand for bandwidth, UNQS was developed to survey and to identify the optimal bandwidth setting as measured by duration (seconds), throughput (bits per second), and flow loss (percentage). The results show that \textbf{TBA}.
 \end{abstract}
 
 % INDEX TERMS
@@ -125,28 +125,26 @@ With assistance from ITC, a mirror port was setup and connected to a 64-bit Ubun
 \texttt{ntopng} uses the Unix timestamp to label the arrival time of packets into the switch (known as \texttt{FIRST\_SWITCHED}) and their exit time from switch to their destination hosts (\texttt{LAST\_SWITCHED}). This timestamp counts the seconds that have passed since January 1, 1970 (Coordinated Universal Time/UTC).
 
 \subsection{Simulation}
-\subsubsection{Classes and their attributes}
+
+A class diagram (section \ref{fig:uml}, pg. \pageref{fig:uml}) was constructed to get an overview of how UNQS was implemented in the Java programming language. The following items give a brief description of each class/interface.
+
+\begin{figure*}
+\includegraphics[width=\textwidth]{UNQS_UML}
+\label{fig:uml}\caption{\textbf{UNQS Class Diagram}}
+\end{figure*}
+
 \begin{enumerate}
-\item \textbf{Cofiguration.java} - This class is responsible for setting, updating, validating, and displaying the configuration for the database connection (datestamp \textit{MM-DD-YY} and interface number \textit{i} for table name written as \textit{flows-MM-DD-YYv4\_i}, database name, IP address \textit{xxx.xxx.xxx.xxx}, password, port number \textit{p}, database username, database password) and queue settings (bandwidth \textit{b}, maximum buffer size \textit{m}, Maximum Transmition Unit \textit{mtu\_size}, queue type \textit{qt}.
+\item \textbf{Cofiguration.java} - This class is responsible for setting, updating, validating, and displaying the configuration for the database connection and simulation settings.
 
-\item \textbf{IPProtocol.java} - This class contains static variables to identify the protocols used for categorizing the priority of each packet into three queues. High priority queue have Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) packets. Low priority packets use the following protocols: Internet Control Message Protocol (ICMP) and Host Identity Protocol. Internet Group Message Protocol (IGMP) and other protocols are classified into the normal queue.
+\item \textbf{Flow.java} - A flow is a network link between a source host and a destination host. For the purpose of this program, the IP addresses of both hosts are not defined as this class' attribute.
 
-\item \textbf{Main.java} - This contains the main function where the connection to database is established, and where time is looped starting from the minimum \texttt{FIRST\_SWITCHED} value (taken from the selected table and measured in ticks) until all packets are scheduled from packet switch to their destination.
+\item \textbf{NetworkBuffer.java} - This class was made for readability purposes and is a collection of flows.
 
-\item \textbf{Packet.java} - A packet instance contains the following attributes: id, priority, protocol, size (in bytes), arrival time and send time to and from the scheduler (measured in ticks), and virtual time \textit{vt} (used only for WFQ).  Virtual time is computed as
-\[
-    vt = \frac{s}{w}
-\]
-where \textit{s} is the packet size and \textit{w} is the weight of a queue. Queue weight's value is derived as
-\[
-	w = d \times m
-\]
+\item \textbf{Schedule.java} - Schedule is an interface that has final-static-defined variables \textit{FIFO} (0), \textit{PQ} (1), and \textit{WFQ} (2). All of its methods are abstract and therefore must be overriden by the classes that will implement it.
 
-where \textit{d} is the fixed distribution rate for each priority (0.5, 0.3, and 0.2 for high, medium, and low priorities respectively), and \textit{m} is the maximum buffer size.
+\item \textbf{FirstInFirstOut.java} - FirstInFirstOut implements the \texttt{Schedule} interface and overrides its methods in order to perform FIFO's logic.
 
-\item \textbf{Queue.java} - Queue takes note of the current buffer size, packet count, total bytes transmitted, and maximum buffer size.
-
-\item \textbf{Schedule.java} - Schedule has static-defined variables \textit{FIFO} (0), \textit{PQ} (1), and \textit{WFQ} (2). Its attributes are the schedule number and the total number of bytes transmitted.
+\item \textbf{UNQS.java} - This contains the main function where the connection to the database is established. Time is counted from the configuration's defined range of \texttt{start\_time} to \texttt{end\_time} and shall continue to iterate until all flows within the defined network buffer(s) are scheduled from the switch to their destination.
 \end{enumerate}
 
 \section{Results and Discussion}
@@ -175,7 +173,7 @@ where \textit{d} is the fixed distribution rate for each priority (0.5, 0.3, and
 \begin{table*}[ht]
 \centering
 \caption{\textbf{Top 9 In-Flows}}
-\label{top-out-flows}
+\label{top-in-flows}
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{IP SOURCE ADDRESS} 						& \textbf{IP DESTINATION ADDRESS}	& \textbf{TOTAL BYTES} 	& \textbf{\%} \\ \hline
@@ -194,8 +192,8 @@ where \textit{d} is the fixed distribution rate for each priority (0.5, 0.3, and
 \begin{table*}[ht]
 \centering
 \caption{\textbf{Top 10 Destination Ports}}
-\label{top-out-flows}
-\begin{tabular}{|l|l|l|l|}
+\label{top-dest-ports}
+\begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{PORT NUMBER}			& \textbf{PROTOCOL}			& \textbf{TOTAL FLOWS}		& \textbf{\%} 	 \\ \hline
     443							& HTTPS						&  65088					& 11.7  	     \\ \hline
@@ -212,109 +210,119 @@ where \textit{d} is the fixed distribution rate for each priority (0.5, 0.3, and
 \end{tabular}
 \end{table*}
 
-%\subsubsection{\textbf{Public IP addresses description}}
+% IP addresses
+The top destination IP addresses for out-flow traffic shown in Table \ref{top-out-flows} and the top source IP addresses for in-flow traffic seen in Table \ref{top-in-flows} belong to the companies that are listed as follows:
 
-The top destination IP addresses for out-flow traffic and the top source IP addresses for in-flow traffic belong to the following companies.
+\begin{enumerate}
+\item \textbf{KDDI Corporation} is a telecommunications business based in Japan. It provides content hosting over optimized networks, and ICT and business services and solutions.
 
-\textit{KDDI Corporation} is a telecommunications business based in Japan. It provides content hosting over optimized networks, and ICT and business services and solutions. \textit{Google LLC} is an American multinational technology company that specializes in Internet-related services and products such as online advertising technologies, search engine, cloud computing, software, and hardware. \textit{WorldStream B.V.} is a popular Internet Service Provider based in the Netherlands and is used by customers from all over the world. It provides cost-effective services to secure hosting environment, and offers hardware and Operating System technologies.
-\textit{M247 Ltd} is a UK-based technology company that offers  services and tools to secure network and data while providing connectivity and internet infastructure that expands to a global scale. \textit{Converge ICT} is a Philippine technology company with the fastest growing fiber internet and offers services to ensure pure end-to-end fiber internet connection, thus reducing data loss, faster speed and bandwidth. \textit{Facebook} is an American online social media and social networking service company. \textit{Apple Inc.} is an American multinational technology company that designs, develops, and sells consumer electronics, computer software, and online services. Multicast IPs allow group communication to be sent simultaneously to multiple computers.
+\item \textbf{Google LLC} is an American multinational technology company that specializes in Internet-related services and products such as online advertising technologies, search engine, cloud computing, software, and hardware.
 
-% Ports
+\item \textbf{WorldStream B.V.} is a popular Internet Service Provider based in the Netherlands and is used by customers from all over the world. It provides cost-effective services to secure hosting environment, and offers hardware and Operating System technologies.
 
-Hypertext Transfer Protocol Secure - secure communication  via encryption over a computer network.
+\item \textbf{M247 Ltd} is a UK-based technology company that offers  services and tools to secure network and data while providing connectivity and internet infastructure that expands to a global scale.
 
-Domain Name System - match names to IP addresses and vice versa
+\item \textbf{Converge ICT} is a Philippine technology company with the fastest growing fiber internet and offers services to ensure pure end-to-end fiber internet connection, thus reducing data loss, faster speed and bandwidth.
 
-Simple Service Discovery Protocol - advertisement and discovery of network services and presence information
+\item \textbf{Facebook} is an American online social media and social networking service company.
 
-Session Inititation Protocol - signal and control multimedia communication sessions in applications using Internet telephony for voice and video calls, private IP telephone systems, and even instant messaging over IP networks. It is part of the Voice over IP (VoIP) group of technologies.
+\item \textbf{Apple Inc.} is an American multinational technology company that designs, develops, and sells consumer electronics, computer software, and online services. Multicast IPs allow group communication to be sent simultaneously to multiple computers.
 
-Microsoft-Directory Services - follows the Server Message Block protocol for shared access to files, printers, and serial ports and ohter communications between nodes on a network.
+\item \textbf{Multicast} * is not a company, but rather a form of data transmission that allows multiple hosts to receive data simultaneously.
 
-Hypertext Transfer Protocol - used to facilitate data communication for the World Wide Web
+\end{enumerate}
 
-Link Local Multicast Name Resolution - based on DNS and allows both IPv4 and IPv6 hosts to perform name resolution for hosts on the same local link.s
-
-0 (Reserved) and 7437 (Faximum) are likely ports used to send computer attacks and harmful content like viruses.
-
-Simple Network Management Protocol - collect and organize information about managed devices on IP networks and for modifying information to change device behavior
-
-Bootstrap Protocol Server - exclusive for IPv4, Dynamic Host Configuration Protocol (DHCP) server to receive requests
-
-
-
-%Multicast
-
+% references
 %http://www.kddi.com/english/corporate/kddi/our-business/ may 28 2018
 %https://www.worldstream.nl/en/about/company
 %https://m247.com/about-us/
 %http://www.convergeict.com/about-us/
 %https://tools.ietf.org/html/rfc1112
 
+% Ports
+
+The Internet Assigned Numbers Authority (IANA) is responsible for associating port numbers with certain internet protocols used by network applications. These identifications can be found in IANA's \textit{Service Name and Transport Protocol Port Number Registry}. Table \ref{top-dest-ports} listed the top destination port numbers as recorded in the data.
+
+% https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
+
+\begin{enumerate}
+
+\item \textbf{Hypertext Transfer Protocol Secure (HTTPS)} - secures communication over a network
+
+\item \textbf{Domain Name System (DNS)} - matches names to IP addresses and vice versa to facilitate network communications
+
+\item \textbf{Simple Service Discovery Protocol (SSDP)} - advertises presence information to locate available network services
+
+\item \textbf{Session Inititation Protocol (SIP)} - signals and controls multimedia communication sessions in Voice over IP (VoIP) applications like online voice and video calls
+
+\item \textbf{Microsoft-Directory Services (MS-DS)} - follows the Server Message Block (SMB) protocol for shared access to files, printers, and serial ports and other communications between nodes on a network
+
+\item \textbf{Hypertext Transfer Protocol (HTTP)} - facilitates data communication for the World Wide Web
+
+\item \textbf{Link Local Multicast Name Resolution} - is based on DNS and allows both IPv4 and IPv6 hosts to perform name resolution for hosts on the same local links
+
+\item \textbf{0 (Reserved)} and \textbf{7437 (Faximum)} - have no specifics protocols linked to them, and therefore are likely abused ports to send computer attacks and harmful computer and network content like viruses
+
+\item \textbf{Simple Network Management Protocol (SNMP)} - collects and organizes information about managed devices on IP networks, and can modify information to change device behavior
+
+\item \textbf{Bootstrap Protocol Server (BOOTP)} - exclusive protocol for IPv4; Dynamic Host Configuration Protocol (DHCP) server receives requests upon booting the client's computer
+
+\end{enumerate}
+
 %\linebreak
 %\hrule
 
-In summary, the observed frequented applications being used can be seen by the ports used most. Port 8000 is used by the Hyper Text Transfer Protocol, port 1900 is used by the Simple Service Discovery Protocol, port 0 is the initial 'binding' port before the operating system returns a new value, which is an available port, and port 5355 is used for Link-Local Multicast Name Resolution.
-
-\subsection{Metrics Considered in the Data Analysis}
-The following figures show bar graphs of the average network performance metrics to be looked at: duration, throughput, and packet loss. The dates per collection, from left to right, are April 17, 18, 25, 28, and 29. The data that spawned these results were collected 4 hours per date. For each scheduling algorithm, ten varying buffer sizes were tested, from 10MB, 20MB...until 100MB. The averages for each network performance metric were collected and visualized in the figures.
+\subsection{Data Analysis}
+\textbf{TBA}
 
 \subsubsection{Duration}
 
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{duration}
-\label{fig:duration}\caption{Average Durations per Date and Queue Type}
-\end{figure}
-
-It is evident from \ref{fig:duration} that in terms of how fast the packets are scheduled, \texttt{WFQ} takes the most time to finish in scheduling the packets. Duration \textit{d} is a function of the arrival time \textit{t\textsubscript{0}} and last switched time \textit{t\textsubscript{n}} seen as follows:
+Duration \textit{d} is a function of the arrival time \textit{t\textsubscript{0}} and last switched time \textit{t\textsubscript{n}} seen as follows:
 
 \[
 	d(t_0, t_n) = t_n - t_0
 \]
 
 \subsubsection{Throughput}
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{throughput}
-\label{fig:throughput}\caption{Average Throughputs per Date and Queue Type}
-\end{figure}
 
 Throughput \textit{tput} was computed as 
 \[
 	tput = \frac{count(p_s)}{d}
 \]
 
-where \textit{ts} is the total size (in bytes) that was successfully switched, and \textit{d} as the computed duration. Focusing on \ref{fig:throughput}, \texttt{FIFO} scheduling queue outputted the most throughput.
+where \textit{ts} is the total size (in bytes) that was successfully switched, and \textit{d} as the computed duration. 
 
-\subsubsection{Packet Loss}
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{packetloss}
-\label{fig:packetloss}\caption{Average Packet Losses per Date and Queue Type}
-\end{figure}
+\subsubsection{Flow Loss}
+% \begin{figure}
+% \includegraphics[width=0.5\textwidth]{packetloss}
+% \label{fig:packetloss}\caption{Average Packet Losses per Date and Queue Type}
+% \end{figure}
 
 The last network performance parametric looked at is the packet loss \textit{l}, solved by
 
 \[
-	l = \frac{count(p_l)}{count(p_l + p_s)} \times 100
+	l = \frac{count(f_l)}{count(f_l + f_s)} \times 100
 \]
 
-where all dropped packets \textit{p\textsubscript{l}} are counted, divided by the total of dropped \textit{p\textsubscript{l}} and switched packets \textit{p\textsubscript{s}} multiplied by 100, to get the percentage. Similarly, the results show that \texttt{WFQ} has the worst performance when packet loss is considered. Notably, \texttt{PQ} shows lower packet loss compared to \texttt{FIFO}.
+where all dropped flows \textit{f\textsubscript{l}} are counted and divided by the total number of flows \textit{f\textsubscript{l}} plus \textit{f\textsubscript{s}} (switched flows) multiplied by 100, to get the percentage. 
 
 \subsubsection{Bandwidth Constraint}
-In attempt to check if the same trend is observed when a bandwidth constraint is added, the following bandwidth constraints were tested using a 100MBps buffer: 600Mbps, 800Mbps, 1000Mbps, and 1200Mbps. These values were converted into their byte form and with help from the conversion value for seconds to ticks, they were translated into 1.125 Bytes per tick (Bpt), 1.5Bpt, 1.875Bpt, and 2.25Bpt respectively. The result is visualized in \ref{fig:bc}. The throughputs noted for all ran simulations are very close to the bandwidth, and a 100MB buffer provided 0\% packet loss, hence only the duration was left as  basis.
+% In attempt to check if the same trend is observed when a bandwidth constraint is added, the following bandwidth constraints were tested using a 100MBps buffer: 600Mbps, 800Mbps, 1000Mbps, and 1200Mbps. These values were converted into their byte form and with help from the conversion value for seconds to ticks, they were translated into 1.125 Bytes per tick (Bpt), 1.5Bpt, 1.875Bpt, and 2.25Bpt respectively. The result is visualized in \ref{fig:bc}. The throughputs noted for all ran simulations are very close to the bandwidth, and a 100MB buffer provided 0\% packet loss, hence only the duration was left as  basis.
 
-As seen, PQ and WFQ amounted to the same duration that showed improvement per increase of the bandwidth. Yet, it is apparent that FIFO's performance is a lot better based on this network performance metric. FIFO, in any of the bandwidth constraints, displayed minimal and fast speed of switching the packets, while maintaining a similar throughput to the slow-performing PQ and WFQ.
+% As seen, PQ and WFQ amounted to the same duration that showed improvement per increase of the bandwidth. Yet, it is apparent that FIFO's performance is a lot better based on this network performance metric. FIFO, in any of the bandwidth constraints, displayed minimal and fast speed of switching the packets, while maintaining a similar throughput to the slow-performing PQ and WFQ.
 
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{duration_with_bc}
-\label{fig:bc}\caption{Average Durations with Applied Bandwidth Constraint}
-\end{figure}
+% \begin{figure}
+% \includegraphics[width=0.5\textwidth]{duration_with_bc}
+% \label{fig:bc}\caption{Average Durations with Applied Bandwidth Constraint}
+% \end{figure}
 
 \section{Conclusion and Recommendation}
-After the experiment, the results show that the UPLB network works better using the \texttt{FIFO} scheduling algorithm. It was able to output the most number of packets over a period of time, as shown by \ref{fig:throughput}, and switched the packets fastly \ref{fig:duration} while maintaining the most integrity by minimizing lost packets\ref{fig:packetloss}.
+\textbf{TBA}
+% After the experiment, the results show that the UPLB network works better using the \texttt{FIFO} scheduling algorithm. It was able to output the most number of packets over a period of time, as shown by \ref{fig:throughput}, and switched the packets fastly \ref{fig:duration} while maintaining the most integrity by minimizing lost packets\ref{fig:packetloss}.
 
-While \texttt{PQ} and \texttt{WFQ} algorithms were intended to improve the network performance in terms of packet switching, this study proves that the traffic of UPLB is more suited to a \texttt{FIFO} scheduling algorithm.
+% While \texttt{PQ} and \texttt{WFQ} algorithms were intended to improve the network performance in terms of packet switching, this study proves that the traffic of UPLB is more suited to a \texttt{FIFO} scheduling algorithm.
 
-For future studies, the researcher would recommend that a different traffic classification method is to be used, such as statistical methods or machine learning methods. Another advisable method is to inspect a different field of the payload or packet that will be used to classify traffic, instead of the protocol field. A final recommendation is the use of hybrid or variation of the PQ and WFQ scheduling algorithms to further improve the switching, thus effectively managing UPLB's internet bandwidth.
+% For future studies, the researcher would recommend that a different traffic classification method is to be used, such as statistical methods or machine learning methods. Another advisable method is to inspect a different field of the payload or packet that will be used to classify traffic, instead of the protocol field. A final recommendation is the use of hybrid or variation of the PQ and WFQ scheduling algorithms to further improve the switching, thus effectively managing UPLB's internet bandwidth.
 
 % BIBLIOGRAPHY
 \bibliographystyle{./IEEE/IEEEtran}

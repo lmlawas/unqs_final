@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.26)  30 MAY 2018 22:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.9.26)  31 MAY 2018 09:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -759,14 +759,7 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-(./cs190-ieee.aux
-
-LaTeX Warning: Label `top-out-flows' multiply defined.
-
-
-LaTeX Warning: Label `top-out-flows' multiply defined.
-
-)
+(./cs190-ieee.aux)
 \openout1 = `cs190-ieee.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
@@ -912,57 +905,31 @@ LaTeX Font Info:    Try loading font information for T1+zi4 on input line 123.
 
 (/usr/share/texlive/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
-) [2
+)
+<images/UNQS_UML.png, id=13, 753.81625pt x 471.7625pt>
+File: images/UNQS_UML.png Graphic file (type png)
+
+<use images/UNQS_UML.png>
+Package pdftex.def Info: images/UNQS_UML.png used on input line 132.
+(pdftex.def)             Requested size: 516.0pt x 322.925pt.
+ [2
 
 ]
 LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <8> not available
-(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 158.
+(Font)              Font shape `T1/ptm/b/sc' tried instead on input line 156.
 
-<images/duration.png, id=17, 455.45157pt x 255.95625pt>
-File: images/duration.png Graphic file (type png)
-
-<use images/duration.png>
-Package pdftex.def Info: images/duration.png used on input line 265.
-(pdftex.def)             Requested size: 258.0pt x 144.99438pt.
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 265--266
-[][]
+Underfull \hbox (badness 2856) in paragraph at lines 221--222
+[]\T1/ptm/b/n/10 WorldStream B.V. \T1/ptm/m/n/10 is a pop-u-lar In-ter-net Ser-
+vice
  []
 
-<images/throughput.png, id=18, 455.45157pt x 255.95625pt>
-File: images/throughput.png Graphic file (type png)
 
-<use images/throughput.png>
-Package pdftex.def Info: images/throughput.png used on input line 277.
-(pdftex.def)             Requested size: 258.0pt x 144.99438pt.
+Underfull \vbox (badness 4872) has occurred while \output is active []
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 277--278
-[][]
- []
+ [3 <./images/UNQS_UML.png>]
+Underfull \vbox (badness 5105) has occurred while \output is active []
 
-[3] <images/packetloss.png, id=27, 455.45157pt x 255.95625pt>
-File: images/packetloss.png Graphic file (type png)
-
-<use images/packetloss.png>
-Package pdftex.def Info: images/packetloss.png used on input line 290.
-(pdftex.def)             Requested size: 258.0pt x 144.99438pt.
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 290--291
-[][]
- []
-
-[4 <./images/duration.png (PNG copy)> <./images/throughput.png (PNG copy)>]
-<images/duration_with_bc.png, id=31, 455.45157pt x 255.95625pt>
-File: images/duration_with_bc.png Graphic file (type png)
-
-<use images/duration_with_bc.png>
-Package pdftex.def Info: images/duration_with_bc.png used on input line 308.
-(pdftex.def)             Requested size: 258.0pt x 144.99438pt.
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 308--309
-[][]
- []
-
+ [4]
 (./cs190-ieee.bbl
 Overfull \hbox (49.14139pt too wide) in paragraph at lines 39--42
 \T1/ptm/m/n/8 ict.com/as_a2_ict_new/ocr/A2_G063/333_networks_coms/bandwidth/min
@@ -986,8 +953,7 @@ Underfull \hbox (badness 1867) in paragraph at lines 117--120
 []\T1/ptm/m/n/8 webopedia, ``Clock tick,'' 2017. [On-line]. Avail-able:
  []
 
-) [5 <./images/packetloss.png (PNG copy)> <./images/duration_with_bc.png (PNG c
-opy)>]
+)
 Package epstopdf Info: Source file: <./yourPicture.eps>
 (epstopdf)                    date: 2006-08-25 06:40:04
 (epstopdf)                    size: 21238 bytes
@@ -996,17 +962,17 @@ Package epstopdf Info: Source file: <./yourPicture.eps>
 (epstopdf)                    size: 6374 bytes
 (epstopdf)             Command: <repstopdf --outfile=./yourPicture-eps-converte
 d-to.pdf ./yourPicture.eps>
-(epstopdf)             \includegraphics on input line 325.
+(epstopdf)             \includegraphics on input line 333.
 Package epstopdf Info: Output file is already uptodate.
- <./yourPicture-eps-converted-to.pdf, id=35, 73.27374pt x 91.34125pt>
+ <./yourPicture-eps-converted-to.pdf, id=31, 73.27374pt x 91.34125pt>
 File: ./yourPicture-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./yourPicture-eps-converted-to.pdf>
 Package pdftex.def Info: ./yourPicture-eps-converted-to.pdf used on input line 
-325.
+333.
 (pdftex.def)             Requested size: 73.27354pt x 91.34102pt.
 
-Overfull \hbox (1.00356pt too wide) in paragraph at lines 325--325
+Overfull \hbox (1.00356pt too wide) in paragraph at lines 333--333
  [][] 
  []
 
@@ -1018,48 +984,43 @@ Package epstopdf Info: Source file: <./yourPicture.eps>
 (epstopdf)                    size: 6374 bytes
 (epstopdf)             Command: <repstopdf --outfile=./yourPicture-eps-converte
 d-to.pdf ./yourPicture.eps>
-(epstopdf)             \includegraphics on input line 325.
+(epstopdf)             \includegraphics on input line 333.
 Package epstopdf Info: Output file is already uptodate.
 File: ./yourPicture-eps-converted-to.pdf Graphic file (type pdf)
 <use ./yourPicture-eps-converted-to.pdf>
 Package pdftex.def Info: ./yourPicture-eps-converted-to.pdf used on input line 
-325.
+333.
 (pdftex.def)             Requested size: 73.27354pt x 91.34102pt.
 
-Overfull \hbox (1.00356pt too wide) in paragraph at lines 325--325
+Overfull \hbox (1.00356pt too wide) in paragraph at lines 333--333
  [][] 
  []
 
-[6
-
- <./yourPicture-eps-converted-to.pdf>] (./cs190-ieee.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+[5 <./yourPicture-eps-converted-to.pdf>] (./cs190-ieee.aux) ) 
 Here is how much of TeX's memory you used:
- 24371 strings out of 493029
- 598456 string characters out of 6136234
- 759407 words of memory out of 5000000
- 27455 multiletter control sequences out of 15000+600000
+ 24355 strings out of 493029
+ 598060 string characters out of 6136234
+ 754407 words of memory out of 5000000
+ 27442 multiletter control sequences out of 15000+600000
  123713 words of font info for 123 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,10n,77p,1022b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/
-share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-
-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utm
-b8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cs190-ieee.pdf (6 pages, 218024 bytes).
+{/usr/share/texliv
+e/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}{/usr/share/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/inconsolata/Inconsolata-zi4r.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/urw/times/utmri8a.pfb>
+Output written on cs190-ieee.pdf (5 pages, 201725 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
+ 72 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
 
