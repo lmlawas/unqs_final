@@ -96,11 +96,13 @@ public class UNQS {
             System.out.print("Processing flows...");
 
             while (current_time <= config.getEndTime()) {
+
+                // get flows at current_time from the database
                 flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
 
                 if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
 
-                // while there are flows at time current_time
+                // if there are flows, add them to buffer
                 while ( flows.next() ) {
                     if (config.getSchedule() == Schedule.FIFO) {
                         single_flow = new Flow(flows.getInt(1), flows.getInt(2), flows.getInt(4));
@@ -118,9 +120,9 @@ public class UNQS {
                 }
 
                 // wait for current processed elapsed time to finish before processing again
-                // if (!processing) {
+                if (!processing) {
                     processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
-                // }
+                }
                 if (config.getDebug()) {
                     System.out.println("buffer size = " + sched.bufferSize());
                 }

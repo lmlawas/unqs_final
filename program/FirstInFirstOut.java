@@ -22,8 +22,8 @@ public class FirstInFirstOut implements Schedule {
 		flows_dropped_cnt = 0;
 		flows_switched_cnt = 0;
 
-		// for duration
-		processing_time = 1;
+		// // for duration
+		// processing_time = -1;
 
 		// for average wait time
 		total_wait_time = 0;
@@ -50,7 +50,35 @@ public class FirstInFirstOut implements Schedule {
 
 	public boolean process(int bandwidth, int current_time, int timeout, boolean debug) {
 		Flow f;
-		int temp_duration = 0;
+		int processing_time = 0;
+
+		while (!buffer.isEmpty()) {
+			f = buffer.peekFirst();
+
+			// (flow size in bits + overhead)/ bits/second
+			processing_time = (f.size + f.no_of_packets) / bandwidth;
+
+			if (processing_time >= timeout) {
+				if (debug) {
+					System.out.println("-- Dropping flow --");
+					f.info();
+				}
+				dropFlow(f);
+				total_wait_time = total_wait_time + (current_time - f.first_switched);
+			} else {
+				if (debug) {
+					System.out.println("++ Switching flow ++");
+					f.info();
+				}
+				switchFlow(f);
+				total_wait_time = total_wait_time + (current_time - f.first_switched);
+				
+				if(processing_time>1){
+					return true;
+					processing_time--;
+				}
+			}
+		}
 
 		/* this block of code works but functions the opposite that it's supposed to */
 		// check if there are timed out flows waiting in queue
@@ -72,41 +100,42 @@ public class FirstInFirstOut implements Schedule {
 		// 	}
 		// }
 
-		if (processing_time > 0) return true;
+		// if (processing_time > 0) return true;
 
 		// switch flows that fit the bandwidth
 
 		/* this block of code seems to be the source of the infinite loop */
-		while (!buffer.isEmpty()) {
-			f = buffer.remove();
-			if(processing_time == 1){
-				processing_time = (f.size + f.no_of_packets) / bandwidth;
-			}
+		// while (!buffer.isEmpty()) {
+		// 	f = buffer.remove();
+		// 	if (processing_time == -1) {
+		// 		processing_time =
+		// 		if (processing_time >= timeout) {
+		// 			if (debug) {
+		// 				System.out.println("-- Dropping flow --");
+		// 				f.info();
+		// 			}
+		// 			dropFlow(f);
+		// 			total_wait_time = total_wait_time + (current_time - f.first_switched);
+		// 		}
+		// 	}
+		// 	else if(processing_time > 0) {
+		// 		if (debug) {
+		// 			System.out.println("++ Switching flow ++");
+		// 			f.info();
+		// 		}
+		// 		switchFlow(f);
+		// 		total_wait_time = total_wait_time + (current_time - f.first_switched);
+		// 		processing_time--;
+		// 	} else {
+		// 		buffer.addFirst(f);
+		// 		break;
+		// 	}
+		// }
 
-			System.out.println(processing_time);
-			if (processing_time < timeout) {
-				if (debug) {
-					System.out.println("++ Switching flow ++");
-					f.info();
-				}
-				switchFlow(f);
-				total_wait_time = total_wait_time + (current_time - f.first_switched);
-				processing_time--;
-			} else {
-				if (debug) {
-					System.out.println("-- Dropping flow --");
-					f.info();
-				}
-				dropFlow(f);
-				total_wait_time = total_wait_time + (current_time - f.first_switched);
-				break;
-			}
-		}
-
-		if (processing_time <= 0){
-			processing_time = 1;
-			return false;
-		}
+		// if (processing_time <= 0) {
+		// 	processing_time = -1;
+		// 	return false;
+		// }
 		return true;
 	}
 
@@ -115,7 +144,7 @@ public class FirstInFirstOut implements Schedule {
 	}
 
 	public void dropFlow(Flow f) {
-		// buffer.remove();
+		buffer.remove();
 		flows_dropped_size += f.size;
 		flows_dropped_cnt++;
 	}
@@ -149,7 +178,7 @@ public class FirstInFirstOut implements Schedule {
 	}
 
 	public void switchFlow(Flow f) {
-		// buffer.remove();
+		buffer.remove();
 		flows_switched_size += f.size;
 		flows_switched_cnt++;
 	}
