@@ -49,40 +49,44 @@ public class FirstInFirstOut implements Schedule {
 	}
 
 	public boolean process(int bandwidth, int current_time, int timeout, boolean debug) {
-		Flow f;		
+		Flow f;
 
 		while (!buffer.isEmpty()) {
 			f = buffer.peekFirst();
 
-			// (flow size in bits + overhead)/ bits/second
-			if(processing_time==-1){
-				processing_time = (f.size + f.no_of_packets) / bandwidth;	
-			}
-
-			// if flow cannot be processed before timeout
-			if (processing_time >= timeout) {
-				if (debug) {
-					System.out.println("-- Dropping flow --");
-					f.info();
+			// if nothing is being processed
+			if (processing_time == -1) {
+				// (flow size in bits + overhead)/ bits/second
+				processing_time = (f.size + f.no_of_packets) / bandwidth;
+				// if flow cannot be processed before timeout
+				if (processing_time >= timeout) {
+					if (debug) {
+						System.out.println("-- Dropping flow --");
+						f.info();
+					}
+					dropFlow(f);
+					total_wait_time = total_wait_time + (current_time - f.first_switched);
+					processing_time = -1;
 				}
-				dropFlow(f);
-				total_wait_time = total_wait_time + (current_time - f.first_switched);
 			}
 			// else the flow can be processed
-			else {
+			if (processing_time > 0) {
 				if (debug) {
 					System.out.println("++ Switching flow ++");
 					f.info();
 				}
 				switchFlow(f);
 				total_wait_time = total_wait_time + (current_time - f.first_switched);
-				
-				if(processing_time>1){
-					processing_time--;
-					return true;
-				}
+				processing_time--;
+
+				// if process is finished
+				if (processing_time == 0) return false;				
+				else return true;
 			}
 		}
+
+		// default: process is not ongoing
+		return false;
 
 		/* this block of code works but functions the opposite that it's supposed to */
 		// check if there are timed out flows waiting in queue
@@ -108,7 +112,7 @@ public class FirstInFirstOut implements Schedule {
 
 		// switch flows that fit the bandwidth
 
-		
+
 		// while (!buffer.isEmpty()) {
 		// 	f = buffer.remove();
 		/*** if processing_time is not set yet ***/
@@ -145,7 +149,6 @@ public class FirstInFirstOut implements Schedule {
 		// 	processing_time = -1;
 		// 	return false;
 		// }
-		return true;
 	}
 
 	public void addFlow(Flow f) {
@@ -154,7 +157,7 @@ public class FirstInFirstOut implements Schedule {
 
 	public void dropFlow(Flow f) {
 		buffer.remove();
-		flows_dropped_size += f.size;
+		flows_dropped_size += (f.size + f.no_of_packets);
 		flows_dropped_cnt++;
 	}
 
@@ -188,7 +191,7 @@ public class FirstInFirstOut implements Schedule {
 
 	public void switchFlow(Flow f) {
 		buffer.remove();
-		flows_switched_size += f.size;
+		flows_switched_size += (f.size + f.no_of_packets);
 		flows_switched_cnt++;
 	}
 }
