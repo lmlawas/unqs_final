@@ -57,7 +57,7 @@ public class FirstInFirstOut implements Schedule {
 			// if nothing is being processed
 			if (processing_time == -1) {
 				// (flow size in bits + overhead)/ bits/second
-				processing_time = (f.size + f.no_of_packets) / bandwidth;
+				processing_time = (int)Math.ceil((f.size + f.no_of_packets + 0.0) / bandwidth*1.0);
 				// if flow cannot be processed before timeout
 				if (processing_time >= timeout) {
 					if (debug) {
@@ -70,7 +70,7 @@ public class FirstInFirstOut implements Schedule {
 				}
 			}
 			// else the flow can be processed
-			if (processing_time > 0) {
+			if (processing_time >= 0) {
 				if (debug) {
 					System.out.println("++ Switching flow ++");
 					f.info();
@@ -80,7 +80,8 @@ public class FirstInFirstOut implements Schedule {
 				processing_time--;
 
 				// if process is finished
-				if (processing_time == 0) return false;				
+				if (processing_time <= 0) return false;		
+				// else process is ongoing		
 				else return true;
 			}
 		}
