@@ -77,7 +77,6 @@ public class UNQS {
             Statement stmt = con.createStatement();
             ResultSet flows;
             int current_time = config.getStartTime();
-            boolean processing = false;
             Flow single_flow;
             Schedule sched;
 
@@ -118,11 +117,9 @@ public class UNQS {
                         single_flow.info();
                     }
                 }
+                
+                sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
 
-                // wait for current processed elapsed time to finish before processing again
-                if (!processing) {
-                    processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
-                }
                 if (config.getDebug()) {
                     System.out.println("buffer size = " + sched.bufferSize());
                 }
@@ -132,9 +129,7 @@ public class UNQS {
             while (!sched.queueEmpty()) {
                 if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
 
-                // if (!processing) {
-                    processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
-                // }
+                    sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
 
                 if (config.getDebug()) {
                     System.out.println("buffer size = " + sched.bufferSize());
