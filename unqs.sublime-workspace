@@ -528,17 +528,6 @@
 			}
 		},
 		{
-			"contents": "# for the database connection\n--username=root\n--password\n--ip-address=127.0.0.1\n--port=3306\n--database=FINAL\n--table=flowsv4\n\n# for the queue\n\n# in bits per second\n--bandwidth=12200\n\n# 0=FIFO, 1=PQ, 2=WFQ\n--schedule=0\n\n# in seconds\n--timeout=60\n--starttime=1510502646\n--endtime=1510588797\n\n\n#--debug\n",
-			"file": "program/simulation.conf",
-			"file_size": 300,
-			"file_write_time": 131717758298590276,
-			"settings":
-			{
-				"buffer_size": 300,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"contents": "8 hours = 28800 seconds\n1 day = 86400 seconds\n\nNovember \t8AM timestamp\n\n13 \t\t\t1510531200\n14\t\t\t1510617600\n15\t\t\t1510704000\n16 \t\t\t1510790400\n17 \t\t\t1510876800\n18 \t\t\t1510963200\n19\t\t\t1511049600\n20 \t\t\t1511136000\n\n1510560000\n\n\nFQ\nArrive(j)F = arrival time of jth packet of flow F\nLength(j)F = length/packet size of jth packet of flow F \nPacketSize(j)F = OUT_BYTES/PACKETS\nFinish(j)F = max(Arrive(j)F, Finish(j-1)F) + Length(j)F\n\nselect t.range as [score range], count(*) as [number of occurences]\nfrom (\n  select case \n    when score between  0 and  9 then ' 0-9 '\n    when score between 10 and 19 then '10-19'\n    when score between 20 and 29 then '20-29'\n    ...\n    else '90-99' end as range\n  from scores) t\ngroup by t.range\n\nselect FIRST_SWITCHED as dates, SUM(PACKETS) as totalpackets\nfrom (\n  select case \n    when FIRST_SWITCHED between 1510531200 and 1510531200+28800 then 'nov13'\n    when FIRST_SWITCHED between 1510617600 and 1510617600+28800 then 'nov14'\n    when FIRST_SWITCHED between 1510704000 and 1510704000+28800 then 'nov15'\n    when FIRST_SWITCHED between 1510790400 and 1510790400+28800 then 'nov16'\n    when FIRST_SWITCHED between 1510876800 and 1510876800+28800 then 'nov17'\n    when FIRST_SWITCHED between 1510963200 and 1510963200+28800 then 'nov18'\n    when FIRST_SWITCHED between 1511049600 and 1511049600+28800 then 'nov19'\n    when FIRST_SWITCHED between 1511136000 and 1511136000+28800 then 'nov20'\n    else '' END\n  from flowsv4) flowsv4\ngroup by flowsv4.range\n\nSELECT OrderID, Quantity,\nCASE\n    WHEN Quantity > 30 THEN \"The quantity is greater than 30\"\n    WHEN Quantity = 30 THEN \"The quantity is 30\"\n    ELSE \"The quantity is something else\"\nEND\nFROM OrderDetails;",
 			"settings":
 			{
@@ -560,7 +549,41 @@
 			"file": "journal/cs190-ieee.tex",
 			"settings":
 			{
-				"buffer_size": 24589,
+				"buffer_size": 22643,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "program/Flow.java",
+			"settings":
+			{
+				"buffer_size": 2189,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "program/UNQS.java",
+			"settings":
+			{
+				"buffer_size": 6134,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/lmlawas1/Desktop/CMSC200/usb/ntopng.conf",
+			"settings":
+			{
+				"buffer_size": 356,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "program/conf/nov13.conf",
+			"settings":
+			{
+				"buffer_size": 318,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -570,50 +593,6 @@
 			"settings":
 			{
 				"buffer_size": 8611,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "program/NetworkBuffer.java",
-			"settings":
-			{
-				"buffer_size": 84,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "program/UNQS.java",
-			"settings":
-			{
-				"buffer_size": 5556,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "program/Schedule.java",
-			"settings":
-			{
-				"buffer_size": 648,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "program/FirstInFirstOut.java",
-			"settings":
-			{
-				"buffer_size": 3508,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "program/Flow.java",
-			"settings":
-			{
-				"buffer_size": 2131,
-				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -672,13 +651,23 @@
 	],
 	"file_history":
 	[
+		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/others/accounts.txt",
+		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/text/masterlist.txt",
+		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/text/accounts_masterlist.txt",
+		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/MASTERLIST.txt",
+		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/text/RP.txt",
+		"/home/lmlawas1/Desktop/CMSC200/ntop configuration.txt",
 		"/home/lmlawas1/Documents/unqs_final/program/UNQS.java",
-		"/home/lmlawas1/Documents/unqs_final/program/NetworkBuffer.java",
 		"/home/lmlawas1/Documents/unqs_final/program/Flow.java",
+		"/home/lmlawas1/Documents/unqs_final/program/Schedule.java",
+		"/home/lmlawas1/Documents/unqs_final/program/conf/nov13.conf",
+		"/home/lmlawas1/Documents/unqs_final/program/conf/simulation.conf",
+		"/home/lmlawas1/Documents/unqs_final/program/Configuration.java",
+		"/home/lmlawas1/Documents/unqs_final/program/NetworkBuffer.java",
+		"/home/lmlawas1/Documents/unqs_final/program/simulation.conf",
+		"/home/lmlawas1/Documents/unqs_final/program/conf/demo.conf",
 		"/home/lmlawas1/Documents/unqs_final/program/Packet.java",
 		"/home/lmlawas1/Documents/unqs_final/program/FirstInFirstOut.java",
-		"/home/lmlawas1/Documents/unqs_final/program/Schedule.java",
-		"/home/lmlawas1/Documents/unqs_final/program/Configuration.java",
 		"/home/lmlawas1/Desktop/CMSC200/stuff to do.txt",
 		"/home/lmlawas1/Documents/unqs_final/program/PriorityQueue.java",
 		"/home/lmlawas1/Documents/unqs_final/program/WaitFairQueue.java",
@@ -698,7 +687,6 @@
 		"/home/lmlawas1/Documents/unqs_final/converter/source.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/destination.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/dest_org.txt",
-		"/home/lmlawas1/Documents/unqs_final/program/conf/nov13.conf",
 		"/home/lmlawas1/Documents/unqs_final/converter/quad_src.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/quad_dest.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/IPConverter.java",
@@ -708,7 +696,6 @@
 		"/home/lmlawas1/Documents/unqs_final/program/demo.conf",
 		"/home/lmlawas1/Desktop/CMSC200/UNQS_with_data/Schedule.java",
 		"/home/lmlawas1/Documents/unqs_final/program/FairQueue.java",
-		"/home/lmlawas1/Documents/unqs_final/program/simulation.conf",
 		"/home/lmlawas1/Documents/unqs_final/priority/service-names-port-numbers.csv",
 		"/home/lmlawas1/Documents/unqs_final/converter/src_org.txt",
 		"/home/lmlawas1/Documents/college stuff/2nd year 1st sem/CMSC 22/CMSC22 Lab/cmsc22lab09/FileReaderWriterDemo.java",
@@ -791,15 +778,7 @@
 		"/home/lmlawas1/Desktop/CMSC200/Mb MB conversion.txt",
 		"/home/lmlawas1/Desktop/CMSC200/ports pri.txt",
 		"/home/lmlawas1/Desktop/CMSC200/algo.txt",
-		"/home/lmlawas1/Desktop/CMSC200/ntop configuration.txt",
-		"/home/lmlawas1/Desktop/CMSC200/traffic profile.txt",
-		"/home/lmlawas1/Desktop/time_sample.c",
-		"/home/lmlawas1/Desktop/UNQS_with_data/CountPorts.java",
-		"/home/lmlawas1/Desktop/new-unqs/priority/1.txt",
-		"/home/lmlawas1/Desktop/new-unqs/priority/2.txt",
-		"/home/lmlawas1/Desktop/UNQS_with_data/db.conf",
-		"/home/lmlawas1/Desktop/UNQS_with_data/Packet.java",
-		"/home/lmlawas1/Desktop/UNQS_with_data/Queue.java"
+		"/home/lmlawas1/Desktop/CMSC200/traffic profile.txt"
 	],
 	"find":
 	{
@@ -814,9 +793,15 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"thedark",
+			"death",
+			"lydia",
+			"data ana",
+			"data",
+			"flows",
 			"packet",
 			"Packet",
 			"wait",
@@ -860,7 +845,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -888,39 +873,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "program/simulation.conf",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 300,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								204,
-								204
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"semi_transient": false,
 					"settings":
 					{
@@ -946,11 +903,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "converter/sqlstmt_and_result.txt",
 					"semi_transient": false,
 					"settings":
@@ -973,27 +930,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4620.0,
+						"translation.y": 4720.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 3,
 					"file": "journal/cs190-ieee.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 24589,
+						"buffer_size": 22643,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23028,
-								23028
+								22206,
+								22206
 							]
 						],
 						"settings":
@@ -1003,49 +960,19 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 9174.0,
+						"translation.y": 9152.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "program/Configuration.java",
+					"buffer": 4,
+					"file": "program/Flow.java",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8611,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								453,
-								453
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Java/Java.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "program/NetworkBuffer.java",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 84,
+						"buffer_size": 2189,
 						"regions":
 						{
 						},
@@ -1054,64 +981,6 @@
 							[
 								0,
 								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Java/Java.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "program/UNQS.java",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5556,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2570,
-								2570
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Java/Java.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1380.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "program/Schedule.java",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 648,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								398,
-								398
 							]
 						],
 						"settings":
@@ -1127,55 +996,55 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "program/FirstInFirstOut.java",
+					"buffer": 5,
+					"file": "program/UNQS.java",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3508,
+						"buffer_size": 6134,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3508,
-								3508
+								2965,
+								2965
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Java/Java.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1610.0,
+						"translation.y": 1996.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "program/Flow.java",
+					"buffer": 6,
+					"file": "/home/lmlawas1/Desktop/CMSC200/usb/ntopng.conf",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2131,
+						"buffer_size": 356,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								697,
-								697
+								356,
+								356
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Java/Java.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1185,7 +1054,65 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 7,
+					"file": "program/conf/nov13.conf",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								317,
+								317
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "program/Configuration.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8611,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6569,
+								6569
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5491.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1196,8 +1123,8 @@
 						"selection":
 						[
 							[
-								1866,
-								1866
+								1691,
+								1691
 							]
 						],
 						"settings":
@@ -1206,10 +1133,10 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 371.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1217,7 +1144,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 36.0
 	},
 	"input":
 	{
@@ -1295,7 +1222,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 345.0,
 	"status_bar_visible": true,
 	"template_settings":

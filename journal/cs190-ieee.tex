@@ -58,7 +58,7 @@
 
 % ABSTRACT
 \begin{abstract}
-Given the increasing demand for bandwidth, UNQS was developed to survey and to identify the optimal bandwidth setting as measured by duration (seconds), throughput (bits per second), and flow loss (percentage). The results show that \textbf{TBA}.
+Given the increasing demand for bandwidth, UNQS was developed to simulate real traffic data and to identify the optimal bandwidth setting as measured by duration (seconds), throughput (bits per second), and flow loss (percentage). The results show that \textbf{TBA}.
 \end{abstract}
 
 % INDEX TERMS
@@ -167,12 +167,8 @@ The most active source IP address, 2886731784, sent  the most data, accounting f
 	KDDI CORPORATION (1)				&  62409079786			& 60.6        \\ \hline
 	MULTICAST (3)						&  12310903701          & 11.9        \\ \hline
 	Google LLC(3)						&  5202456530           & 5.0         \\ \hline
-	Facebook, Inc. (1)					&  2771346197           & 2.7         \\ \hline
-	% MULTICAST							&  1575146908           & 1.5         \\ \hline
-	% MULTICAST							&  1562493373           & 1.5         \\ \hline
-	% Google LLC							&  1242563600           & 1.2         \\ \hline
+	Facebook, Inc. (1)					&  2771346197           & 2.7         \\ \hline	
 	Apple Inc.(1)						&  1054547100           & 1.0         \\ \hline
-	% Google LLC							&  1039431952           & 1.0         \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -186,12 +182,8 @@ The most active source IP address, 2886731784, sent  the most data, accounting f
     KDDI CORPORATION(1)				&  79135454093			& 43.0        \\ \hline
     Google LLC(3)					&  27958817762          & 15.2        \\ \hline
     WorldStream B.V.(1)				&  3426880570           & 1.9         \\ \hline
-    % Google LLC						&  2815063488           & 1.5         \\ \hline
     M247 Ltd(2)						&  4286472241           & 2.3         \\ \hline
-    Converge ICT Solutions Inc.(2)	&  3967550023			& 2.2         \\ \hline
-    % M247 Ltd						&  2098695101           & 1.1         \\ \hline
-    % Converge ICT Solutions Inc.		&  1812641471           & 1.0         \\ \hline
-    % Google LLC						&  1750693948           & 1.0         \\ \hline
+    Converge ICT Solutions Inc.(2)	&  3967550023			& 2.2         \\ \hline    
 \end{tabular}
 \end{table*}
 
@@ -279,9 +271,12 @@ The Internet Assigned Numbers Authority (IANA) is responsible for associating po
 %\hrule
 
 \subsection{Data Analysis}
-\textbf{TBA}
 
-\subsubsection{Duration}
+Three network performance metrics were accounted for as a result of the simulation, namely, duration, throughput, and flow loss. They are described in the items listed below.
+
+\begin{enumerate}
+\item \textbf{Duration}
+
 
 Duration \textit{d} is a function of the arrival time \textit{t\textsubscript{0}} and last switched time \textit{t\textsubscript{n}} seen as follows:
 
@@ -289,7 +284,7 @@ Duration \textit{d} is a function of the arrival time \textit{t\textsubscript{0}
 	d(t_0, t_n) = t_n - t_0
 \]
 
-\subsubsection{Throughput}
+\item \textbf{Throughput}
 
 Throughput \textit{tput} was computed as 
 \[
@@ -298,13 +293,9 @@ Throughput \textit{tput} was computed as
 
 where \textit{ts} is the total size (in bytes) that was successfully switched, and \textit{d} as the computed duration. 
 
-\subsubsection{Flow Loss}
-% \begin{figure}
-% \includegraphics[width=0.5\textwidth]{packetloss}
-% \label{fig:packetloss}\caption{Average Packet Losses per Date and Queue Type}
-% \end{figure}
+\item \textbf{Flow Loss}
 
-The last network performance parametric looked at is the packet loss \textit{l}, solved by
+The last network performance parametric looked at is the flow loss \textit{l}, solved by
 
 \[
 	l = \frac{count(f_l)}{count(f_l + f_s)} \times 100
@@ -312,23 +303,16 @@ The last network performance parametric looked at is the packet loss \textit{l},
 
 where all dropped flows \textit{f\textsubscript{l}} are counted and divided by the total number of flows \textit{f\textsubscript{l}} plus \textit{f\textsubscript{s}} (switched flows) multiplied by 100, to get the percentage. 
 
-\subsubsection{Bandwidth Constraint}
-% In attempt to check if the same trend is observed when a bandwidth constraint is added, the following bandwidth constraints were tested using a 100MBps buffer: 600Mbps, 800Mbps, 1000Mbps, and 1200Mbps. These values were converted into their byte form and with help from the conversion value for seconds to ticks, they were translated into 1.125 Bytes per tick (Bpt), 1.5Bpt, 1.875Bpt, and 2.25Bpt respectively. The result is visualized in \ref{fig:bc}. The throughputs noted for all ran simulations are very close to the bandwidth, and a 100MB buffer provided 0\% packet loss, hence only the duration was left as  basis.
+\end{enumerate}
 
-% As seen, PQ and WFQ amounted to the same duration that showed improvement per increase of the bandwidth. Yet, it is apparent that FIFO's performance is a lot better based on this network performance metric. FIFO, in any of the bandwidth constraints, displayed minimal and fast speed of switching the packets, while maintaining a similar throughput to the slow-performing PQ and WFQ.
-
-% \begin{figure}
-% \includegraphics[width=0.5\textwidth]{duration_with_bc}
-% \label{fig:bc}\caption{Average Durations with Applied Bandwidth Constraint}
-% \end{figure}
-
+Due to the limited time and resources, the actual data was unable to finish running under the latest implementation of UNQS. Two very small trials were attempted and compared to the result of an SQL query to the database.
 \section{Conclusion and Recommendation}
-\textbf{TBA}
-% After the experiment, the results show that the UPLB network works better using the \texttt{FIFO} scheduling algorithm. It was able to output the most number of packets over a period of time, as shown by \ref{fig:throughput}, and switched the packets fastly \ref{fig:duration} while maintaining the most integrity by minimizing lost packets\ref{fig:packetloss}.
 
-% While \texttt{PQ} and \texttt{WFQ} algorithms were intended to improve the network performance in terms of packet switching, this study proves that the traffic of UPLB is more suited to a \texttt{FIFO} scheduling algorithm.
-
-% For future studies, the researcher would recommend that a different traffic classification method is to be used, such as statistical methods or machine learning methods. Another advisable method is to inspect a different field of the payload or packet that will be used to classify traffic, instead of the protocol field. A final recommendation is the use of hybrid or variation of the PQ and WFQ scheduling algorithms to further improve the switching, thus effectively managing UPLB's internet bandwidth.
+\subsection{Old Results}
+\begin{enumerate}
+  \item \textbf{Queueing techniques}. Other queueing techniques aside from the native FIFO scheduling may be implemented with the help of the Schedule interface.
+  \item \textbf{Traffic classification}. In the original implementation, the port numbers were used for identifying the priority of the packets under the PQ scheduling algorithm. Use of other traffic classification methods, such as statistical method or machine learning classification techniques may improve the effect of prioritizing traffic in the performance of PQ and other queueing techniques which may make use of traffic classification.
+\end{enumerate}
 
 % BIBLIOGRAPHY
 \bibliographystyle{./IEEE/IEEEtran}

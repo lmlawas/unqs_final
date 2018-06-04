@@ -61,7 +61,7 @@ public class FirstInFirstOut implements Schedule {
 		}
 
 		// switch flows that fit the bandwidth and
-		while (!buffer.isEmpty()) {
+		if (!buffer.isEmpty()) {
 			Flow f = buffer.peekFirst();
 			temp_duration = temp_duration + ( (f.size + f.no_of_packets) / bandwidth );
 			if (temp_duration < timeout) {
