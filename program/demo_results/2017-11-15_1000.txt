@@ -1,0 +1,99 @@
+
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-15
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 922224.0 b
+	flows_switched_cnt = 13 flows
+
+	total_wait_time = 306 seconds
+	processing_time = 43 seconds
+	throughput = 19213.0 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-15
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 922224.0 b
+	flows_switched_cnt = 13 flows
+
+	total_wait_time = 306 seconds
+	processing_time = 44 seconds
+	throughput = 19213.0 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-15
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 922224.0 b
+	flows_switched_cnt = 13 flows
+
+	total_wait_time = 306 seconds
+	processing_time = 44 seconds
+	throughput = 19213.0 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-15
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 922224.0 b
+	flows_switched_cnt = 13 flows
+
+	total_wait_time = 3 seconds
+	processing_time = 44 seconds
+	throughput = 25617.333333333332 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-15
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 922224.0 b
+	flows_switched_cnt = 13 flows
+
+	total_wait_time = 3 seconds
+	processing_time = 44 seconds
+	throughput = 25617.333333333332 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-15
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 927152.0 b
+	flows_switched_cnt = 13 flows
+
+	total_wait_time = 3 seconds
+	processing_time = 45 seconds
+	throughput = 25754.222222222223 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-15
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 927152.0 b
+	flows_switched_cnt = 13 flows
+
+	total_wait_time = 3 seconds
+	processing_time = 45 seconds
+	throughput = 25754.222222222223 bps

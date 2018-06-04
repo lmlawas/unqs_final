@@ -1,0 +1,127 @@
+
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2036954.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 185 seconds
+	processing_time = 45 seconds
+	throughput = 47371.023255813954 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2036954.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 185 seconds
+	processing_time = 45 seconds
+	throughput = 47371.023255813954 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2036954.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 185 seconds
+	processing_time = 45 seconds
+	throughput = 47371.023255813954 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2036954.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 185 seconds
+	processing_time = 46 seconds
+	throughput = 47371.023255813954 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2036954.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 185 seconds
+	processing_time = 45 seconds
+	throughput = 47371.023255813954 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2036954.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 185 seconds
+	processing_time = 45 seconds
+	throughput = 47371.023255813954 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2036954.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 185 seconds
+	processing_time = 45 seconds
+	throughput = 47371.023255813954 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2036954.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 185 seconds
+	processing_time = 46 seconds
+	throughput = 47371.023255813954 bps
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-20
+BANDWIDTH = 1000 bps
+
+	flows_dropped_size = 0.0 b
+	flows_dropped_cnt = 0 flows
+
+	flows_switched_size = 2044752.0 b
+	flows_switched_cnt = 12 flows
+
+	total_wait_time = 2 seconds
+	processing_time = 46 seconds
+	throughput = 61962.181818181816 bps

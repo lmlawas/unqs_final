@@ -1,0 +1,15 @@
+
+
+------[ FIFO SIMULATION SUMMARY ]------
+TIMESTAMP = 2017-11-13
+BANDWIDTH = 950 bps
+
+	flows_dropped_size = 9.35590888648E11 b
+	flows_dropped_cnt = 554392 flows
+
+	flows_switched_size = 0.0 b
+	flows_switched_cnt = 0 flows
+
+	total_wait_time = 132458733 seconds
+	processing_time = 300 seconds
+	throughput = 0.0 bps
