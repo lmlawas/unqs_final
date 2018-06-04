@@ -23,7 +23,7 @@ public class FirstInFirstOut implements Schedule {
 		flows_switched_cnt = 0;
 
 		// // for duration
-		// processing_time = -1;
+		processing_time = -1;
 
 		// for average wait time
 		total_wait_time = 0;
@@ -49,15 +49,17 @@ public class FirstInFirstOut implements Schedule {
 	}
 
 	public boolean process(int bandwidth, int current_time, int timeout, boolean debug) {
-		Flow f;
-		int processing_time = 0;
+		Flow f;		
 
 		while (!buffer.isEmpty()) {
 			f = buffer.peekFirst();
 
 			// (flow size in bits + overhead)/ bits/second
-			processing_time = (f.size + f.no_of_packets) / bandwidth;
+			if(processing_time==-1){
+				processing_time = (f.size + f.no_of_packets) / bandwidth;	
+			}
 
+			// if flow cannot be processed before timeout
 			if (processing_time >= timeout) {
 				if (debug) {
 					System.out.println("-- Dropping flow --");
@@ -65,7 +67,9 @@ public class FirstInFirstOut implements Schedule {
 				}
 				dropFlow(f);
 				total_wait_time = total_wait_time + (current_time - f.first_switched);
-			} else {
+			}
+			// else the flow can be processed
+			else {
 				if (debug) {
 					System.out.println("++ Switching flow ++");
 					f.info();
@@ -74,8 +78,8 @@ public class FirstInFirstOut implements Schedule {
 				total_wait_time = total_wait_time + (current_time - f.first_switched);
 				
 				if(processing_time>1){
-					return true;
 					processing_time--;
+					return true;
 				}
 			}
 		}
