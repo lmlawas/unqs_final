@@ -95,8 +95,6 @@ public class UNQS {
 
             System.out.print("Processing flows...");
 
-
-            int counter=0;
             while (current_time <= config.getEndTime()) {
                 flows = stmt.executeQuery("select FIRST_SWITCHED, PACKETS, L4_DST_PORT, IN_BYTES from `" + config.getTableName() + "` WHERE FIRST_SWITCHED = " + current_time + ";");
 
@@ -112,7 +110,6 @@ public class UNQS {
 
                     // add to schedule's buffer
                     sched.addFlow(single_flow);
-                    counter++;
 
                     if (config.getDebug()) {
                         System.out.println("++Add flow");
@@ -121,27 +118,27 @@ public class UNQS {
                 }
 
                 // wait for current processed elapsed time to finish before processing again
-                // if (!processing) {
-                //     processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
-                // }
+                if (!processing) {
+                    processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
+                }
                 if (config.getDebug()) {
-                    System.out.println("buffer size = " + counter);
+                    System.out.println("buffer size = " + sched.bufferSize());
                 }
                 current_time++;
             }
 
-            // while (!sched.queueEmpty()) {
-            //     if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
+            while (!sched.queueEmpty()) {
+                if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
 
-            //     if (!processing) {
-            //         processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
-            //     }
+                if (!processing) {
+                    processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
+                }
 
-            //     if (config.getDebug()) {
-            //         System.out.println("buffer size = " + sched.bufferSize());
-            //     }
-            //     current_time++;
-            // }
+                if (config.getDebug()) {
+                    System.out.println("buffer size = " + sched.bufferSize());
+                }
+                current_time++;
+            }
 
             System.out.print("done.\n\n");
             sched.info(config.getBandwidth(), current_time - 1 - config.getStartTime(), readableDate(config.getStartTime()));

@@ -54,31 +54,41 @@ public class FirstInFirstOut implements Schedule {
 
 		// check if there are timed out flows waiting in queue
 		while (!buffer.isEmpty()) {
-			f = buffer.peekFirst();
-			if (f.waitTime(current_time) == timeout) {
+			f = buffer.remove();
+			if (f.first_switched + timeout == current_time) {
 				if (debug) {
-					System.out.println("Dropping flow--");
+					System.out.println("-- Dropping flow --");
 					f.info();
 				}
 				dropFlow(f);
-				total_wait_time += f.waitTime(current_time);
-			} else break;
+				total_wait_time = total_wait_time + (current_time - f.first_switched);
+			} else {
+				buffer.addFirst(f);
+				break;
+			}
 		}
 
-		if(processing_time>0) return true;
+		if (processing_time > 0) return true;
 
 		// switch flows that fit the bandwidth and
 		if (!buffer.isEmpty()) {
-			f = buffer.peekFirst();
+			f = buffer.remove();
 			processing_time = (f.size + f.no_of_packets) / bandwidth;
 			if (processing_time < timeout) {
 				if (debug) {
-					System.out.println("Switching flow--");
+					System.out.println("++ Switching flow ++");
 					f.info();
 				}
 				switchFlow(f);
-				total_wait_time += f.waitTime(current_time);
+				total_wait_time = total_wait_time + (current_time - f.first_switched);
 				processing_time--;
+			} else {
+				if (debug) {
+					System.out.println("-- Dropping flow --");
+					f.info();
+				}
+				dropFlow(f);
+				total_wait_time = total_wait_time + (current_time - f.first_switched);
 			}
 		}
 
@@ -91,7 +101,7 @@ public class FirstInFirstOut implements Schedule {
 	}
 
 	public void dropFlow(Flow f) {
-		buffer.remove();
+		// buffer.remove();
 		flows_dropped_size += f.size;
 		flows_dropped_cnt++;
 	}
@@ -105,6 +115,7 @@ public class FirstInFirstOut implements Schedule {
 		System.out.println("flows_switched_size = " + flows_switched_size + " b");
 		System.out.println("flows_switched_cnt = " + flows_switched_cnt + " flows\n");
 		System.out.println("total_wait_time = " + total_wait_time + " seconds");
+		System.out.println("processing_time = " + processing_time + " seconds");
 		System.out.println("throughput = " + throughput(duration) + " bps");
 	}
 
@@ -118,12 +129,13 @@ public class FirstInFirstOut implements Schedule {
 		fw.write("\n\tflows_switched_size = " + flows_switched_size + " b");
 		fw.write("\n\tflows_switched_cnt = " + flows_switched_cnt + " flows\n");
 		fw.write("\n\ttotal_wait_time = " + total_wait_time + " seconds");
+		fw.write("\n\tprocessing_time = " + processing_time + " seconds");
 		fw.write("\n\tthroughput = " + throughput(duration) + " bps");
 		fw.close();
 	}
 
 	public void switchFlow(Flow f) {
-		buffer.remove();
+		// buffer.remove();
 		flows_switched_size += f.size;
 		flows_switched_cnt++;
 	}
