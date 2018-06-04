@@ -118,9 +118,9 @@ public class UNQS {
                 }
 
                 // wait for current processed elapsed time to finish before processing again
-                if (!processing) {
+                // if (!processing) {
                     processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
-                }
+                // }
                 if (config.getDebug()) {
                     System.out.println("buffer size = " + sched.bufferSize());
                 }
@@ -130,9 +130,9 @@ public class UNQS {
             while (!sched.queueEmpty()) {
                 if (config.getDebug()) System.out.println("[ current_time = " + current_time + " ]");
 
-                if (!processing) {
+                // if (!processing) {
                     processing = sched.process(config.getBandwidth(), current_time, config.getTimeout(), config.getDebug());
-                }
+                // }
 
                 if (config.getDebug()) {
                     System.out.println("buffer size = " + sched.bufferSize());
