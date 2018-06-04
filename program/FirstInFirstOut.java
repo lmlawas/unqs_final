@@ -52,28 +52,38 @@ public class FirstInFirstOut implements Schedule {
 		Flow f;
 		int temp_duration = 0;
 
+		/* this block of code works but functions the opposite that it's supposed to */
 		// check if there are timed out flows waiting in queue
-		while (!buffer.isEmpty()) {
-			f = buffer.remove();
-			if (f.first_switched + timeout == current_time) {
-				if (debug) {
-					System.out.println("-- Dropping flow --");
-					f.info();
-				}
-				dropFlow(f);
-				total_wait_time = total_wait_time + (current_time - f.first_switched);
-			} else {
-				buffer.addFirst(f);
-				break;
-			}
-		}
+		// while (!buffer.isEmpty()) {
+		// 	f = buffer.remove();
+		// 	System.out.println(f.first_switched+timeout);
+		// 	System.out.println(current_time+"\n\n\n");
+
+		// 	if (f.first_switched + timeout == current_time) {
+		// 		if (debug) {
+		// 			System.out.println("-- Dropping flow --");
+		// 			f.info();
+		// 		}
+		// 		dropFlow(f);
+		// 		total_wait_time = total_wait_time + (current_time - f.first_switched);
+		// 	} else {
+		// 		buffer.addFirst(f);
+		// 		break;
+		// 	}
+		// }
 
 		if (processing_time > 0) return true;
 
-		// switch flows that fit the bandwidth and
-		if (!buffer.isEmpty()) {
+		// switch flows that fit the bandwidth
+
+		/* this block of code seems to be the source of the infinite loop */
+		while (!buffer.isEmpty()) {
 			f = buffer.remove();
-			processing_time = (f.size + f.no_of_packets) / bandwidth;
+			if(processing_time == 1){
+				processing_time = (f.size + f.no_of_packets) / bandwidth;
+			}
+
+			System.out.println(processing_time);
 			if (processing_time < timeout) {
 				if (debug) {
 					System.out.println("++ Switching flow ++");
@@ -89,10 +99,14 @@ public class FirstInFirstOut implements Schedule {
 				}
 				dropFlow(f);
 				total_wait_time = total_wait_time + (current_time - f.first_switched);
+				break;
 			}
 		}
 
-		if (processing_time <= 0) return false;
+		if (processing_time <= 0){
+			processing_time = 1;
+			return false;
+		}
 		return true;
 	}
 
