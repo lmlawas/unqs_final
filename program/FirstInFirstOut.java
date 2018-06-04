@@ -7,7 +7,7 @@ public class FirstInFirstOut implements Schedule {
 	public int flows_dropped_cnt;
 	public int flows_switched_cnt;
 	public int processing_time;
-	public int total_wait_time;	
+	public int total_wait_time;
 	public double flows_dropped_size;
 	public double flows_switched_size;
 	public NetworkBuffer buffer;
@@ -22,6 +22,9 @@ public class FirstInFirstOut implements Schedule {
 		flows_dropped_cnt = 0;
 		flows_switched_cnt = 0;
 
+		// for duration
+		processing_time = 1;
+
 		// for average wait time
 		total_wait_time = 0;
 
@@ -35,7 +38,7 @@ public class FirstInFirstOut implements Schedule {
 		return false;
 	}
 
-	public int bufferSize(){
+	public int bufferSize() {
 		return buffer.size();
 	}
 
@@ -45,14 +48,15 @@ public class FirstInFirstOut implements Schedule {
 		return (flows_switched_size / (double)duration);
 	}
 
-	public int process(int bandwidth, int current_time, int timeout, boolean debug) {
+	public boolean process(int bandwidth, int current_time, int timeout, boolean debug) {
+		Flow f;
 		int temp_duration = 0;
 
 		// check if there are timed out flows waiting in queue
 		while (!buffer.isEmpty()) {
-			Flow f = buffer.peekFirst();
+			f = buffer.peekFirst();
 			if (f.waitTime(current_time) == timeout) {
-				if(debug){
+				if (debug) {
 					System.out.println("Dropping flow--");
 					f.info();
 				}
@@ -61,21 +65,25 @@ public class FirstInFirstOut implements Schedule {
 			} else break;
 		}
 
+		if(processing_time>0) return true;
+
 		// switch flows that fit the bandwidth and
 		if (!buffer.isEmpty()) {
-			Flow f = buffer.peekFirst();
-			temp_duration = temp_duration + ( (f.size + f.no_of_packets) / bandwidth );
-			if (temp_duration < timeout) {
-				if(debug){
+			f = buffer.peekFirst();
+			processing_time = (f.size + f.no_of_packets) / bandwidth;
+			if (processing_time < timeout) {
+				if (debug) {
 					System.out.println("Switching flow--");
 					f.info();
 				}
 				switchFlow(f);
 				total_wait_time += f.waitTime(current_time);
-			} else break;
+				processing_time--;
+			}
 		}
 
-		return (current_time + temp_duration);
+		if (processing_time <= 0) return false;
+		return true;
 	}
 
 	public void addFlow(Flow f) {
