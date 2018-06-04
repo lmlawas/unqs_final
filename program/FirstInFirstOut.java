@@ -104,11 +104,13 @@ public class FirstInFirstOut implements Schedule {
 
 		// switch flows that fit the bandwidth
 
-		/* this block of code seems to be the source of the infinite loop */
+		
 		// while (!buffer.isEmpty()) {
 		// 	f = buffer.remove();
+		/*** if processing_time is not set yet ***/
 		// 	if (processing_time == -1) {
-		// 		processing_time =
+		// 		processing_time = (f.size + f.no_of_packets) / bandwidth;
+		/*** if flow can't be processed completely before timeout ***/
 		// 		if (processing_time >= timeout) {
 		// 			if (debug) {
 		// 				System.out.println("-- Dropping flow --");
@@ -118,6 +120,7 @@ public class FirstInFirstOut implements Schedule {
 		// 			total_wait_time = total_wait_time + (current_time - f.first_switched);
 		// 		}
 		// 	}
+		/*** else flow can be processed ***/
 		// 	else if(processing_time > 0) {
 		// 		if (debug) {
 		// 			System.out.println("++ Switching flow ++");
@@ -126,7 +129,9 @@ public class FirstInFirstOut implements Schedule {
 		// 		switchFlow(f);
 		// 		total_wait_time = total_wait_time + (current_time - f.first_switched);
 		// 		processing_time--;
-		// 	} else {
+		// 	}
+		/*** else flow cannot be processed yet ***/
+		// else {
 		// 		buffer.addFirst(f);
 		// 		break;
 		// 	}
