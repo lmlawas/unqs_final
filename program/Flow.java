@@ -19,14 +19,14 @@ public class Flow {
 
 	public Flow(int first_switched, int no_of_packets, int size) {
 		this.first_switched = first_switched;
-		this.no_of_packets = no_of_packets;
+		this.no_of_packets = no_of_packets * BITS_PER_BYTE;
 		this.priority = 0;
 		this.size = size * BITS_PER_BYTE;
 	}
 
 	public Flow(int first_switched, int no_of_packets, int protocol, int size) {
 		this.first_switched = first_switched;
-		this.no_of_packets = no_of_packets;
+		this.no_of_packets = no_of_packets * BITS_PER_BYTE;
 		this.priority = getPriority(protocol);
 		this.size = size * BITS_PER_BYTE;
 	}
