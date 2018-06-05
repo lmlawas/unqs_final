@@ -57,7 +57,7 @@ public class FirstInFirstOut implements Schedule {
 			// if nothing is being processed
 			if (processing_time == -1) {
 				// (flow size in bits + overhead)/ bits/second
-				processing_time = (int)Math.ceil((f.size + f.no_of_packets + 0.0) / bandwidth*1.0);
+				processing_time = (int)Math.ceil((f.size + f.no_of_packets + 0.0) / bandwidth * 1.0);
 				// if flow cannot be processed before timeout
 				if (processing_time >= timeout) {
 					if (debug) {
@@ -80,76 +80,14 @@ public class FirstInFirstOut implements Schedule {
 				processing_time--;
 
 				// if process is finished
-				if (processing_time <= 0) return false;		
-				// else process is ongoing		
+				if (processing_time <= 0) return false;
+				// else process is ongoing
 				else return true;
 			}
 		}
 
 		// default: process is not ongoing
 		return false;
-
-		/* this block of code works but functions the opposite that it's supposed to */
-		// check if there are timed out flows waiting in queue
-		// while (!buffer.isEmpty()) {
-		// 	f = buffer.remove();
-		// 	System.out.println(f.first_switched+timeout);
-		// 	System.out.println(current_time+"\n\n\n");
-
-		// 	if (f.first_switched + timeout == current_time) {
-		// 		if (debug) {
-		// 			System.out.println("-- Dropping flow --");
-		// 			f.info();
-		// 		}
-		// 		dropFlow(f);
-		// 		total_wait_time = total_wait_time + (current_time - f.first_switched);
-		// 	} else {
-		// 		buffer.addFirst(f);
-		// 		break;
-		// 	}
-		// }
-
-		// if (processing_time > 0) return true;
-
-		// switch flows that fit the bandwidth
-
-
-		// while (!buffer.isEmpty()) {
-		// 	f = buffer.remove();
-		/*** if processing_time is not set yet ***/
-		// 	if (processing_time == -1) {
-		// 		processing_time = (f.size + f.no_of_packets) / bandwidth;
-		/*** if flow can't be processed completely before timeout ***/
-		// 		if (processing_time >= timeout) {
-		// 			if (debug) {
-		// 				System.out.println("-- Dropping flow --");
-		// 				f.info();
-		// 			}
-		// 			dropFlow(f);
-		// 			total_wait_time = total_wait_time + (current_time - f.first_switched);
-		// 		}
-		// 	}
-		/*** else flow can be processed ***/
-		// 	else if(processing_time > 0) {
-		// 		if (debug) {
-		// 			System.out.println("++ Switching flow ++");
-		// 			f.info();
-		// 		}
-		// 		switchFlow(f);
-		// 		total_wait_time = total_wait_time + (current_time - f.first_switched);
-		// 		processing_time--;
-		// 	}
-		/*** else flow cannot be processed yet ***/
-		// else {
-		// 		buffer.addFirst(f);
-		// 		break;
-		// 	}
-		// }
-
-		// if (processing_time <= 0) {
-		// 	processing_time = -1;
-		// 	return false;
-		// }
 	}
 
 	public void addFlow(Flow f) {
