@@ -7,7 +7,7 @@ public class FirstInFirstOut implements Schedule {
 	public int flows_dropped_cnt;
 	public int flows_switched_cnt;
 	public int processing_time;
-	public int total_wait_time;
+	public long total_wait_time;
 	public double flows_dropped_size;
 	public double flows_switched_size;
 	public NetworkBuffer buffer;
