@@ -10,6 +10,6 @@ BANDWIDTH = 40000000 bps
 	flows_switched_size = 9.39051817096E11 b
 	flows_switched_cnt = 554392 flows
 
-	total_wait_time = -1687002114 seconds
-	processing_time = 0 seconds
-	throughput = 822573.7315596854 bps
+	total_wait_time = 63964958344 seconds
+	duration = 710346 seconds
+	throughput = 1321963.9683984988 bps
