@@ -129,7 +129,7 @@ public class FirstInFirstOut implements Schedule {
 		System.out.println("flows_switched_size = " + flows_switched_size + " b");
 		System.out.println("flows_switched_cnt = " + flows_switched_cnt + " flows\n");
 		System.out.println("total_wait_time = " + total_wait_time + " seconds");
-		System.out.println("processing_time = " + processing_time + " seconds");
+		System.out.println("duration = " + duration + " seconds");
 		System.out.println("throughput = " + throughput(duration) + " bps");
 	}
 
@@ -143,7 +143,7 @@ public class FirstInFirstOut implements Schedule {
 		fw.write("\n\tflows_switched_size = " + flows_switched_size + " b");
 		fw.write("\n\tflows_switched_cnt = " + flows_switched_cnt + " flows\n");
 		fw.write("\n\ttotal_wait_time = " + total_wait_time + " seconds");
-		fw.write("\n\tprocessing_time = " + processing_time + " seconds");
+		fw.write("\n\tduration = " + duration + " seconds");
 		fw.write("\n\tthroughput = " + throughput(duration) + " bps");
 		fw.close();
 	}
