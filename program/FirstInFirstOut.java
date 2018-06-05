@@ -60,32 +60,52 @@ public class FirstInFirstOut implements Schedule {
 				processing_time = (int)Math.ceil((f.size + f.no_of_packets + 0.0) / bandwidth * 1.0);
 				// if flow cannot be processed before timeout
 				if (processing_time >= timeout) {
-					if (debug) {
-						System.out.println("-- Dropping flow --");
-						f.info();
-					}
 					dropFlow(f);
 					total_wait_time = total_wait_time + (current_time - f.first_switched);
 					processing_time = -1;
+					if (debug) {
+						System.out.println("-- Dropping flow --");
+						bufferSize();
+						f.info();
+					}
+				} else {
+					switchFlow(f);
+					total_wait_time = total_wait_time + (current_time - f.first_switched);
+					processing_time--;
+					if (debug) {
+						System.out.println("++ Switching flow ++");
+						bufferSize();
+						f.info();
+					}
+
+					// if process is finished
+					if (processing_time <= 0) break;
+					// else process is ongoing
+					else return true;
 				}
 			}
 			// else the flow can be processed
-			if (processing_time >= 0) {
-				if (debug) {
-					System.out.println("++ Switching flow ++");
-					f.info();
-				}
+			else if (processing_time > 0) {
+
 				switchFlow(f);
 				total_wait_time = total_wait_time + (current_time - f.first_switched);
 				processing_time--;
+				if (debug) {
+					System.out.println("++ Switching flow ++");
+					bufferSize();
+					f.info();
+				}
 
 				// if process is finished
-				if (processing_time <= 0) return false;
+				if (processing_time <= 0) break;
+
 				// else process is ongoing
 				else return true;
 			}
+			else break;
 		}
 
+		processing_time = -1;
 		// default: process is not ongoing
 		return false;
 	}
