@@ -63,18 +63,14 @@ E.~Lazowska, J.~Zahorjan, G.~Graham, and K.~Sevcik, \emph{Quantitative system
   performance: Computer system analysis using queueing network models}.\hskip
   1em plus 0.5em minus 0.4em\relax Prentice-Hall, Inc., 1984.
 
+\bibitem{paul_1999}
+A.~Paul, ``Qos in data networks: Protocols and standards,'' 1999.
+
 \bibitem{duzbeck_2006}
 \BIBentryALTinterwordspacing
 F.~Duzbeck, ``Bandwidth management is here to stay,'' \emph{Network World},
   vol.~23, no.~13, p.~37, 2006. [Online]. Available:
   \url{http://search.proquest.com/docview/215977831?accountid=47253}
-\BIBentrySTDinterwordspacing
-
-\bibitem{martin_roth_nd}
-\BIBentryALTinterwordspacing
-M.~Martin and A.~Roth, ``Cis 501: Computer architecture [pdf document].''
-  [Online]. Available:
-  \url{https://www.cis.upenn.edu/~milom/cis501-Fall11/lectures/02\_performance.pdf}
 \BIBentrySTDinterwordspacing
 
 \bibitem{internet_live_stats_2016}
@@ -86,6 +82,14 @@ I.~L. Stats, ``Number of internet users,'' 2016. [Online]. Available:
 \bibitem{comer_1999}
 D.~Comer, \emph{Computer Networks and Internets}.\hskip 1em plus 0.5em minus
   0.4em\relax Prentice-Hall International, Inc., 1999.
+
+\bibitem{jerkin_wang_1999}
+\BIBentryALTinterwordspacing
+J.~Jerkins and J.~Wang, ``Ffrom network measurement collection to traffic
+  peformance modeling: challenges and lessons learned,'' \emph{Journal of the
+  Brazilian Computer Society}, vol.~5, no.~3, 1999. [Online]. Available:
+  \url{http://dx.doi.org/10.1590/S0104-65001999000100003}
+\BIBentrySTDinterwordspacing
 
 \bibitem{cisco_2008}
 \BIBentryALTinterwordspacing
@@ -111,11 +115,5 @@ L.~Karim, N.~Nasser, T.~Taleb, and A.~Alqallaf, ``An efficient priority packet
 R.~Muhilan, S.~Arulselvi, and T.~Kiran~Kumar, ``Packet scheduling algorithms
   simulator wfq, scfq and wf2q,'' \emph{International Journal of Scientific \&
   Technology Research}, vol.~2, no.~10, pp. 249--252, Oct 2013.
-
-\bibitem{webopedia_2017}
-\BIBentryALTinterwordspacing
-webopedia, ``Clock tick,'' 2017. [Online]. Available:
-  \url{http://www.webopedia.com/TERM/C/clock\_tick.html}
-\BIBentrySTDinterwordspacing
 
 \end{thebibliography}

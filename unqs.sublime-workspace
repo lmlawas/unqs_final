@@ -520,14 +520,6 @@
 	"buffers":
 	[
 		{
-			"contents": "public class Test {\n\n\tpublic static void main(String args[]) {\n\t\tint i = (int) (new Date().getTime() / 1000);\n\t\tSystem.out.println(\"Integer : \" + i);\n\t\tSystem.out.println(\"Long : \" + new Date().getTime());\n\t\tSystem.out.println(\"Long date : \" + new Date(new Date().getTime()));\n\t\tSystem.out.println(\"Int Date : \" + new Date(((long)i) * 1000L));\n\t}\n\n\t/*Integer : 1345619256\n\tLong : 1345619256308\n\tLong date : Wed Aug 22 16:37:36 CST 2012\n\tInt Date : Wed Aug 22 16:37:36 CST 2012\n\n\tconvert and divide the data */\n}\n",
-			"settings":
-			{
-				"buffer_size": 512,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"contents": "8 hours = 28800 seconds\n1 day = 86400 seconds\n\nNovember \t8AM timestamp\n\n13 \t\t\t1510531200\n14\t\t\t1510617600\n15\t\t\t1510704000\n16 \t\t\t1510790400\n17 \t\t\t1510876800\n18 \t\t\t1510963200\n19\t\t\t1511049600\n20 \t\t\t1511136000\n\n1510560000\n\n\nFQ\nArrive(j)F = arrival time of jth packet of flow F\nLength(j)F = length/packet size of jth packet of flow F \nPacketSize(j)F = OUT_BYTES/PACKETS\nFinish(j)F = max(Arrive(j)F, Finish(j-1)F) + Length(j)F\n\nselect t.range as [score range], count(*) as [number of occurences]\nfrom (\n  select case \n    when score between  0 and  9 then ' 0-9 '\n    when score between 10 and 19 then '10-19'\n    when score between 20 and 29 then '20-29'\n    ...\n    else '90-99' end as range\n  from scores) t\ngroup by t.range\n\nselect FIRST_SWITCHED as dates, SUM(PACKETS) as totalpackets\nfrom (\n  select case \n    when FIRST_SWITCHED between 1510531200 and 1510531200+28800 then 'nov13'\n    when FIRST_SWITCHED between 1510617600 and 1510617600+28800 then 'nov14'\n    when FIRST_SWITCHED between 1510704000 and 1510704000+28800 then 'nov15'\n    when FIRST_SWITCHED between 1510790400 and 1510790400+28800 then 'nov16'\n    when FIRST_SWITCHED between 1510876800 and 1510876800+28800 then 'nov17'\n    when FIRST_SWITCHED between 1510963200 and 1510963200+28800 then 'nov18'\n    when FIRST_SWITCHED between 1511049600 and 1511049600+28800 then 'nov19'\n    when FIRST_SWITCHED between 1511136000 and 1511136000+28800 then 'nov20'\n    else '' END\n  from flowsv4) flowsv4\ngroup by flowsv4.range\n\nSELECT OrderID, Quantity,\nCASE\n    WHEN Quantity > 30 THEN \"The quantity is greater than 30\"\n    WHEN Quantity = 30 THEN \"The quantity is 30\"\n    ELSE \"The quantity is something else\"\nEND\nFROM OrderDetails;",
 			"settings":
 			{
@@ -537,38 +529,10 @@
 			}
 		},
 		{
-			"file": "converter/sqlstmt_and_result.txt",
-			"settings":
-			{
-				"buffer_size": 27397,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "journal/cs190-ieee.tex",
-			"settings":
-			{
-				"buffer_size": 22643,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "program/Flow.java",
-			"settings":
-			{
-				"buffer_size": 2221,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "program/UNQS.java",
 			"settings":
 			{
 				"buffer_size": 5864,
-				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -576,26 +540,42 @@
 			"file": "program/FirstInFirstOut.java",
 			"settings":
 			{
-				"buffer_size": 5872,
+				"buffer_size": 4534,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "program/Schedule.java",
+			"file": "program/conf/simulation.conf",
 			"settings":
 			{
-				"buffer_size": 665,
-				"encoding": "UTF-8",
+				"buffer_size": 321,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/lmlawas1/Desktop/CMSC200/usb/ntopng.conf",
+			"file": "program/conf/demo.conf",
 			"settings":
 			{
-				"buffer_size": 356,
+				"buffer_size": 1317,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "program/conf/stack_simulation3.txt",
+			"settings":
+			{
+				"buffer_size": 4401,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "An Efficient Policy-based Packet Scheduler With Flow Cache Ga-feng Lv and Xiao-ming Zhang.\nSchool of Computer, National University of Defense Technology, Changsha, Hunan 410073 P.R. China.\n1-4244-1206-4/07/2007/IEEE\n\nA new Class of Priority-based Weighted Fair Scheduling Algorithm\nLi Yang\nChengSheng Pan\nErHan Zhang\nHaiYan Liu\nCollege of Information Engineering, Dalian University, Dalian, China\n2012 International Conference on Medical Physics and Biomedical Enginering\n\nEfficient priority schemes for the provision of end-to-end quality of service for multimedia traffic over MPLS VPN networks\nNasser-Eddine Rikli\nSaad Almogari\nDepartment of Computer Engineering, King Saud University, Riyadh, Saudi Arabia\nJournal of King Saud University - Computer and Information Sciences (2013) 25, 89-98\nSept 5 2012\n\nA Weighted Fair Queueing Scheduling Algorithm with (m,k)-Firm Guarantee\nHongxia Yin\nZhi Wang\nYouxian Sun\nNational Laboratory of Industrial Control Technology, Zhejiang University, Hangzhou, China\nThe 30th Annual Conference of the IEEE Industrial Electronics Society, November 2-6, 2004, Busan, Korea\n\nA New Fair Weighted Fair Queuing Scheduling Algorithm in Differentiated Services Network\nM. A. Elshaikh, M. Othman, S. Shamala and J. Desa\nDepartment of Communication Technology and Network\nFaculty of Computer Science and Information Technology\nUniversity Putra Malaysia\nSelangor, D.E., Malaysia\nIJCSNS International Journal of Computer Science and Network Security, VOL.6 No.11, November 2006\n\nComparative Performance Study of LTE Uplink Schedulers\nMohamed Salah\nThesis\nDepartment of Electrical and Computer Engineering\nQueen's University, Kingston, Ontario, Canada.\n2011",
+			"settings":
+			{
+				"buffer_size": 1681,
+				"line_ending": "Unix",
+				"name": "An Efficient Policy-based Packet Scheduler With Fl"
 			}
 		},
 		{
@@ -605,6 +585,14 @@
 				"buffer_size": 2125,
 				"line_ending": "Unix",
 				"name": "# for the database connection"
+			}
+		},
+		{
+			"contents": "\n\nIslam, Z., Islam, S., Haque, F., and Moheuddin, A. (2012). A comparative analysis of different real time applications over various queuing techniques, International Conference on Informatics, Electronics & Vision, 2012, Dhaka, Bangladesh, New Jersey: IEEE.\n\nAbstract:\nQoS (Quality of Service) is a very intricate and widespread system which belongs to the area of priority congestions management. It is implemented by using different queuing mechanisms, which take care of arranging traffic into waiting queues. Time-sensitive traffic should have maximum possible priority provided. However, if an appropriate queuing mechanism (FIFO, CQ, WFQ, etc.) is not used, the priority loses its preliminary denotation. It is also a well-known fact that all elements with memory capability involve additional delays during data transfer from one network segment to another, so a proper queuing mechanism and a proper buffer length should be used, or the VoIP quality will deteriorate. In this paper, a comparative study has been done among real time applications such as Web Server, VoIP, E-mail, FTP and Voice Server under the same topology. The network topology remained the same in all scenarios; the differences are only in the used queuing disciplines.\n\n\nWeighted Fair Queuing (WFQ) offers fair queuing that divides the available bandwidth across queues of traffic based on weights. Each flow is associated with an independent queue assigned with a weight to ensure that important traffic gets higher priority over less important traffic\n\nDekeris, B., Adomkus, T. and Budnikas, A. (2006) Analysis of QoS Assurance Using Weighted Fair Queueing (WFQ) Scheduling Discipline with Low Latency Queue (LLQ), 28th International Conference on Information Technology Interfaces, 2006, Cavtat/Dubrovnik, Croatia.\n\n\n\nQoS - provide better service to certain network traffic, increase performance and reduce delay\n\nPaul, A. (1999). QoS in Data Networks: Protocols and Standards, Recent Advances in Networking 1999. St. Louis, Missouri.\n\n\n",
+			"settings":
+			{
+				"buffer_size": 2021,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -650,38 +638,54 @@
 	[
 		"/home/lmlawas1/Documents/unqs_final",
 		"/home/lmlawas1/Documents/unqs_final/program",
-		"/home/lmlawas1/Documents/unqs_final/program/conf"
+		"/home/lmlawas1/Documents/unqs_final/program/results"
 	],
 	"file_history":
 	[
+		"/home/lmlawas1/Documents/unqs_final/program/results/2017-11-13_40000000.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/results/2017-11-13_37500000.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/results/2017-11-13_35000000.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/results/2017-11-13_32500000.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/FirstInFirstOut.java",
+		"/home/lmlawas1/Documents/unqs_final/program/conf/stack_simulation.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/conf/stack_simulation2.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/conf/stack.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/conf/stack3.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/conf/stack2.txt",
+		"/home/lmlawas1/Documents/unqs_final/program/Schedule.java",
+		"/home/lmlawas1/Documents/unqs_final/program/UNQS.java",
+		"/home/lmlawas1/Documents/unqs_final/program/NetworkBuffer.java",
+		"/home/lmlawas1/Documents/unqs_final/program/Flow.java",
+		"/home/lmlawas1/Documents/unqs_final/program/Configuration.java",
+		"/home/lmlawas1/Desktop/CMSC200/usb/interfaces",
+		"/home/lmlawas1/Documents/unqs_final/converter/sqlstmt_and_result.txt",
+		"/home/lmlawas1/Documents/unqs_final/journal/cs190-ieee.tex",
+		"/home/lmlawas1/Desktop/CMSC200/usb/ifconfig.txt",
 		"/home/lmlawas1/Documents/unqs_final/program/conf/simulation.conf",
+		"/home/lmlawas1/Desktop/CMSC200/ntop configuration.txt",
+		"/home/lmlawas1/Desktop/CMSC200/INSTALL NTOPNG/installntop.sh",
+		"/home/lmlawas1/Desktop/CMSC200/usb/thesis.sh",
+		"/home/lmlawas1/Desktop/CMSC200/stuff to do.txt",
+		"/home/lmlawas1/Desktop/CMSC200/iyak.txt",
+		"/home/lmlawas1/Desktop/CMSC200/Summary.txt",
+		"/home/lmlawas1/Desktop/CMSC200/usb/ntopng.conf",
 		"/home/lmlawas1/Documents/unqs_final/program/conf/demo.conf",
 		"/home/lmlawas1/Documents/unqs_final/program/conf/nov13.conf",
-		"/home/lmlawas1/Documents/unqs_final/program/Configuration.java",
 		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/others/accounts.txt",
 		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/text/masterlist.txt",
 		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/text/accounts_masterlist.txt",
 		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/MASTERLIST.txt",
 		"/media/lmlawas1/Acer/Users/Leensey/Pictures/RP/text/RP.txt",
-		"/home/lmlawas1/Desktop/CMSC200/ntop configuration.txt",
-		"/home/lmlawas1/Documents/unqs_final/program/UNQS.java",
-		"/home/lmlawas1/Documents/unqs_final/program/Flow.java",
-		"/home/lmlawas1/Documents/unqs_final/program/Schedule.java",
-		"/home/lmlawas1/Documents/unqs_final/program/NetworkBuffer.java",
 		"/home/lmlawas1/Documents/unqs_final/program/simulation.conf",
 		"/home/lmlawas1/Documents/unqs_final/program/Packet.java",
-		"/home/lmlawas1/Documents/unqs_final/program/FirstInFirstOut.java",
-		"/home/lmlawas1/Desktop/CMSC200/stuff to do.txt",
 		"/home/lmlawas1/Documents/unqs_final/program/PriorityQueue.java",
 		"/home/lmlawas1/Documents/unqs_final/program/WaitFairQueue.java",
 		"/home/lmlawas1/Documents/unqs_final/converter/inflow_dst.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/outflow_src.txt",
-		"/home/lmlawas1/Documents/unqs_final/journal/cs190-ieee.tex",
 		"/home/lmlawas1/Documents/unqs_final/priority/1.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/inflow_src_org.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/outflow_dest_org.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/app.sh",
-		"/home/lmlawas1/Documents/unqs_final/converter/sqlstmt_and_result.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/inflow_src_long.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/inflow_src_quad.txt",
 		"/home/lmlawas1/Documents/unqs_final/converter/outflow_dest_quad.txt",
@@ -765,23 +769,7 @@
 		"/home/lmlawas1/Desktop/characters/00rps/jaz khan/jaz and joshua ashway.md",
 		"/home/lmlawas1/Desktop/characters/00rps/jaz khan/jaz and john constantine.md",
 		"/home/lmlawas1/Desktop/characters/00rps/jaz khan/jaz and benjamin colt.md",
-		"/home/lmlawas1/Desktop/characters/00rps/jaz khan/jaz and anyalissa 3.md",
-		"/home/lmlawas1/Desktop/characters/00rps/jaz khan/jaz and amir al raisani.md",
-		"/home/lmlawas1/Desktop/IG EDIT/crcssrcads/to edit/otp/otp.md",
-		"/home/lmlawas1/Desktop/characters/00rps/Mathieu Donovan - hamige hamilton.txt",
-		"/home/lmlawas1/Desktop/characters/00rps/Mathieu Donovan - malitia.txt",
-		"/home/lmlawas1/Desktop/characters/00rps/Mathieu Donovan - john constantine.txt",
-		"/home/lmlawas1/Desktop/characters/00rps/sgtjazkhan/sgtjazkhan.md",
-		"/home/lmlawas1/Desktop/IG EDIT/The Brave scenes/1x10/1x10.txt",
-		"/home/lmlawas1/Desktop/characters/accounts_masterlist.txt",
-		"/home/lmlawas1/Desktop/characters/00rps/banter/pandora x alexander.txt",
-		"/home/lmlawas1/Desktop/IG EDIT/subs.txt",
-		"/home/lmlawas1/Desktop/CMSC200/INSTALL NTOPNG/installntop.sh",
-		"/home/lmlawas1/Desktop/UNQS_with_data/Main.class",
-		"/home/lmlawas1/Desktop/CMSC200/Mb MB conversion.txt",
-		"/home/lmlawas1/Desktop/CMSC200/ports pri.txt",
-		"/home/lmlawas1/Desktop/CMSC200/algo.txt",
-		"/home/lmlawas1/Desktop/CMSC200/traffic profile.txt"
+		"/home/lmlawas1/Desktop/characters/00rps/jaz khan/jaz and anyalissa 3.md"
 	],
 	"find":
 	{
@@ -799,6 +787,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"total",
+			"processing_time",
+			"proc",
+			"setdef",
 			"IN_",
 			"temp_",
 			"is_",
@@ -851,39 +843,11 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 8,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 512,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								511,
-								511
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Java/Java.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"semi_transient": false,
 					"settings":
 					{
@@ -894,8 +858,8 @@
 						"selection":
 						[
 							[
-								45,
-								45
+								88,
+								88
 							]
 						],
 						"settings":
@@ -909,100 +873,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "converter/sqlstmt_and_result.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 27397,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11441,
-								11441
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4292.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "journal/cs190-ieee.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 22643,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								22206,
-								22206
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 8338.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "program/Flow.java",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2221,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								712,
-								712
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Java/Java.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 1,
 					"file": "program/UNQS.java",
 					"semi_transient": false,
 					"settings":
@@ -1014,8 +889,8 @@
 						"selection":
 						[
 							[
-								2362,
-								2362
+								316,
+								316
 							]
 						],
 						"settings":
@@ -1025,56 +900,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1232.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 2,
 					"file": "program/FirstInFirstOut.java",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5872,
+						"buffer_size": 4534,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1363,
-								1363
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Java/Java.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 57.0,
-						"translation.y": 727.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "program/Schedule.java",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 665,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								313,
-								313
+								1203,
+								1203
 							]
 						],
 						"settings":
@@ -1083,27 +929,55 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 20.0,
+						"translation.y": 822.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "/home/lmlawas1/Desktop/CMSC200/usb/ntopng.conf",
+					"buffer": 3,
+					"file": "program/conf/simulation.conf",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 356,
+						"buffer_size": 321,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								356,
-								356
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "program/conf/demo.conf",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1317,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								207,
+								207
 							]
 						],
 						"settings":
@@ -1118,7 +992,63 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 5,
+					"file": "program/conf/stack_simulation3.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4401,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2500,
+								2500
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 776.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1681,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1031,
+								1031
+							]
+						],
+						"settings":
+						{
+							"auto_name": "An Efficient Policy-based Packet Scheduler With Fl",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 481.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1129,8 +1059,8 @@
 						"selection":
 						[
 							[
-								1691,
-								1691
+								639,
+								639
 							]
 						],
 						"settings":
@@ -1142,7 +1072,35 @@
 						"translation.y": 371.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2021,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2021,
+								2021
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
